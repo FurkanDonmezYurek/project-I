@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Position:
     m_InternalValue: {x: 0, y: 0, z: 0}
-  speed: 3
+  speed: 10
 --- !u!136 &826170338585404372
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,9 +8,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     // NetworkVariable with default permissions: readable by everyone, writable by server
     public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
-
     DefaultPlayerActions InputActions;
-    Vector3 moveDir;
     public float speed;
     Rigidbody rb;
 
@@ -24,39 +23,30 @@ public class PlayerMovement : NetworkBehaviour
         InputActions.Player.Enable();
     }
 
-    void Update()
+    public void Update()
     {
-        if (IsOwner)
+        Vector2 moveDir = InputActions.Player.Move.ReadValue<Vector2>();
+        if (IsServer && IsLocalPlayer)
         {
-            HandleMovement();
+            Move(moveDir);
         }
-        // Non-owners update their position based on the server value
-        rb.position = Position.Value;
+        else if (IsLocalPlayer)
+        {
+            RequestMoveServerRpc(moveDir);
+        }
     }
 
-    void HandleMovement()
+    void Move(Vector2 moveInput)
     {
-        moveDir = InputActions.Player.Move.ReadValue<Vector2>();
-        Vector3 newPos = transform.position + new Vector3(moveDir.x, 0f, moveDir.y) * speed;
+        Vector3 newPos = new Vector3(moveInput.x, 0f, moveInput.y);
 
-        // Update local position for smooth client-side movement
         rb.MovePosition(transform.position + newPos * Time.deltaTime * speed);
-
-        if (NetworkManager.Singleton.IsServer)
-        {
-            Position.Value = newPos;
-        }
-        else
-        {
-            Debug.Log("Client is requesting move to new position: " + newPos);
-            RequestMoveServerRpc(newPos);
-        }
+        // rb.Move(Player.transform.position + newPos * Time.deltaTime * speed, Quaternion.identity);
     }
 
     [ServerRpc]
-    void RequestMoveServerRpc(Vector3 newPos, ServerRpcParams serverRpcParams = default)
+    void RequestMoveServerRpc(Vector2 moveInput)
     {
-        Debug.Log("Server received move request to new position: " + newPos);
-        Position.Value = newPos;
+        Move(moveInput);
     }
 }
