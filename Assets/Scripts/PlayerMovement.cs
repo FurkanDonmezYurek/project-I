@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    // NetworkVariable with default permissions: readable by everyone, writable by server
     public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
+
     DefaultPlayerActions InputActions;
     Vector3 moveDir;
-    public float speed;
-
-    Vector2 mousePos;
-    public float mouseSens;
-    NetworkObject playerObject;
+    public float speed = 5f;
 
     private void Awake()
     {
@@ -21,44 +18,45 @@ public class PlayerMovement : NetworkBehaviour
         InputActions.Player.Enable();
     }
 
-    void Start()
-    {
-        // Cursor.lockState = CursorLockMode.Locked;
-    }
+
 
     void Update()
     {
         if (IsOwner)
         {
-            Move();
-        }
+            HandleMovement();
+        
+        }    
+            // Non-owners update their position based on the server value
+            transform.position = Position.Value;
+        
     }
 
-    void Move()
+    void HandleMovement()
     {
+        moveDir = InputActions.Player.Move.ReadValue<Vector2>();
+        Vector3 newPos = transform.position + new Vector3(moveDir.x, 0f, moveDir.y) * speed ;
+
+        // Update local position for smooth client-side movement
+        transform.position = newPos;
+
         if (NetworkManager.Singleton.IsServer)
         {
-            Position.Value = PlayerPos();
+            Position.Value = newPos;
         }
         else
         {
-            RequestMoveServerRpc();
+            Debug.Log("Client is requesting move to new position: " + newPos);
+            RequestMoveServerRpc(newPos);
         }
     }
 
     [ServerRpc]
-    void RequestMoveServerRpc(ServerRpcParams serverRpcParams = default)
+    void RequestMoveServerRpc(Vector3 newPos, ServerRpcParams serverRpcParams = default)
     {
-        Position.Value = PlayerPos();
+        Debug.Log("Server received move request to new position: " + newPos);
+        Position.Value = newPos;
     }
 
-    Vector3 PlayerPos()
-    {
-        moveDir = InputActions.Player.Move.ReadValue<Vector2>();
-        this.transform.position += new Vector3(moveDir.x, 0f, moveDir.y) * speed;
-        Vector3 newPos = transform.position;
-        return newPos;
-    }
 
-    private void FixedUpdate() { }
 }
