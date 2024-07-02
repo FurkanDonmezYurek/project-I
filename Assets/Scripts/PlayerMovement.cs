@@ -10,7 +10,13 @@ public class PlayerMovement : NetworkBehaviour
 
     DefaultPlayerActions InputActions;
     Vector3 moveDir;
-    public float speed = 5f;
+    public float speed;
+    Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void Awake()
     {
@@ -18,27 +24,23 @@ public class PlayerMovement : NetworkBehaviour
         InputActions.Player.Enable();
     }
 
-
-
     void Update()
     {
         if (IsOwner)
         {
             HandleMovement();
-        
-        }    
-            // Non-owners update their position based on the server value
-            transform.position = Position.Value;
-        
+        }
+        // Non-owners update their position based on the server value
+        rb.position = Position.Value;
     }
 
     void HandleMovement()
     {
         moveDir = InputActions.Player.Move.ReadValue<Vector2>();
-        Vector3 newPos = transform.position + new Vector3(moveDir.x, 0f, moveDir.y) * speed ;
+        Vector3 newPos = transform.position + new Vector3(moveDir.x, 0f, moveDir.y) * speed;
 
         // Update local position for smooth client-side movement
-        transform.position = newPos;
+        rb.MovePosition(transform.position + newPos * Time.deltaTime * speed);
 
         if (NetworkManager.Singleton.IsServer)
         {
@@ -57,6 +59,4 @@ public class PlayerMovement : NetworkBehaviour
         Debug.Log("Server received move request to new position: " + newPos);
         Position.Value = newPos;
     }
-
-
 }
