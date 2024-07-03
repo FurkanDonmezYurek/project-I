@@ -52,9 +52,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             Move(moveDir);
             Rotate(lookInput);
+            RotateCamera(lookInput.y);
         }
         else if (IsLocalPlayer)
         {
+            RotateCamera(lookInput.y);
             RequestMoveServerRpc(moveDir, lookInput);
         }
     }
@@ -73,7 +75,6 @@ public class PlayerMovement : NetworkBehaviour
             transform.up,
             lookInput.x * turnSpeed * Time.deltaTime
         );
-        RotateCamera(lookInput.y);
     }
 
     void RotateCamera(float lookInputY)
