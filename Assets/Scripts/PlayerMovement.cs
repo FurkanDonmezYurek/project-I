@@ -1,19 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
+    Rigidbody rb;
     DefaultPlayerActions InputActions;
-    Vector3 moveDir;
     public float speed;
+    public float turnSpeed;
+    public Vector2 minMaxRotationX;
+    public Transform camTransform;
+    float cameraAngle;
 
-    Vector2 mousePos;
-    public float mouseSens;
-    NetworkObject playerObject;
+    CharacterController cc;
+
+    public override void OnNetworkSpawn()
+    {
+        CinemachineVirtualCamera cvm =
+            camTransform.gameObject.GetComponent<CinemachineVirtualCamera>();
+
+        if (IsOwner)
+        {
+            cvm.Priority = 1;
+        }
+        else
+        {
+            cvm.Priority = 0;
+        }
+    }
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Awake()
     {
@@ -21,44 +44,61 @@ public class PlayerMovement : NetworkBehaviour
         InputActions.Player.Enable();
     }
 
-    void Start()
+    public void Update()
     {
-        // Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    void Update()
-    {
-        if (IsOwner)
+        Vector2 moveDir = InputActions.Player.Move.ReadValue<Vector2>();
+        Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
+        if (IsServer && IsLocalPlayer)
         {
-            Move();
+            Move(moveDir);
+            Rotate(lookInput);
+        }
+        else if (IsLocalPlayer)
+        {
+            RequestMoveServerRpc(moveDir, lookInput);
         }
     }
 
-    void Move()
+    void Move(Vector2 moveInput)
     {
-        if (NetworkManager.Singleton.IsServer)
+        Vector3 movement = moveInput.x * camTransform.right + moveInput.y * camTransform.forward;
+        movement.y = 0;
+        cc.Move(movement * speed * Time.deltaTime);
+    }
+
+    void Rotate(Vector2 lookInput)
+    {
+        transform.RotateAround(
+            transform.position,
+            transform.up,
+            lookInput.x * turnSpeed * Time.deltaTime
+        );
+        RotateCamera(lookInput.y);
+    }
+
+    void RotateCamera(float lookInputY)
+    {
+        cameraAngle = Vector3.SignedAngle(
+            transform.forward,
+            camTransform.forward,
+            camTransform.right
+        );
+        float cameraRotationAmount = lookInputY * turnSpeed * Time.deltaTime;
+        float newCameraAngle = cameraAngle - cameraRotationAmount;
+        if (newCameraAngle <= minMaxRotationX.x && newCameraAngle >= minMaxRotationX.y)
         {
-            Position.Value = PlayerPos();
-        }
-        else
-        {
-            RequestMoveServerRpc();
+            camTransform.RotateAround(
+                camTransform.position,
+                camTransform.right,
+                -lookInputY * turnSpeed * Time.deltaTime
+            );
         }
     }
 
     [ServerRpc]
-    void RequestMoveServerRpc(ServerRpcParams serverRpcParams = default)
+    void RequestMoveServerRpc(Vector2 moveInput, Vector2 lookInput)
     {
-        Position.Value = PlayerPos();
+        Move(moveInput);
+        Rotate(lookInput);
     }
-
-    Vector3 PlayerPos()
-    {
-        moveDir = InputActions.Player.Move.ReadValue<Vector2>();
-        this.transform.position += new Vector3(moveDir.x, 0f, moveDir.y) * speed;
-        Vector3 newPos = transform.position;
-        return newPos;
-    }
-
-    private void FixedUpdate() { }
 }
