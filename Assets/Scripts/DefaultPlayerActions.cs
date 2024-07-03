@@ -15,8 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class 
-    @DefaultPlayerActions: IInputActionCollection2, IDisposable
+public partial class @DefaultPlayerActions: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
     public @DefaultPlayerActions()
@@ -39,7 +38,7 @@ public partial class
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""5dc73afb-c4e6-4107-81c6-3a342dbfda3f"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -203,7 +202,7 @@ public partial class
                 {
                     ""name"": """",
                     ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
-                    ""path"": ""<Pointer>/delta"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse;Touch"",
