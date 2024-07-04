@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using GameFramework.Network.Movement;
 using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    Rigidbody rb;
     DefaultPlayerActions InputActions;
-    public float speed;
-    public float turnSpeed;
     public Vector2 minMaxRotationX;
     public Transform camTransform;
     float cameraAngle;
 
     CharacterController cc;
+
+    [SerializeField]
+    NetworkMovementComponent playerMovement;
 
     public override void OnNetworkSpawn()
     {
@@ -33,7 +34,6 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         cc = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -46,60 +46,34 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Update()
     {
-        Vector2 moveDir = InputActions.Player.Move.ReadValue<Vector2>();
+        Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
         Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
-        if (IsServer && IsLocalPlayer)
+        if (IsClient && IsLocalPlayer)
         {
-            Move(moveDir);
-            Rotate(lookInput);
-            RotateCamera(lookInput.y);
+            playerMovement.ProcessLocalPlayerMovement(movementInput, lookInput);
         }
         else if (IsLocalPlayer)
         {
-            RotateCamera(lookInput.y);
-            RequestMoveServerRpc(moveDir, lookInput);
+            playerMovement.ProcessSimulatedPlayerMovement();
         }
     }
 
-    void Move(Vector2 moveInput)
-    {
-        Vector3 movement = moveInput.x * camTransform.right + moveInput.y * camTransform.forward;
-        movement.y = 0;
-        cc.Move(movement * speed * Time.deltaTime);
-    }
-
-    void Rotate(Vector2 lookInput)
-    {
-        transform.RotateAround(
-            transform.position,
-            transform.up,
-            lookInput.x * turnSpeed * Time.deltaTime
-        );
-    }
-
-    void RotateCamera(float lookInputY)
-    {
-        cameraAngle = Vector3.SignedAngle(
-            transform.forward,
-            camTransform.forward,
-            camTransform.right
-        );
-        float cameraRotationAmount = lookInputY * turnSpeed * Time.deltaTime;
-        float newCameraAngle = cameraAngle - cameraRotationAmount;
-        if (newCameraAngle <= minMaxRotationX.x && newCameraAngle >= minMaxRotationX.y)
-        {
-            camTransform.RotateAround(
-                camTransform.position,
-                camTransform.right,
-                -lookInputY * turnSpeed * Time.deltaTime
-            );
-        }
-    }
-
-    [ServerRpc]
-    void RequestMoveServerRpc(Vector2 moveInput, Vector2 lookInput)
-    {
-        Move(moveInput);
-        Rotate(lookInput);
-    }
+    // void RotateCamera(float lookInputY)
+    // {
+    //     cameraAngle = Vector3.SignedAngle(
+    //         transform.forward,
+    //         camTransform.forward,
+    //         camTransform.right
+    //     );
+    //     float cameraRotationAmount = lookInputY * turnSpeed * Time.deltaTime;
+    //     float newCameraAngle = cameraAngle - cameraRotationAmount;
+    //     if (newCameraAngle <= minMaxRotationX.x && newCameraAngle >= minMaxRotationX.y)
+    //     {
+    //         camTransform.RotateAround(
+    //             camTransform.position,
+    //             camTransform.right,
+    //             -lookInputY * turnSpeed * Time.deltaTime
+    //         );
+    //     }
+    // }
 }
