@@ -1,0 +1,771 @@
+fileFormatVersion: 2
+guid: 6524890e8dc5b9d4ea135515af746fa5
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_0"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1859
+        width: 2048
+        height: 189
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64b4774f3f8c3424fb07c69faabcb6f7
+      internalID: -2026689148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_1"
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 1709
+        width: 120
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fab368d138dac04f9165e0d7b30d6f2
+      internalID: -1523034224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_2"
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 1751
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5fb6a880be42ef4d931fbc7babac964
+      internalID: 458646316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_3"
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 1735
+        width: 68
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27435f148887c1b4f83321fca5da4295
+      internalID: -197228021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_4"
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 1737
+        width: 79
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfba0fdb84d267b4983279096a6e901d
+      internalID: -1653428894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_5"
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 1733
+        width: 68
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebe9758e1e4ac3b479e0913bb232e71c
+      internalID: 2128900663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_7"
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 1733
+        width: 80
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a249ac75ce96464409489ff499a46164
+      internalID: -1513939657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_8"
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 1726
+        width: 80
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d4d628ee84eb4241bb246232477a87f
+      internalID: -1540522781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_9"
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 1517
+        width: 441
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aac846fa63ee544f9b5e5596c3fe9fe
+      internalID: -431353367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_10"
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 1535
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec93c90bf040b9b46a9b81aa6f9cce11
+      internalID: 1047082833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_12"
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 1510
+        width: 664
+        height: 133
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d2afddb2136ab428a194257c655e37
+      internalID: -1835033934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_13"
+      rect:
+        serializedVersion: 2
+        x: 1745
+        y: 1535
+        width: 235
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97a240e2f86ef5d44aabfc9d043c46f7
+      internalID: 1353499278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_14"
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 1547
+        width: 54
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97ad7537c90bce240b334d6db16139a0
+      internalID: 176190026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_15"
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 1335
+        width: 400
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da92d3539ea15ee48ab32b0c72e2da03
+      internalID: -763100977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_16"
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 1319
+        width: 157
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c4785b9ae9395940b5745e037e33c8c
+      internalID: 1375864436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_17"
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 1350
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c86ea9acd947d744fa1ddd852d2f88cb
+      internalID: 1001325544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_18"
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 1349
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b47ffde4655a0c840aaf5f150a847a52
+      internalID: -1295696383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_19"
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 1373
+        width: 685
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 120abcf7030978f4cade0fb33329e5fb
+      internalID: 1754758114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_20"
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 1367
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35119298ee5c2104f888074ae554bc5c
+      internalID: -2019369636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_21"
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 1162
+        width: 61
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef2954f03e3449042a516384c33cfb57
+      internalID: -278736709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_22"
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 1172
+        width: 60
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 858a648eb7ba1844c975a928ba9936ce
+      internalID: 222496468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_23"
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 1166
+        width: 76
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee49af40d4ac9d74abb46eccdbe8f30b
+      internalID: -1946648484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_24"
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 581
+        width: 1282
+        height: 698
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3582453511ec434fb5cc31a0d135086
+      internalID: -1440899305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_25"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 991
+        width: 84
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b743af28690e784a99cabcaffefbad5
+      internalID: -981967331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_26"
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 984
+        width: 74
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b37865c6b4908784bbaef52a068453c3
+      internalID: 38423923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_27"
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 230
+        width: 266
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d486357557bf554989740392e0e6baf
+      internalID: 1805362727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_28"
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 87
+        width: 1282
+        height: 383
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 616277af8168cfd4d8ed2e17c4fdefc2
+      internalID: -2023093205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Oyun Ana Men\xFCs\xFC_29"
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 58
+        width: 266
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a81f056d7beeb5409c84ff6277ac015
+      internalID: -593685622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 46c1eaf068d155744bee109fa9a8663c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      "Oyun Ana Men\xFCs\xFC_0": -2026689148
+      "Oyun Ana Men\xFCs\xFC_1": -1523034224
+      "Oyun Ana Men\xFCs\xFC_10": 1047082833
+      "Oyun Ana Men\xFCs\xFC_11": 881054678
+      "Oyun Ana Men\xFCs\xFC_12": -1835033934
+      "Oyun Ana Men\xFCs\xFC_13": 1353499278
+      "Oyun Ana Men\xFCs\xFC_14": 176190026
+      "Oyun Ana Men\xFCs\xFC_15": -763100977
+      "Oyun Ana Men\xFCs\xFC_16": 1375864436
+      "Oyun Ana Men\xFCs\xFC_17": 1001325544
+      "Oyun Ana Men\xFCs\xFC_18": -1295696383
+      "Oyun Ana Men\xFCs\xFC_19": 1754758114
+      "Oyun Ana Men\xFCs\xFC_2": 458646316
+      "Oyun Ana Men\xFCs\xFC_20": -2019369636
+      "Oyun Ana Men\xFCs\xFC_21": -278736709
+      "Oyun Ana Men\xFCs\xFC_22": 222496468
+      "Oyun Ana Men\xFCs\xFC_23": -1946648484
+      "Oyun Ana Men\xFCs\xFC_24": -1440899305
+      "Oyun Ana Men\xFCs\xFC_25": -981967331
+      "Oyun Ana Men\xFCs\xFC_26": 38423923
+      "Oyun Ana Men\xFCs\xFC_27": 1805362727
+      "Oyun Ana Men\xFCs\xFC_28": -2023093205
+      "Oyun Ana Men\xFCs\xFC_29": -593685622
+      "Oyun Ana Men\xFCs\xFC_3": -197228021
+      "Oyun Ana Men\xFCs\xFC_4": -1653428894
+      "Oyun Ana Men\xFCs\xFC_5": 2128900663
+      "Oyun Ana Men\xFCs\xFC_6": -104367208
+      "Oyun Ana Men\xFCs\xFC_7": -1513939657
+      "Oyun Ana Men\xFCs\xFC_8": -1540522781
+      "Oyun Ana Men\xFCs\xFC_9": -431353367
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
