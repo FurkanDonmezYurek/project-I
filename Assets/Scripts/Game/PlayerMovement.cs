@@ -52,7 +52,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             playerMovement.ProcessLocalPlayerMovement(movementInput, lookInput);
         }
-        else if (IsLocalPlayer)
+        else
         {
             playerMovement.ProcessSimulatedPlayerMovement();
         }
