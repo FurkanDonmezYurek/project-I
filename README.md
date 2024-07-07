@@ -44,7 +44,7 @@ Bir bölgede geçen ve her oyuncunun belirli rollerden rastgele birini aldığı
 - Level Tasarımı araştırılması yapılıyor.
 
 - **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
-- 
+  
 - **Puan tamamlama mantığı**: Toplamda proje boyunca tamamlanması gereken 400 puanlık backlog bulunmaktadır. 3 sprint'e bölündüğünde ilk sprint'in en azından 100 ile başlaması gerektiğine karar verildi.
 
 - **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır. 
