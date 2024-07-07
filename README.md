@@ -50,13 +50,13 @@ Bir bölgede geçen ve her oyuncunun belirli rollerden rastgele birini aldığı
 - **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır. 
 
 - **Sprint board update**: Sprint board screenshotları: 
-![Backlog_1]() 
-![Backlog_2]() 
+![Backlog_1](https://github.com/FurkanDonmezYurek/project-I/assets/116437656/302badad-fb6b-444e-963b-38b10425885b) 
+![Backlog_2](https://github.com/FurkanDonmezYurek/project-I/assets/116437656/ac0a903e-fea0-45ee-8734-ce29197d17a4) 
 
 - **Ürün Durumu**: Ekran görüntüleri:
-  ![Multiplayer]()
-  ![Multiplayer2]()
-  ![MiniGame]()
+  ![Multiplayer](https://github.com/FurkanDonmezYurek/project-I/assets/116437656/5139bdbe-5f62-40a9-abc2-b1415cf130d7)
+  ![Multiplayer2](https://github.com/FurkanDonmezYurek/project-I/assets/116437656/625cd65d-21d1-46cf-96b6-87a828000c37)
+  ![MiniGame](https://github.com/FurkanDonmezYurek/project-I/assets/116437656/9a0f1624-1fb6-4da9-aa33-279510eb0c86)
 
 
 - **Sprint Review**: 
