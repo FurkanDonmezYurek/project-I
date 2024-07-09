@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6524890e8dc5b9d4ea135515af746fa5
+guid: fbe776d450eb38742a5e0b1ece17c474
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_0"
+      name: GameMainMenu_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1859
-        width: 2048
-        height: 189
+        x: 54
+        y: 1724
+        width: 76
+        height: 76
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64b4774f3f8c3424fb07c69faabcb6f7
-      internalID: -2026689148
+      spriteID: 0d31047973731064b89f8aa7ffd81887
+      internalID: -2107476145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_1"
+      name: GameMainMenu_3
       rect:
         serializedVersion: 2
-        x: 30
-        y: 1709
-        width: 120
-        height: 121
+        x: 224
+        y: 1706
+        width: 114
+        height: 114
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fab368d138dac04f9165e0d7b30d6f2
-      internalID: -1523034224
+      spriteID: c4869f297221961478358210e35c7c23
+      internalID: 881187174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_2"
+      name: GameMainMenu_4
       rect:
         serializedVersion: 2
-        x: 257
-        y: 1751
-        width: 45
-        height: 45
+        x: 406
+        y: 1706
+        width: 135
+        height: 117
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +192,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5fb6a880be42ef4d931fbc7babac964
-      internalID: 458646316
+      spriteID: d6a26456a2dbbfe4dabe47b69fa27a14
+      internalID: 1083774747
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_3"
+      name: GameMainMenu_5
       rect:
         serializedVersion: 2
-        x: 436
-        y: 1735
-        width: 68
-        height: 68
+        x: 605
+        y: 1699
+        width: 115
+        height: 115
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27435f148887c1b4f83321fca5da4295
-      internalID: -197228021
+      spriteID: a06370ff438da7447a17cff1ac15cc61
+      internalID: -883183985
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_4"
+      name: GameMainMenu_7
       rect:
         serializedVersion: 2
-        x: 610
-        y: 1737
-        width: 79
-        height: 69
+        x: 756
+        y: 1682
+        width: 166
+        height: 167
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,20 +234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfba0fdb84d267b4983279096a6e901d
-      internalID: -1653428894
+      spriteID: 426421f2f43663148b4364446b5150c8
+      internalID: 2113723789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_5"
+      name: GameMainMenu_8
       rect:
         serializedVersion: 2
-        x: 805
-        y: 1733
-        width: 68
-        height: 68
+        x: 943
+        y: 1684
+        width: 159
+        height: 159
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,186 +255,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebe9758e1e4ac3b479e0913bb232e71c
-      internalID: 2128900663
+      spriteID: 0559fa9c58520b44aa575a456cfc87e5
+      internalID: -1016349639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_7"
+      name: GameMainMenu_10
       rect:
         serializedVersion: 2
-        x: 1729
-        y: 1733
-        width: 80
-        height: 77
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a249ac75ce96464409489ff499a46164
-      internalID: -1513939657
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_8"
-      rect:
-        serializedVersion: 2
-        x: 1916
-        y: 1726
-        width: 80
-        height: 79
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d4d628ee84eb4241bb246232477a87f
-      internalID: -1540522781
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_9"
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 1517
-        width: 441
-        height: 132
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6aac846fa63ee544f9b5e5596c3fe9fe
-      internalID: -431353367
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_10"
-      rect:
-        serializedVersion: 2
-        x: 606
-        y: 1535
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec93c90bf040b9b46a9b81aa6f9cce11
-      internalID: 1047082833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_12"
-      rect:
-        serializedVersion: 2
-        x: 972
-        y: 1510
-        width: 664
-        height: 133
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4d2afddb2136ab428a194257c655e37
-      internalID: -1835033934
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_13"
-      rect:
-        serializedVersion: 2
-        x: 1745
-        y: 1535
-        width: 235
-        height: 95
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97a240e2f86ef5d44aabfc9d043c46f7
-      internalID: 1353499278
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_14"
-      rect:
-        serializedVersion: 2
-        x: 810
-        y: 1547
-        width: 54
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97ad7537c90bce240b334d6db16139a0
-      internalID: 176190026
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_15"
-      rect:
-        serializedVersion: 2
-        x: 90
-        y: 1335
-        width: 400
-        height: 119
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da92d3539ea15ee48ab32b0c72e2da03
-      internalID: -763100977
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_16"
-      rect:
-        serializedVersion: 2
-        x: 572
-        y: 1319
+        x: 1320
+        y: 1694
         width: 157
         height: 157
       alignment: 0
@@ -444,20 +276,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c4785b9ae9395940b5745e037e33c8c
-      internalID: 1375864436
+      spriteID: 0de56b0dd1bfddf44b18673eb2438504
+      internalID: 931768530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_17"
+      name: GameMainMenu_11
       rect:
         serializedVersion: 2
-        x: 792
-        y: 1350
-        width: 86
-        height: 86
+        x: 1511
+        y: 1697
+        width: 152
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,20 +297,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c86ea9acd947d744fa1ddd852d2f88cb
-      internalID: 1001325544
+      spriteID: f62aa3cfb2e022a44bdd31c53dfd2273
+      internalID: 43423231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_18"
+      name: GameMainMenu_12
       rect:
         serializedVersion: 2
-        x: 981
-        y: 1349
-        width: 96
-        height: 96
+        x: 1745
+        y: 1715
+        width: 235
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -486,20 +318,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b47ffde4655a0c840aaf5f150a847a52
-      internalID: -1295696383
+      spriteID: 66243d2ca8fbe2b4c9298aa0200f4434
+      internalID: -1679149782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_19"
+      name: GameMainMenu_13
       rect:
         serializedVersion: 2
-        x: 1143
-        y: 1373
-        width: 685
-        height: 40
+        x: 1165
+        y: 1712
+        width: 81
+        height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -507,20 +339,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 120abcf7030978f4cade0fb33329e5fb
-      internalID: 1754758114
+      spriteID: 6d4a9fb373648ff48bca175bb47a75f9
+      internalID: 173305538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_20"
+      name: GameMainMenu_14
       rect:
         serializedVersion: 2
-        x: 1937
-        y: 1367
-        width: 34
-        height: 33
+        x: 14
+        y: 1502
+        width: 157
+        height: 157
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -528,19 +360,187 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35119298ee5c2104f888074ae554bc5c
-      internalID: -2019369636
+      spriteID: 1dbc228dc2b9da444a6657092b1cee6c
+      internalID: -583951689
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_21"
+      name: GameMainMenu_15
       rect:
         serializedVersion: 2
-        x: 56
-        y: 1162
-        width: 61
+        x: 197
+        y: 1499
+        width: 166
+        height: 166
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa0abc5629c767848a2f85d0446050af
+      internalID: -286938180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_16
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1514
+        width: 126
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac2c6ff00f349314780510e2004ad42e
+      internalID: -247850327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_17
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 761
+        width: 1442
+        height: 892
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a99e9fed7589d6d4aa054cf31e3685e9
+      internalID: -709204338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_18
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1310
+        width: 491
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e5fce1eb1cecca449668a4ea6e581e9
+      internalID: 2014050689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_19
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 1139
+        width: 149
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7972d41edf256b9429b813534fa7b63a
+      internalID: 766710824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_20
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 1134
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 072d9f6023fe37f4ba8b0087cd9157da
+      internalID: 1732151585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_21
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 1135
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab0043b09dc623044bfd333420745ff6
+      internalID: -416176803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 948
+        width: 550
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 945ab838a29398640baeee970acd213b
+      internalID: -404999833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_23
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 796
+        width: 172
         height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -549,20 +549,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef2954f03e3449042a516384c33cfb57
-      internalID: -278736709
+      spriteID: 2de9dc94917735844a5c01ab4b79817e
+      internalID: -119835485
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_22"
+      name: GameMainMenu_24
       rect:
         serializedVersion: 2
-        x: 248
-        y: 1172
-        width: 60
-        height: 72
+        x: 190
+        y: 797
+        width: 170
+        height: 73
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -570,41 +570,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 858a648eb7ba1844c975a928ba9936ce
-      internalID: 222496468
+      spriteID: 0e52bde8530470c4b988c77cef9b1ec5
+      internalID: 1347662908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_23"
+      name: GameMainMenu_25
       rect:
         serializedVersion: 2
-        x: 419
-        y: 1166
-        width: 76
-        height: 71
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee49af40d4ac9d74abb46eccdbe8f30b
-      internalID: -1946648484
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_24"
-      rect:
-        serializedVersion: 2
-        x: 662
+        x: 9
         y: 581
-        width: 1282
-        height: 698
+        width: 169
+        height: 138
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -612,20 +591,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3582453511ec434fb5cc31a0d135086
-      internalID: -1440899305
+      spriteID: ad6de5c151aa16c4ea56b69709432b39
+      internalID: -689656095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_25"
+      name: GameMainMenu_26
       rect:
         serializedVersion: 2
-        x: 48
-        y: 991
-        width: 84
-        height: 63
+        x: 194
+        y: 583
+        width: 172
+        height: 140
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -633,19 +612,271 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b743af28690e784a99cabcaffefbad5
-      internalID: -981967331
+      spriteID: d44a0709b3169f74dab064ba0319a87a
+      internalID: 343433835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_26"
+      name: GameMainMenu_27
       rect:
         serializedVersion: 2
-        x: 248
-        y: 984
-        width: 74
+        x: 796
+        y: 576
+        width: 1180
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7212d5161cf520f41a2629938b50e265
+      internalID: 840095375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_28
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 386
+        width: 159
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b37e824ec0888041b399d0d4f7bb14f
+      internalID: -266330160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_29
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 383
+        width: 162
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 814049069a7f76349906a760a4312860
+      internalID: 1314346046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_30
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 412
+        width: 313
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9bb263fb3ba31044aafed390a06e563
+      internalID: 336004678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_31
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 412
+        width: 312
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 424cb5b9e39bd674596ec7fa15f430b5
+      internalID: 775425498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_32
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 412
+        width: 312
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e50ab73558a6e7439b632ffc5413f63
+      internalID: -2145500771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_33
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 403
+        width: 312
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 314c28c6fc6d8ce4688ed3852b3a4799
+      internalID: -869020684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_34
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 202
+        width: 144
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35818e084b4779942a46e11052cde3b6
+      internalID: -712448028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_35
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 203
+        width: 153
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11e5539f51b0d2442a16ca7d09b80683
+      internalID: -1852847854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_36
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 230
+        width: 298
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d760166070f87f4aa8b2ebbd32793e3
+      internalID: 2127613798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_37
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 13
+        width: 127
+        height: 155
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfdcd865211726d469d6d89e60994d7a
+      internalID: 2018598229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_38
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 16
+        width: 125
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85b24f13ff7504a48a22b9f29ffb2d34
+      internalID: 1189531694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameMainMenu_39
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 55
+        width: 462
         height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -654,20 +885,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b37865c6b4908784bbaef52a068453c3
-      internalID: 38423923
+      spriteID: 4c1977b40dcc52e49bfad569303d5834
+      internalID: 1646326282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_27"
+      name: GameMainMenu_40
       rect:
         serializedVersion: 2
-        x: 427
-        y: 230
-        width: 266
-        height: 73
+        x: 991
+        y: 77
+        width: 431
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -675,20 +906,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d486357557bf554989740392e0e6baf
-      internalID: 1805362727
+      spriteID: ee161518fbd032243a98a0b2da84c46d
+      internalID: 460420755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_28"
+      name: GameMainMenu_41
       rect:
         serializedVersion: 2
-        x: 766
-        y: 87
-        width: 1282
-        height: 383
+        x: 1718
+        y: 35
+        width: 116
+        height: 116
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -696,20 +927,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 616277af8168cfd4d8ed2e17c4fdefc2
-      internalID: -2023093205
+      spriteID: 2e791001693867447957b40360758eb7
+      internalID: 2037391593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Oyun Ana Men\xFCs\xFC_29"
+      name: GameMainMenu_42
       rect:
         serializedVersion: 2
-        x: 427
-        y: 58
-        width: 266
-        height: 73
+        x: 1889
+        y: 15
+        width: 145
+        height: 145
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -717,8 +948,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a81f056d7beeb5409c84ff6277ac015
-      internalID: -593685622
+      spriteID: c21dbcfae649c56479dc12e9528daa81
+      internalID: 1204217404
       vertices: []
       indices: 
       edges: []
@@ -726,7 +957,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 46c1eaf068d155744bee109fa9a8663c
+    spriteID: 22eaf4630492da3439022e06bf37f6f9
     internalID: 0
     vertices: []
     indices: 
@@ -734,36 +965,49 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Oyun Ana Men\xFCs\xFC_0": -2026689148
-      "Oyun Ana Men\xFCs\xFC_1": -1523034224
-      "Oyun Ana Men\xFCs\xFC_10": 1047082833
-      "Oyun Ana Men\xFCs\xFC_11": 881054678
-      "Oyun Ana Men\xFCs\xFC_12": -1835033934
-      "Oyun Ana Men\xFCs\xFC_13": 1353499278
-      "Oyun Ana Men\xFCs\xFC_14": 176190026
-      "Oyun Ana Men\xFCs\xFC_15": -763100977
-      "Oyun Ana Men\xFCs\xFC_16": 1375864436
-      "Oyun Ana Men\xFCs\xFC_17": 1001325544
-      "Oyun Ana Men\xFCs\xFC_18": -1295696383
-      "Oyun Ana Men\xFCs\xFC_19": 1754758114
-      "Oyun Ana Men\xFCs\xFC_2": 458646316
-      "Oyun Ana Men\xFCs\xFC_20": -2019369636
-      "Oyun Ana Men\xFCs\xFC_21": -278736709
-      "Oyun Ana Men\xFCs\xFC_22": 222496468
-      "Oyun Ana Men\xFCs\xFC_23": -1946648484
-      "Oyun Ana Men\xFCs\xFC_24": -1440899305
-      "Oyun Ana Men\xFCs\xFC_25": -981967331
-      "Oyun Ana Men\xFCs\xFC_26": 38423923
-      "Oyun Ana Men\xFCs\xFC_27": 1805362727
-      "Oyun Ana Men\xFCs\xFC_28": -2023093205
-      "Oyun Ana Men\xFCs\xFC_29": -593685622
-      "Oyun Ana Men\xFCs\xFC_3": -197228021
-      "Oyun Ana Men\xFCs\xFC_4": -1653428894
-      "Oyun Ana Men\xFCs\xFC_5": 2128900663
-      "Oyun Ana Men\xFCs\xFC_6": -104367208
-      "Oyun Ana Men\xFCs\xFC_7": -1513939657
-      "Oyun Ana Men\xFCs\xFC_8": -1540522781
-      "Oyun Ana Men\xFCs\xFC_9": -431353367
+      GameMainMenu_0: 1278446506
+      GameMainMenu_1: -2107476145
+      GameMainMenu_10: 931768530
+      GameMainMenu_11: 43423231
+      GameMainMenu_12: -1679149782
+      GameMainMenu_13: 173305538
+      GameMainMenu_14: -583951689
+      GameMainMenu_15: -286938180
+      GameMainMenu_16: -247850327
+      GameMainMenu_17: -709204338
+      GameMainMenu_18: 2014050689
+      GameMainMenu_19: 766710824
+      GameMainMenu_2: -299246998
+      GameMainMenu_20: 1732151585
+      GameMainMenu_21: -416176803
+      GameMainMenu_22: -404999833
+      GameMainMenu_23: -119835485
+      GameMainMenu_24: 1347662908
+      GameMainMenu_25: -689656095
+      GameMainMenu_26: 343433835
+      GameMainMenu_27: 840095375
+      GameMainMenu_28: -266330160
+      GameMainMenu_29: 1314346046
+      GameMainMenu_3: 881187174
+      GameMainMenu_30: 336004678
+      GameMainMenu_31: 775425498
+      GameMainMenu_32: -2145500771
+      GameMainMenu_33: -869020684
+      GameMainMenu_34: -712448028
+      GameMainMenu_35: -1852847854
+      GameMainMenu_36: 2127613798
+      GameMainMenu_37: 2018598229
+      GameMainMenu_38: 1189531694
+      GameMainMenu_39: 1646326282
+      GameMainMenu_4: 1083774747
+      GameMainMenu_40: 460420755
+      GameMainMenu_41: 2037391593
+      GameMainMenu_42: 1204217404
+      GameMainMenu_5: -883183985
+      GameMainMenu_6: 626870040
+      GameMainMenu_7: 2113723789
+      GameMainMenu_8: -1016349639
+      GameMainMenu_9: 166032948
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
