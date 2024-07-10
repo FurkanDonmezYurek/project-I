@@ -10,7 +10,16 @@ public class PlayerMovement : NetworkBehaviour
     DefaultPlayerActions InputActions;
     public Vector2 minMaxRotationX;
     public Transform camTransform;
+
+    [SerializeField]
+    float turnSpeed;
     float cameraAngle;
+
+    [SerializeField]
+    float recognizeDistance;
+
+    [SerializeField]
+    LayerMask layerMask;
 
     CharacterController cc;
 
@@ -55,6 +64,27 @@ public class PlayerMovement : NetworkBehaviour
         else
         {
             playerMovement.ProcessSimulatedPlayerMovement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            var networkObject = ObjectRecognizer.Recognize(
+                camTransform,
+                recognizeDistance,
+                layerMask
+            );
+
+            if (networkObject != null)
+            {
+                if (networkObject.IsPlayerObject)
+                {
+                    Debug.Log("Player " + networkObject.NetworkObjectId);
+                }
+                else if (networkObject.IsSceneObject == true)
+                {
+                    Debug.Log("Object " + networkObject.NetworkObjectId);
+                }
+            }
         }
     }
 
