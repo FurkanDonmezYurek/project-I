@@ -69,7 +69,6 @@ public class RelayManager : MonoBehaviour
     public async void OnJoinClick()
     {
         var allocation = await RelayService.Instance.JoinAllocationAsync(joinInputField.text);
-        Debug.Log("ANAN");
         joinData = new RelayJointData()
         {
             IPv4Adress = allocation.RelayServer.IpV4,
