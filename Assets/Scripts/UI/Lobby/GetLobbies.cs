@@ -36,7 +36,6 @@ public class GetLobbies : MonoBehaviour
             };
 
             QueryResponse lobbies = await Lobbies.Instance.QueryLobbiesAsync(options);
-            Debug.LogWarning("Get Lobbies Done Count:" + lobbies.Results.Count);
             foreach (Lobby foundLobby in lobbies.Results)
             {
                 CreateLobbyButton(foundLobby);
@@ -52,7 +51,22 @@ public class GetLobbies : MonoBehaviour
     {
         var button = Instantiate(buttonPrefab, Vector3.zero, Quaternion.identity);
         button.name = lobby.Name + "Button";
-        button.GetComponentInChildren<TextMeshProUGUI>().text = lobby.Name;
+        button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = lobby.Name;
+        button.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = lobby.Data[
+            "ghost"
+        ].Value;
+        button.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = lobby.Data[
+            "hunter"
+        ].Value;
+        button.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = lobby.Data[
+            "wizard"
+        ].Value;
+        button.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = lobby.Data[
+            "lover"
+        ].Value;
+        button.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = lobby.Data[
+            "villager"
+        ].Value;
 
         var recTransform = button.GetComponent<RectTransform>();
         recTransform.SetParent(buttonsContainer.transform);

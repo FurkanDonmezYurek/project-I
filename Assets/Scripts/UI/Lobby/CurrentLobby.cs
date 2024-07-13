@@ -6,4 +6,5 @@ using UnityEngine;
 public class CurrentLobby : MonoBehaviour
 {
     public Lobby currentLobby { get; set; }
+    public Player thisPlayer { get; set; }
 }

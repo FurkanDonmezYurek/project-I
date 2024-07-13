@@ -8,6 +8,10 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
+using Unity.Services.Relay.Models;
+using Unity.Services.Relay;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 
 public class CreateLobby : MonoBehaviour
 {
@@ -15,11 +19,19 @@ public class CreateLobby : MonoBehaviour
     public TMP_Dropdown maxPlayers;
     public Toggle isLobbyPrivate;
 
+    public TMP_Dropdown ghost;
+    public TMP_Dropdown wizard;
+    public TMP_Dropdown lover;
+    public TMP_Dropdown hunter;
+
     async void Start()
     {
-        //for SignIn
         await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        //for SignIn
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
     }
 
     public async void CreateLobbyFunc()
@@ -29,11 +41,77 @@ public class CreateLobby : MonoBehaviour
         CreateLobbyOptions options = new CreateLobbyOptions();
         options.IsPrivate = isLobbyPrivate.isOn;
         options.Player = new Player(AuthenticationService.Instance.PlayerId);
+        options.Player.Data = new Dictionary<string, PlayerDataObject>()
+        {
+            {
+                "PlayerName",
+                new PlayerDataObject(
+                    PlayerDataObject.VisibilityOptions.Public,
+                    PlayerPrefs.GetString("PlayerName")
+                )
+            }
+        };
+
+        string villager = Convert.ToString(
+            maxplayers
+                - (
+                    Convert.ToInt32(hunter.options[hunter.value].text)
+                    + Convert.ToInt32(wizard.options[wizard.value].text)
+                    + Convert.ToInt32(lover.options[lover.value].text)
+                    + Convert.ToInt32(hunter.options[hunter.value].text)
+                )
+        );
+        //lobby Role data
+        options.Data = new Dictionary<string, DataObject>()
+        {
+            {
+                "ghost",
+                new DataObject(
+                    DataObject.VisibilityOptions.Public,
+                    ghost.options[ghost.value].text,
+                    DataObject.IndexOptions.S1
+                )
+            },
+            {
+                "wizard",
+                new DataObject(
+                    DataObject.VisibilityOptions.Public,
+                    wizard.options[wizard.value].text,
+                    DataObject.IndexOptions.S2
+                )
+            },
+            {
+                "lover",
+                new DataObject(
+                    DataObject.VisibilityOptions.Public,
+                    lover.options[lover.value].text,
+                    DataObject.IndexOptions.S3
+                )
+            },
+            {
+                "hunter",
+                new DataObject(
+                    DataObject.VisibilityOptions.Public,
+                    hunter.options[hunter.value].text,
+                    DataObject.IndexOptions.S4
+                )
+            },
+            {
+                "villager",
+                new DataObject(
+                    DataObject.VisibilityOptions.Public,
+                    villager,
+                    DataObject.IndexOptions.S5
+                )
+            }
+        };
 
         Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyname, maxplayers, options);
 
         DontDestroyOnLoad(this);
         GetComponent<CurrentLobby>().currentLobby = lobby;
+        GetComponent<CurrentLobby>().thisPlayer = options.Player;
+
         JoinLobby.LoadLobbyRoom();
         Debug.Log("Create Lobby Done");
 
