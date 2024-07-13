@@ -7,6 +7,7 @@ using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using Unity.Netcode;
 using System;
+using UnityEngine.UI;
 
 public class PopulateUI : NetworkBehaviour
 {
@@ -33,6 +34,15 @@ public class PopulateUI : NetworkBehaviour
     bool isHost;
 
     RelayManager relayManager;
+
+    public TMP_InputField setLobbyName;
+    public TextMeshProUGUI lobbyNameText;
+    public TMP_Dropdown maxPlayers;
+    public Toggle isLobbyPrivate;
+    public TMP_Dropdown ghost;
+    public TMP_Dropdown wizard;
+    public TMP_Dropdown lover;
+    public TMP_Dropdown hunter;
 
     private void Start()
     {
@@ -103,8 +113,95 @@ public class PopulateUI : NetworkBehaviour
         currentLobby.currentLobby = await LobbyService.Instance.GetLobbyAsync(
             currentLobby.currentLobby.Id
         );
-
         PopulateUIElements();
+    }
+
+    public void RefreshSettingsPanel()
+    {
+        setLobbyName.text = "";
+        lobbyNameText.text = lobbyName.text;
+        maxPlayers.options[maxPlayers.value].text = Convert.ToString(
+            currentLobby.currentLobby.MaxPlayers
+        );
+        isLobbyPrivate.isOn = currentLobby.currentLobby.IsPrivate;
+        ghost.options[ghost.value].text = ghostCount.text;
+        hunter.options[hunter.value].text = hunterCount.text;
+        wizard.options[wizard.value].text = wizardCount.text;
+        lover.options[lover.value].text = loverCount.text;
+    }
+
+    public async void SetNewValueForLobby()
+    {
+        try
+        {
+            UpdateLobbyOptions options = new UpdateLobbyOptions();
+            options.MaxPlayers = Convert.ToInt32(maxPlayers.options[maxPlayers.value].text);
+            string villager = Convert.ToString(
+                options.MaxPlayers
+                    - (
+                        Convert.ToInt32(hunter.options[hunter.value].text)
+                        + Convert.ToInt32(wizard.options[wizard.value].text)
+                        + Convert.ToInt32(lover.options[lover.value].text)
+                        + Convert.ToInt32(hunter.options[hunter.value].text)
+                    )
+            );
+            options.Data = new Dictionary<string, DataObject>()
+            {
+                {
+                    "ghost",
+                    new DataObject(
+                        DataObject.VisibilityOptions.Public,
+                        ghost.options[ghost.value].text,
+                        DataObject.IndexOptions.S1
+                    )
+                },
+                {
+                    "wizard",
+                    new DataObject(
+                        DataObject.VisibilityOptions.Public,
+                        wizard.options[wizard.value].text,
+                        DataObject.IndexOptions.S2
+                    )
+                },
+                {
+                    "lover",
+                    new DataObject(
+                        DataObject.VisibilityOptions.Public,
+                        lover.options[lover.value].text,
+                        DataObject.IndexOptions.S3
+                    )
+                },
+                {
+                    "hunter",
+                    new DataObject(
+                        DataObject.VisibilityOptions.Public,
+                        hunter.options[hunter.value].text,
+                        DataObject.IndexOptions.S4
+                    )
+                },
+                {
+                    "villager",
+                    new DataObject(
+                        DataObject.VisibilityOptions.Public,
+                        villager,
+                        DataObject.IndexOptions.S5
+                    )
+                }
+            };
+            if (setLobbyName.text != "")
+            {
+                options.Name = setLobbyName.text;
+            }
+            options.IsPrivate = isLobbyPrivate.isOn;
+            currentLobby.currentLobby = await Lobbies.Instance.UpdateLobbyAsync(
+                currentLobby.currentLobby.Id,
+                options
+            );
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     private void CleanerContainer()
