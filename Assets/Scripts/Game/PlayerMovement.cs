@@ -15,11 +15,9 @@ public class PlayerMovement : NetworkBehaviour
     float turnSpeed;
     float cameraAngle;
 
-    [SerializeField]
-    float recognizeDistance;
+    [SerializeField] public float recognizeDistance;
 
-    [SerializeField]
-    LayerMask layerMask;
+    [SerializeField] public LayerMask layerMask;
 
     CharacterController cc;
 
@@ -73,7 +71,7 @@ public class PlayerMovement : NetworkBehaviour
                 recognizeDistance,
                 layerMask
             );
-
+        
             if (networkObject != null)
             {
                 if (networkObject.IsPlayerObject)

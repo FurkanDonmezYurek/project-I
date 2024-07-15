@@ -6,11 +6,16 @@ using Unity.Netcode;
 public class Asik : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
+    private PlayerMovement pl_movement;
+
+    
     public ulong loverId = ulong.MaxValue;
 
     private void Start()
     {
         roleAssignment = GetComponent<RoleAssignment>();
+        pl_movement = GetComponent<PlayerMovement>();
+        
         if (roleAssignment == null)
         {
             Debug.LogError("RoleAssignment script not found on the player!");
@@ -25,12 +30,18 @@ public class Asik : NetworkBehaviour
     {
         if (IsLocalPlayer && Input.GetKeyDown(KeyCode.L))
         {
+            var networkObject = ObjectRecognizer.Recognize(
+                pl_movement.camTransform,
+                pl_movement.recognizeDistance,
+                pl_movement.layerMask
+            );
+            
             Debug.Log("L key pressed. Attempting to find target to make in love.");
-            GameObject target = FindTarget();
-            if (target != null)
+ 
+            if (networkObject != null)
             {
-                ulong targetId = target.GetComponent<NetworkObject>().OwnerClientId;
-                Debug.Log($"Target found: {target.name} with ID {targetId}");
+                ulong targetId = networkObject.GetComponent<NetworkObject>().OwnerClientId;
+                Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 MakeInLoveServerRpc(targetId);
             }
             else
@@ -80,16 +91,4 @@ public class Asik : NetworkBehaviour
         }
     }
 
-    private GameObject FindTarget()
-    {
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            RoleAssignment targetRoleAssignment = player.GetComponent<RoleAssignment>();
-            if (targetRoleAssignment != null && player.GetComponent<NetworkObject>().OwnerClientId != NetworkObject.OwnerClientId)
-            {
-                return player;
-            }
-        }
-        return null;
-    }
 }
