@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
-    public static GameObject[] taskArray = new GameObject[4];
+     public static GameObject[] taskArray = new GameObject[4];
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class TaskManager : MonoBehaviour
         }
         taskArray.ToList().ForEach(i => Debug.Log(i.ToString()));
     }
-
+    
     public static void RunTask(GameObject taskObject)
     {
         GameObject obj = Array.Find(taskArray, elm => elm.gameObject.name == taskObject.name);
@@ -30,4 +30,6 @@ public class TaskManager : MonoBehaviour
             obj.SetActive(false);
         }
     }
+    
+
 }
