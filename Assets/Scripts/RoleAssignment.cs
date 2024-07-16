@@ -17,13 +17,18 @@ public enum PlayerRole
 
 public class RoleAssignment : NetworkBehaviour
 {
-    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(PlayerRole.Unassigned);
+    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(
+        PlayerRole.Unassigned
+    );
+    public bool usedSkill;
 
     private void Start()
     {
         if (IsServer)
         {
-            AssignRole((PlayerRole)Random.Range(1, System.Enum.GetValues(typeof(PlayerRole)).Length));
+            AssignRole(
+                (PlayerRole)Random.Range(1, System.Enum.GetValues(typeof(PlayerRole)).Length)
+            );
         }
 
         // Add a listener to the NetworkVariable to handle changes
@@ -60,7 +65,6 @@ public class RoleAssignment : NetworkBehaviour
         GetComponent<HeadHunter>().enabled = false;
         GetComponent<Koylu>().enabled = false;
 
-        
         switch (newRole)
         {
             case PlayerRole.Koylu:

@@ -16,9 +16,11 @@ public class PlayerMovement : NetworkBehaviour
     float turnSpeed;
     float cameraAngle;
 
-    [SerializeField] public float recognizeDistance;
+    [SerializeField]
+    public float recognizeDistance;
 
-    [SerializeField] public LayerMask layerMask;
+    [SerializeField]
+    public LayerMask layerMask;
 
     CharacterController cc;
 
@@ -26,6 +28,12 @@ public class PlayerMovement : NetworkBehaviour
     NetworkMovementComponent playerMovement;
     bool taskStarted = false;
     GameObject taskObject;
+
+    RoleAssignment roleAssignment;
+    GameManager gManager;
+    public ulong loverId = 999;
+    public ulong proxyId = 999;
+    public bool isDead = false;
 
     public override void OnNetworkSpawn()
     {
@@ -46,6 +54,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         cc = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+        roleAssignment = this.GetComponent<RoleAssignment>();
     }
 
     private void Awake()
@@ -56,6 +65,21 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Update()
     {
+        if (isDead)
+        {
+            switch (roleAssignment.role.Value)
+            {
+                case PlayerRole.Asik:
+                    gManager.Dead(this.NetworkObject);
+                    break;
+                case PlayerRole.BaşAvcı:
+                    gManager.Dead(this.NetworkObject);
+                    break;
+                default:
+                    gManager.Dead(this.NetworkObject);
+                    break;
+            }
+        }
         Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
         Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
         if (IsClient && IsLocalPlayer)
@@ -66,15 +90,25 @@ public class PlayerMovement : NetworkBehaviour
         {
             playerMovement.ProcessSimulatedPlayerMovement();
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0))
         {
             var networkObject = ObjectRecognizer.Recognize(
                 camTransform,
                 recognizeDistance,
                 layerMask
             );
-        
+            gManager.Kill(networkObject);
+        }
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.E))
+        {
+            var networkObject = ObjectRecognizer.Recognize(
+                camTransform,
+                recognizeDistance,
+                layerMask
+            );
+            gManager.UseSkill(networkObject, this.gameObject);
+
+            //For Task
             if (networkObject != null)
             {
                 taskObject = networkObject.gameObject;
