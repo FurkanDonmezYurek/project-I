@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cinemachine;
 using GameFramework.Network.Movement;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
@@ -26,8 +25,6 @@ public class PlayerMovement : NetworkBehaviour
 
     [SerializeField]
     NetworkMovementComponent playerMovement;
-    bool taskStarted = false;
-    GameObject taskObject;
 
     public override void OnNetworkSpawn()
     {
@@ -79,31 +76,14 @@ public class PlayerMovement : NetworkBehaviour
 
             if (networkObject != null)
             {
-                taskObject = networkObject.gameObject;
-
-                // if (networkObject.IsPlayerObject)
-                // {
-                //     Debug.Log("Player " + networkObject.NetworkObjectId);
-                // }
-                // else
-                if (
-                    networkObject.IsSceneObject == true
-                    && networkObject.gameObject.transform.tag == "Task"
-                )
+                if (networkObject.IsPlayerObject)
                 {
-                    TaskManager.RunTask(taskObject);
-                    taskStarted = true;
+                    Debug.Log("Player " + networkObject.NetworkObjectId);
                 }
-            }
-        }
-
-        if (taskStarted && taskObject != null)
-        {
-            if (Vector3.Distance(transform.position, taskObject.transform.position) > 5f)
-            {
-                TaskManager.RunTask(taskObject);
-                taskObject = null;
-                taskStarted = false;
+                else if (networkObject.IsSceneObject == true)
+                {
+                    Debug.Log("Object " + networkObject.NetworkObjectId);
+                }
             }
         }
     }
