@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FillingTheBottle : MonoBehaviour
 {
-     public Image[] waterBottles;    
+        public Image[] waterBottles;    
     public Text scoreText;           
     public float gameTime = 30.0f;  
     private int score = 0;          
@@ -44,7 +44,6 @@ public class FillingTheBottle : MonoBehaviour
                 bottle.rectTransform.position = new Vector3(x, y, 0);
                 bottle.gameObject.SetActive(true);
 
-                // Button componentini ekleyip onClick eventini ayarla
                 Button bottleButton = bottle.gameObject.GetComponent<Button>();
                 if (bottleButton == null)
                 {
@@ -59,14 +58,13 @@ public class FillingTheBottle : MonoBehaviour
     {
         if (!gameEnded)
         {
-            // Simüle edilmiş su dolumu işlemi
             StartCoroutine(FillBottleCoroutine(bottle));
         }
     }
 
     IEnumerator FillBottleCoroutine(Image bottle)
     {
-        float fillTime = 2.0f;  // Su dolum süresi (örneğin 2 saniye)
+        float fillTime = 2.0f;  
         float elapsedTime = 0f;
 
         while (elapsedTime < fillTime)
@@ -75,12 +73,10 @@ public class FillingTheBottle : MonoBehaviour
             yield return null;
         }
 
-        // Su dolumu tamamlandı
-        bottle.fillAmount = 1f;  // 1.0 = %100 dolum
+        bottle.fillAmount = 1f;  
         score++;
         UpdateScoreText();
 
-        // Eğer tüm su şişelerini bulduysa oyunu bitir
         if (score >= totalBottles)
         {
             EndGame();
@@ -99,8 +95,6 @@ public class FillingTheBottle : MonoBehaviour
     {
         gameEnded = true;
         Debug.Log("Game Over! Total Score: " + score);
-
-        // Canvas ekranını kapat
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); // Mini oyun arayüzünü gizle
     }
 }
