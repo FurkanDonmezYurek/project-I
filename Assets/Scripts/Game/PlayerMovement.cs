@@ -30,7 +30,7 @@ public class PlayerMovement : NetworkBehaviour
     GameObject taskObject;
 
     RoleAssignment roleAssignment;
-    GameManager gManager;
+        //GameManager gManager;
     public ulong loverId = 999;
     public ulong proxyId = 999;
     public bool isDead = false;
@@ -65,21 +65,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Update()
     {
-        if (isDead)
-        {
-            switch (roleAssignment.role.Value)
-            {
-                case PlayerRole.Asik:
-                    gManager.Dead(this.NetworkObject);
-                    break;
-                case PlayerRole.BaşAvcı:
-                    gManager.Dead(this.NetworkObject);
-                    break;
-                default:
-                    gManager.Dead(this.NetworkObject);
-                    break;
-            }
-        }
+       
         Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
         Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
         if (IsClient && IsLocalPlayer)
@@ -97,7 +83,6 @@ public class PlayerMovement : NetworkBehaviour
                 recognizeDistance,
                 layerMask
             );
-            gManager.Kill(networkObject);
         }
         if (IsLocalPlayer && Input.GetKeyDown(KeyCode.E))
         {
@@ -106,8 +91,6 @@ public class PlayerMovement : NetworkBehaviour
                 recognizeDistance,
                 layerMask
             );
-            gManager.UseSkill(networkObject, this.gameObject);
-
             //For Task
             if (networkObject != null)
             {

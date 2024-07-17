@@ -12,16 +12,16 @@ public enum PlayerRole
     BaşAvcı,
     Avci,
     Hayalet,
-    AlfaHayalet
+    AlphaHayalet
 }
 
 public class RoleAssignment : NetworkBehaviour
 {
-    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(
-        PlayerRole.Unassigned
-    );
-    public bool usedSkill;
-
+    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(PlayerRole.Unassigned);
+    
+    public bool usedSkill = false;
+    public bool isDead = false;
+    
     private void Start()
     {
         if (IsServer)
@@ -46,7 +46,6 @@ public class RoleAssignment : NetworkBehaviour
         role.Value = newRole;
         Debug.Log($"Server received: {gameObject.name} is assigned to {newRole} role");
         EnableRelevantRoleScript(newRole);
-        //print role
     }
 
     private void OnRoleChanged(PlayerRole oldRole, PlayerRole newRole)
@@ -55,48 +54,54 @@ public class RoleAssignment : NetworkBehaviour
         EnableRelevantRoleScript(newRole);
     }
 
+    
     private void EnableRelevantRoleScript(PlayerRole newRole)
     {
-        GetComponent<Hayalet>().enabled = false;
-        GetComponent<AlphaHayalet>().enabled = false;
-        GetComponent<Buyucu>().enabled = false;
-        GetComponent<Asik>().enabled = false;
-        GetComponent<Avci>().enabled = false;
-        GetComponent<HeadHunter>().enabled = false;
-        GetComponent<Koylu>().enabled = false;
+        RemoveAllRoleComponents();
 
         switch (newRole)
         {
             case PlayerRole.Koylu:
-                GetComponent<Koylu>().enabled = true;
+                gameObject.AddComponent<Koylu>();
                 break;
             case PlayerRole.Hayalet:
-                GetComponent<Hayalet>().enabled = true;
+                gameObject.AddComponent<Hayalet>();
                 break;
-            case PlayerRole.AlfaHayalet:
-                GetComponent<AlphaHayalet>().enabled = true;
+            case PlayerRole.AlphaHayalet:
+                gameObject.AddComponent<AlphaHayalet>();
                 break;
             case PlayerRole.Buyucu:
-                GetComponent<Buyucu>().enabled = true;
+                gameObject.AddComponent<Buyucu>();
                 break;
             case PlayerRole.Asik:
-                GetComponent<Asik>().enabled = true;
+                gameObject.AddComponent<Asik>();
                 break;
             case PlayerRole.Avci:
-                GetComponent<Avci>().enabled = true;
+                gameObject.AddComponent<Avci>();
                 break;
             case PlayerRole.BaşAvcı:
-                GetComponent<HeadHunter>().enabled = true;
+                gameObject.AddComponent<HeadHunter>();
                 break;
         }
     }
 
+    private void RemoveAllRoleComponents()
+    {
+        Destroy(GetComponent<Koylu>());
+        Destroy(GetComponent<Hayalet>());
+        Destroy(GetComponent<AlphaHayalet>());
+        Destroy(GetComponent<Buyucu>());
+        Destroy(GetComponent<Asik>());
+        Destroy(GetComponent<Avci>());
+        Destroy(GetComponent<HeadHunter>());
+    }
+
     private void OnValidate()
     {
-        // This method allows you to change the role in the Unity Editor and see the changes immediately.
         if (!Application.isPlaying && role.Value != PlayerRole.Unassigned)
         {
             Debug.Log($"Editor: {gameObject.name} is assigned to {role.Value} role");
+            EnableRelevantRoleScript(role.Value);
         }
     }
 
