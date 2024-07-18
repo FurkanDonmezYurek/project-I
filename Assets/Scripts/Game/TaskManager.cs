@@ -14,7 +14,6 @@ public class TaskManager : MonoBehaviour
         {
             taskArray[i] = transform.GetChild(i).gameObject;
         }
-        taskArray.ToList().ForEach(i => Debug.Log(i.ToString()));
     }
 
     public static void RunTask(GameObject taskObject)

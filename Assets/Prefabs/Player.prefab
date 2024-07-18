@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 6064122544589708649}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -680,3 +680,4 @@ MonoBehaviour:
   role:
     m_InternalValue: 0
   usedSkill: 0
+  isDead: 0
