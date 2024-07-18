@@ -9,8 +9,10 @@ public enum PlayerRole
     Buyucu,
     Koylu,
     Asik,
+    BaşAvcı,
     Avci,
-    Hayalet
+    Hayalet,
+    AlfaHayalet
 }
 
 public class RoleAssignment : NetworkBehaviour
@@ -39,6 +41,7 @@ public class RoleAssignment : NetworkBehaviour
         role.Value = newRole;
         Debug.Log($"Server received: {gameObject.name} is assigned to {newRole} role");
         EnableRelevantRoleScript(newRole);
+        //print role
     }
 
     private void OnRoleChanged(PlayerRole oldRole, PlayerRole newRole)
@@ -49,17 +52,25 @@ public class RoleAssignment : NetworkBehaviour
 
     private void EnableRelevantRoleScript(PlayerRole newRole)
     {
-        // Disable all role scripts initially
         GetComponent<Hayalet>().enabled = false;
+        GetComponent<AlphaHayalet>().enabled = false;
         GetComponent<Buyucu>().enabled = false;
         GetComponent<Asik>().enabled = false;
         GetComponent<Avci>().enabled = false;
+        GetComponent<HeadHunter>().enabled = false;
+        GetComponent<Koylu>().enabled = false;
 
-        // Enable only the relevant script based on the assigned role
+        
         switch (newRole)
         {
+            case PlayerRole.Koylu:
+                GetComponent<Koylu>().enabled = true;
+                break;
             case PlayerRole.Hayalet:
                 GetComponent<Hayalet>().enabled = true;
+                break;
+            case PlayerRole.AlfaHayalet:
+                GetComponent<AlphaHayalet>().enabled = true;
                 break;
             case PlayerRole.Buyucu:
                 GetComponent<Buyucu>().enabled = true;
@@ -70,7 +81,8 @@ public class RoleAssignment : NetworkBehaviour
             case PlayerRole.Avci:
                 GetComponent<Avci>().enabled = true;
                 break;
-            default:
+            case PlayerRole.BaşAvcı:
+                GetComponent<HeadHunter>().enabled = true;
                 break;
         }
     }

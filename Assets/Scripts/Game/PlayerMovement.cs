@@ -14,8 +14,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField]
     float recognizeDistance;
 
-    [SerializeField]
-    LayerMask layerMask;
+    [SerializeField] public LayerMask layerMask;
 
     [SerializeField]
     NetworkMovementComponent playerMovement;
@@ -77,7 +76,7 @@ public class PlayerMovement : NetworkBehaviour
                 recognizeDistance,
                 layerMask
             );
-
+        
             if (networkObject != null)
             {
                 if (taskObject == null)

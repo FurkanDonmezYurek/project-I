@@ -6,10 +6,15 @@ using Unity.Netcode;
 public class Avci : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
+    private PlayerMovement pl_movement;
 
+    private HeadHunter headHunter;
+    
     private void Start()
     {
         roleAssignment = GetComponent<RoleAssignment>();
+        pl_movement = GetComponent<PlayerMovement>();
+
         if (roleAssignment == null)
         {
             Debug.LogError("RoleAssignment script not found on the player!");
@@ -24,12 +29,18 @@ public class Avci : NetworkBehaviour
     {
         if (IsLocalPlayer && Input.GetKeyDown(KeyCode.K))
         {
+            var networkObject = ObjectRecognizer.Recognize(
+                pl_movement.camTransform,
+                pl_movement.recognizeDistance,
+                pl_movement.layerMask
+            );
+            
             Debug.Log("K key pressed. Attempting to find target to kill.");
-            GameObject target = FindTarget();
-            if (target != null)
+            
+            if (networkObject != null)
             {
-                ulong targetId = target.GetComponent<NetworkObject>().OwnerClientId;
-                Debug.Log($"Target found: {target.name} with ID {targetId}");
+                ulong targetId = networkObject.OwnerClientId;
+                Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 KillPlayerServerRpc(targetId);
             }
             else
@@ -65,6 +76,14 @@ public class Avci : NetworkBehaviour
                             Debug.Log($"Asik {netObj.name} killed. Their lover will also die.");
                         }
                     }
+                    //make the vekil of the headhunter a hunter, i hope so...
+                    if (targetRoleAssignment.role.Value == PlayerRole.BaşAvcı)
+                    {
+                        headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
+                        headHunter.isDead = true;
+                        headHunter.MakeVekilHunterServerRpc();
+                    }
+                    
                     Debug.Log($"Target object found on server: {netObj.name}");
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
                 }
@@ -95,16 +114,5 @@ public class Avci : NetworkBehaviour
             Debug.Log("Target object not found on client.");
         }
     }
-
-    private GameObject FindTarget()
-    {
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            if (player.GetComponent<NetworkObject>().OwnerClientId != NetworkObject.OwnerClientId)
-            {
-                return player;
-            }
-        }
-        return null;
-    }
+    
 }

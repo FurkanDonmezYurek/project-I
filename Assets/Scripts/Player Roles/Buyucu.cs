@@ -26,7 +26,7 @@ public class Buyucu : NetworkBehaviour
         {
             Debug.Log("R key pressed. Attempting to find target to revive.");
             GameObject target = FindTarget();
-            if (target != null && target != gameObject) // Ensure Buyucu doesn't target itself
+            if (target != null && target != gameObject)
             {
                 ulong targetId = target.GetComponent<NetworkObject>().OwnerClientId;
                 Debug.Log($"Target found: {target.name} with ID {targetId}");
@@ -83,14 +83,13 @@ public class Buyucu : NetworkBehaviour
     {
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
-            if (player != gameObject) // Ensure Buyucu doesn't target itself
+            if (player != gameObject) 
             {
                 RoleAssignment targetRoleAssignment = player.GetComponent<RoleAssignment>();
                 if (targetRoleAssignment != null)
                 {
                     Debug.Log($"Checking player {player.name} with role {targetRoleAssignment.role.Value}");
-                    // Add conditions to determine a valid target for revival
-                    if (targetRoleAssignment.role.Value == PlayerRole.Koylu) // Example condition
+                    if (targetRoleAssignment.role.Value == PlayerRole.Koylu) 
                     {
                         Debug.Log($"Target player {player.name} found.");
                         return player;
