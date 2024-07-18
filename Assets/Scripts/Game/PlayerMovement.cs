@@ -9,23 +9,17 @@ using UnityEngine;
 public class PlayerMovement : NetworkBehaviour
 {
     DefaultPlayerActions InputActions;
-    public Vector2 minMaxRotationX;
     public Transform camTransform;
 
     [SerializeField]
-    float turnSpeed;
-    float cameraAngle;
-
-    [SerializeField] public float recognizeDistance;
+    float recognizeDistance;
 
     [SerializeField] public LayerMask layerMask;
-
-    CharacterController cc;
 
     [SerializeField]
     NetworkMovementComponent playerMovement;
     bool taskStarted = false;
-    GameObject taskObject;
+    public GameObject taskObject;
 
     public override void OnNetworkSpawn()
     {
@@ -44,7 +38,6 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
-        cc = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -56,15 +49,24 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Update()
     {
-        Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
-        Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
-        if (IsClient && IsLocalPlayer)
+        if (taskStarted)
         {
-            playerMovement.ProcessLocalPlayerMovement(movementInput, lookInput);
+            Cursor.lockState = CursorLockMode.Confined;
         }
         else
         {
-            playerMovement.ProcessSimulatedPlayerMovement();
+            taskObject = null;
+            Cursor.lockState = CursorLockMode.Locked;
+            Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
+            Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
+            if (IsClient && IsLocalPlayer)
+            {
+                playerMovement.ProcessLocalPlayerMovement(movementInput, lookInput);
+            }
+            else
+            {
+                playerMovement.ProcessSimulatedPlayerMovement();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -77,51 +79,21 @@ public class PlayerMovement : NetworkBehaviour
         
             if (networkObject != null)
             {
-                taskObject = networkObject.gameObject;
-
-                // if (networkObject.IsPlayerObject)
-                // {
-                //     Debug.Log("Player " + networkObject.NetworkObjectId);
-                // }
-                // else
+                if (taskObject == null)
+                {
+                    taskObject = networkObject.gameObject;
+                }
                 if (
                     networkObject.IsSceneObject == true
                     && networkObject.gameObject.transform.tag == "Task"
+                    && taskObject == networkObject.gameObject
                 )
                 {
-                    TaskManager.RunTask(taskObject);
-                    taskStarted = true;
+                    Cursor.lockState = CursorLockMode.Confined;
+                    taskStarted = !taskStarted;
+                    TaskManager.RunTask(taskObject, taskStarted);
                 }
             }
         }
-
-        if (taskStarted && taskObject != null)
-        {
-            if (Vector3.Distance(transform.position, taskObject.transform.position) > 5f)
-            {
-                TaskManager.RunTask(taskObject);
-                taskObject = null;
-                taskStarted = false;
-            }
-        }
     }
-
-    // void RotateCamera(float lookInputY)
-    // {
-    //     cameraAngle = Vector3.SignedAngle(
-    //         transform.forward,
-    //         camTransform.forward,
-    //         camTransform.right
-    //     );
-    //     float cameraRotationAmount = lookInputY * turnSpeed * Time.deltaTime;
-    //     float newCameraAngle = cameraAngle - cameraRotationAmount;
-    //     if (newCameraAngle <= minMaxRotationX.x && newCameraAngle >= minMaxRotationX.y)
-    //     {
-    //         camTransform.RotateAround(
-    //             camTransform.position,
-    //             camTransform.right,
-    //             -lookInputY * turnSpeed * Time.deltaTime
-    //         );
-    //     }
-    // }
 }
