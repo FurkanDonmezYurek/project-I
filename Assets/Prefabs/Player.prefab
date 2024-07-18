@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3515605724
+  GlobalObjectIdHash: 4227996855
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -589,12 +589,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minMaxRotationX: {x: 90, y: -90}
   camTransform: {fileID: 2186439602067403128}
-  turnSpeed: 0
-  recognizeDistance: 5
+  turnSpeed: 1
+  recognizeDistance: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 8
   playerMovement: {fileID: -5152995086853162142}
+  taskObject: {fileID: 0}
 --- !u!114 &-5152995086853162142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,6 +613,7 @@ MonoBehaviour:
   turnSpeed: 10
   camSocket: {fileID: 516503779705563755}
   vcam: {fileID: 3129659903808394760}
+  minMaxRotationX: {x: 90, y: -90}
 --- !u!136 &826170338585404372
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class FillingTheBottle : MonoBehaviour
 {
-        public Image[] waterBottles;    
-    public Text scoreText;           
-    public float gameTime = 30.0f;  
-    private int score = 0;          
-    private int totalBottles = 5;   
-    private float timer;            
-    private bool gameEnded = false; 
+    public Image[] waterBottles;
+    public Text scoreText;
+    public float gameTime = 30.0f;
+    private int score = 0;
+    private int totalBottles = 5;
+    private float timer;
+    private bool gameEnded = false;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class FillingTheBottle : MonoBehaviour
 
     void Update()
     {
-        if (!gameEnded)
+        if (this.gameObject.activeSelf)
         {
             timer -= Time.deltaTime;
             if (timer <= 0)
@@ -64,7 +64,7 @@ public class FillingTheBottle : MonoBehaviour
 
     IEnumerator FillBottleCoroutine(Image bottle)
     {
-        float fillTime = 2.0f;  
+        float fillTime = 2.0f;
         float elapsedTime = 0f;
 
         while (elapsedTime < fillTime)
@@ -73,7 +73,7 @@ public class FillingTheBottle : MonoBehaviour
             yield return null;
         }
 
-        bottle.fillAmount = 1f;  
+        bottle.fillAmount = 1f;
         score++;
         UpdateScoreText();
 
