@@ -8,11 +8,13 @@ using UnityEngine;
 using Unity.Netcode;
 using System;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+using System.Linq;
 
 public class PopulateUI : NetworkBehaviour
 {
     public TextMeshProUGUI playerName;
-    public int playerCount = 0;
+    public int playerCount = 1;
 
     public GameObject privImage;
     public TextMeshProUGUI lobbyName;
@@ -27,9 +29,9 @@ public class PopulateUI : NetworkBehaviour
 
     public GameObject playerCardPrefab;
     public GameObject playerListContainer;
+
     Player hostPlayer;
 
-    public int readyCount = 0;
     public bool setReady = true;
     bool isHost;
 
@@ -77,22 +79,24 @@ public class PopulateUI : NetworkBehaviour
                 hostPlayer = player;
             }
         }
-
-        if (hostPlayer.Id == currentLobby.thisPlayer.Id)
+        if (currentLobby.currentLobby.Players.Any(p => p.Id == currentLobby.thisPlayer.Id))
         {
-            startButtonText.text = "Başlat";
-            isHost = true;
-
-            SetJoinCode();
-        }
-        else
-        {
-            startButtonText.text = "Hazır";
-            isHost = false;
-            if (!isHost && currentLobby.currentLobby.Data["joinCode"].Value != "")
+            if (hostPlayer.Id == currentLobby.thisPlayer.Id)
             {
-                JoinLobby.LoadGame();
-                relayManager.OnJoinClick();
+                startButtonText.text = "Başlat";
+                isHost = true;
+
+                SetJoinCode();
+            }
+            else
+            {
+                startButtonText.text = "Hazır";
+                isHost = false;
+                if (!isHost && currentLobby.currentLobby.Data["joinCode"].Value != "")
+                {
+                    JoinLobby.LoadGame();
+                    relayManager.OnJoinClick();
+                }
             }
         }
     }
@@ -106,6 +110,29 @@ public class PopulateUI : NetworkBehaviour
         text.GetComponent<TextMeshProUGUI>().text = player.Data["PlayerName"].Value;
         var recTransform = card.GetComponent<RectTransform>();
         recTransform.SetParent(playerListContainer.transform);
+        if (isHost)
+        {
+            if (
+                text.GetComponent<TextMeshProUGUI>().text
+                == currentLobby.thisPlayer.Data["PlayerName"].Value
+            )
+            {
+                card.transform.GetChild(3).gameObject.SetActive(false);
+            }
+            card.transform
+                .GetChild(3)
+                .GetComponent<Button>()
+                .onClick.AddListener(
+                    delegate
+                    {
+                        KickLobby(player);
+                    }
+                );
+        }
+        else
+        {
+            card.transform.GetChild(3).gameObject.SetActive(false);
+        }
     }
 
     async void UpdateLobby()
@@ -113,6 +140,11 @@ public class PopulateUI : NetworkBehaviour
         currentLobby.currentLobby = await LobbyService.Instance.GetLobbyAsync(
             currentLobby.currentLobby.Id
         );
+        if (!currentLobby.currentLobby.Players.Any(p => p.Id == currentLobby.thisPlayer.Id))
+        {
+            JoinLobby.ReturnMainMenu();
+        }
+
         PopulateUIElements();
     }
 
@@ -211,7 +243,7 @@ public class PopulateUI : NetworkBehaviour
             foreach (Transform item in playerListContainer.transform)
             {
                 Destroy(item.gameObject);
-                playerCount = 0;
+                playerCount = 1;
             }
         }
     }
@@ -222,36 +254,69 @@ public class PopulateUI : NetworkBehaviour
     {
         if (isHost)
         {
-            JoinLobby.LoadGame();
-            relayManager.OnHostClick();
+            int totalReadyCount = 0;
+            foreach (Player player in currentLobby.currentLobby.Players)
+            {
+                totalReadyCount += Convert.ToInt32(player.Data["readyCount"].Value);
+            }
+            if (totalReadyCount == currentLobby.currentLobby.Players.Count)
+            {
+                JoinLobby.LoadGame();
+                relayManager.OnHostClick();
+            }
         }
+        else if (!isHost && setReady == true)
+        {
+            SetReady();
+        }
+    }
 
-        // if (isHost)
-        // {
-        //     if (
-        //         Convert.ToInt32(currentLobby.currentLobby.Data["readyCount"].Value)
-        //         == playerCount - 1
-        //     )
-        //     {
-
-        //     }
-        // }
-        // else if (!isHost && setReady == true)
-        // {
-        //     readyCount++;
-        //     setReady = false;
-        // }
+    public async void SetReady()
+    {
+        setReady = false;
+        try
+        {
+            UpdatePlayerOptions options = new UpdatePlayerOptions();
+            options.Data = new Dictionary<string, PlayerDataObject>()
+            {
+                {
+                    "readyCount",
+                    new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "1")
+                }
+            };
+            currentLobby.currentLobby = await Lobbies.Instance.UpdatePlayerAsync(
+                currentLobby.currentLobby.Id,
+                currentLobby.thisPlayer.Id,
+                options
+            );
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     public async void ExitLobby()
     {
         try
         {
-            //Ensure you sign-in before calling Authentication Instance
-            //See IAuthenticationService interface
-            string playerId = AuthenticationService.Instance.PlayerId;
-            await LobbyService.Instance.RemovePlayerAsync(currentLobby.currentLobby.Id, playerId);
+            await LobbyService.Instance.RemovePlayerAsync(
+                currentLobby.currentLobby.Id,
+                currentLobby.thisPlayer.Id
+            );
             JoinLobby.ReturnMainMenu();
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
+    public async void KickLobby(Player player)
+    {
+        try
+        {
+            await LobbyService.Instance.RemovePlayerAsync(currentLobby.currentLobby.Id, player.Id);
         }
         catch (LobbyServiceException e)
         {
