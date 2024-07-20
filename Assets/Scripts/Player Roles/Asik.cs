@@ -28,7 +28,7 @@ public class Asik : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.L))
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.L) && !roleAssignment.usedSkill)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -63,6 +63,7 @@ public class Asik : NetworkBehaviour
                 loverId = targetId;
                 Debug.Log($"Target object found on server: {netObj.name} is now in love with {gameObject.name}");
                 MakeInLoveClientRpc(new NetworkObjectReference(netObj));
+                roleAssignment.usedSkill = true;
                 return;
             }
         }
@@ -72,7 +73,7 @@ public class Asik : NetworkBehaviour
     [ClientRpc]
     private void MakeInLoveClientRpc(NetworkObjectReference target)
     {
-        if (target.TryGet(out NetworkObject targetObject))
+        if (target.TryGet(out NetworkObject targetObject) && !targetObject.GetComponent<RoleAssignment>().isDead)
         {
             Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)

@@ -12,14 +12,25 @@ public class PlayerMovement : NetworkBehaviour
     public Transform camTransform;
 
     [SerializeField]
-    float recognizeDistance;
+    float turnSpeed;
+    float cameraAngle;
 
-    [SerializeField] public LayerMask layerMask;
+    [SerializeField]
+    public float recognizeDistance;
+
+    [SerializeField]
+    public LayerMask layerMask;
 
     [SerializeField]
     NetworkMovementComponent playerMovement;
     bool taskStarted = false;
     public GameObject taskObject;
+
+    RoleAssignment roleAssignment;
+        //GameManager gManager;
+    public ulong loverId = 999;
+    public ulong proxyId = 999;
+    public bool isDead = false;
 
     public override void OnNetworkSpawn()
     {
@@ -39,6 +50,7 @@ public class PlayerMovement : NetworkBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        roleAssignment = this.GetComponent<RoleAssignment>();
     }
 
     private void Awake()
@@ -68,15 +80,22 @@ public class PlayerMovement : NetworkBehaviour
                 playerMovement.ProcessSimulatedPlayerMovement();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0))
         {
             var networkObject = ObjectRecognizer.Recognize(
                 camTransform,
                 recognizeDistance,
                 layerMask
             );
-        
+        }
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.E))
+        {
+            var networkObject = ObjectRecognizer.Recognize(
+                camTransform,
+                recognizeDistance,
+                layerMask
+            );
+            //For Task
             if (networkObject != null)
             {
                 if (taskObject == null)

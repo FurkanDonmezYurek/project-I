@@ -5,11 +5,11 @@ using Unity.Netcode;
 
 public class HeadHunter : NetworkBehaviour
 {
-    private RoleAssignment roleAssignment;
+    public RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
 
     public ulong vekilId = ulong.MaxValue;
-    public bool isDead;
+    //public bool isDead;
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class HeadHunter : NetworkBehaviour
             }
         }
 
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.V))
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.V) && !roleAssignment.usedSkill)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -65,6 +65,7 @@ public class HeadHunter : NetworkBehaviour
                 ulong targetId = networkObject.GetComponent<NetworkObject>().OwnerClientId;
                 Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 VekilServerRpc(targetId);
+                roleAssignment.usedSkill = true;
             }
             else
             {
@@ -129,7 +130,7 @@ public class HeadHunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void MakeVekilHunterServerRpc()
     {
-        if (isDead && vekilId != ulong.MaxValue)
+        if (roleAssignment.isDead && vekilId != ulong.MaxValue)
         {
             foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
             {

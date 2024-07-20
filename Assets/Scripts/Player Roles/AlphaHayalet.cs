@@ -9,8 +9,8 @@ public class AlphaHayalet : NetworkBehaviour
     private PlayerMovement pl_movement;
     private HeadHunter headHunter;
 
-    private bool usedTransformAbility = false;
-
+    //private bool usedTransformAbility = false;
+    
     private void Start()
     {
         roleAssignment = GetComponent<RoleAssignment>();
@@ -50,7 +50,7 @@ public class AlphaHayalet : NetworkBehaviour
             }
         }
 
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T) && !usedTransformAbility)
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T) && !roleAssignment.usedSkill)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -60,12 +60,12 @@ public class AlphaHayalet : NetworkBehaviour
 
             Debug.Log("T key pressed. Attempting to find target to transform into Hayalet.");
 
-            if (networkObject != null)
+            if (networkObject != null) 
             {
                 ulong targetId = networkObject.OwnerClientId;
                 Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 TransformToHayaletServerRpc(targetId);
-                usedTransformAbility = true;
+                roleAssignment.usedSkill = true;
             }
             else
             {
@@ -99,7 +99,7 @@ public class AlphaHayalet : NetworkBehaviour
                     if (targetRoleAssignment.role.Value == PlayerRole.BaşAvcı)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.isDead = true;
+                        headHunter.roleAssignment.isDead = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
 
