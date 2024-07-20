@@ -27,8 +27,7 @@ public class Avci : NetworkBehaviour
 
     private void Update()
     {
-        Debug.Log("islocal: " +IsLocalPlayer);
-        if (Input.GetKeyDown(KeyCode.K))
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.K))
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -81,7 +80,7 @@ public class Avci : NetworkBehaviour
                     if (targetRoleAssignment.role.Value == PlayerRole.BaşAvcı)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.roleAssignment.isDead = true;
+                        headHunter.isDead = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
                     

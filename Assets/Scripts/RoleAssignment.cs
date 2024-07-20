@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,31 +12,22 @@ public enum PlayerRole
     BaşAvcı,
     Avci,
     Hayalet,
-    AlphaHayalet
+    AlfaHayalet
 }
 
 public class RoleAssignment : NetworkBehaviour
 {
-    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(
-        PlayerRole.Unassigned
-    );
-
-    public bool usedSkill = false;
-    public bool isDead = false;
-
-    public int[] roleCountList = new int[5];
-
-    CurrentLobby currentLobby;
+    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(PlayerRole.Unassigned);
 
     private void Start()
     {
-        if (IsServer && IsOwner)
+        if (IsServer)
         {
-            Invoke("GetLobbyData", 5f);
+            AssignRole((PlayerRole)Random.Range(1, System.Enum.GetValues(typeof(PlayerRole)).Length));
         }
 
         // Add a listener to the NetworkVariable to handle changes
-        // role.OnValueChanged += OnRoleChanged;
+        role.OnValueChanged += OnRoleChanged;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -51,6 +41,7 @@ public class RoleAssignment : NetworkBehaviour
         role.Value = newRole;
         Debug.Log($"Server received: {gameObject.name} is assigned to {newRole} role");
         EnableRelevantRoleScript(newRole);
+        //print role
     }
 
     private void OnRoleChanged(PlayerRole oldRole, PlayerRole newRole)
@@ -61,93 +52,53 @@ public class RoleAssignment : NetworkBehaviour
 
     private void EnableRelevantRoleScript(PlayerRole newRole)
     {
-        RemoveAllRoleComponents();
+        GetComponent<Hayalet>().enabled = false;
+        GetComponent<AlphaHayalet>().enabled = false;
+        GetComponent<Buyucu>().enabled = false;
+        GetComponent<Asik>().enabled = false;
+        GetComponent<Avci>().enabled = false;
+        GetComponent<HeadHunter>().enabled = false;
+        GetComponent<Koylu>().enabled = false;
 
+        
         switch (newRole)
         {
             case PlayerRole.Koylu:
-                gameObject.AddComponent<Koylu>();
+                GetComponent<Koylu>().enabled = true;
                 break;
             case PlayerRole.Hayalet:
-                gameObject.AddComponent<Hayalet>();
+                GetComponent<Hayalet>().enabled = true;
                 break;
-            case PlayerRole.AlphaHayalet:
-                gameObject.AddComponent<AlphaHayalet>();
+            case PlayerRole.AlfaHayalet:
+                GetComponent<AlphaHayalet>().enabled = true;
                 break;
             case PlayerRole.Buyucu:
-                gameObject.AddComponent<Buyucu>();
+                GetComponent<Buyucu>().enabled = true;
                 break;
             case PlayerRole.Asik:
-                gameObject.AddComponent<Asik>();
+                GetComponent<Asik>().enabled = true;
                 break;
             case PlayerRole.Avci:
-                gameObject.AddComponent<Avci>();
+                GetComponent<Avci>().enabled = true;
                 break;
             case PlayerRole.BaşAvcı:
-                gameObject.AddComponent<HeadHunter>();
+                GetComponent<HeadHunter>().enabled = true;
                 break;
         }
-    }
-
-    private void RemoveAllRoleComponents()
-    {
-        Destroy(GetComponent<Koylu>());
-        Destroy(GetComponent<Hayalet>());
-        Destroy(GetComponent<AlphaHayalet>());
-        Destroy(GetComponent<Buyucu>());
-        Destroy(GetComponent<Asik>());
-        Destroy(GetComponent<Avci>());
-        Destroy(GetComponent<HeadHunter>());
     }
 
     private void OnValidate()
     {
+        // This method allows you to change the role in the Unity Editor and see the changes immediately.
         if (!Application.isPlaying && role.Value != PlayerRole.Unassigned)
         {
             Debug.Log($"Editor: {gameObject.name} is assigned to {role.Value} role");
-            EnableRelevantRoleScript(role.Value);
         }
     }
 
-    void GetLobbyData()
+    private void OnDestroy()
     {
-        currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
-        roleCountList[0] = Convert.ToInt32(currentLobby.currentLobby.Data["ghost"].Value);
-        roleCountList[1] = Convert.ToInt32(currentLobby.currentLobby.Data["hunter"].Value);
-        roleCountList[2] = Convert.ToInt32(currentLobby.currentLobby.Data["villager"].Value);
-        roleCountList[3] = Convert.ToInt32(currentLobby.currentLobby.Data["lover"].Value);
-        roleCountList[4] = Convert.ToInt32(currentLobby.currentLobby.Data["wizard"].Value);
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-            RoleAssignment roleAssignment = player.GetComponent<RoleAssignment>();
-            int roleClass = UnityEngine.Random.Range(0, roleCountList.Length);
-            if (roleCountList[roleClass] != 0)
-            {
-                switch (roleClass)
-                {
-                    case 0:
-                        roleAssignment.AssignRole(PlayerRole.Hayalet);
-                        break;
-                    case 1:
-                        roleAssignment.AssignRole(PlayerRole.Avci);
-                        break;
-                    case 2:
-                        roleAssignment.AssignRole(PlayerRole.Koylu);
-                        break;
-                    case 3:
-                        roleAssignment.AssignRole(PlayerRole.Asik);
-                        break;
-                    case 4:
-                        roleAssignment.AssignRole(PlayerRole.Buyucu);
-                        break;
-                }
-                roleCountList[roleClass]--;
-            }
-            else
-            {
-                return;
-            }
-        }
+        // Remove the listener when the object is destroyed to avoid memory leaks
+        role.OnValueChanged -= OnRoleChanged;
     }
 }
