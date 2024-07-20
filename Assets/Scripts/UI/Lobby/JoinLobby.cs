@@ -29,10 +29,6 @@ public class JoinLobby : MonoBehaviour
                         PlayerDataObject.VisibilityOptions.Public,
                         PlayerPrefs.GetString("PlayerName")
                     )
-                },
-                {
-                    "readyCount",
-                    new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")
                 }
             };
             Lobby lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId, options);
@@ -65,10 +61,6 @@ public class JoinLobby : MonoBehaviour
                         PlayerDataObject.VisibilityOptions.Public,
                         PlayerPrefs.GetString("PlayerName")
                     )
-                },
-                {
-                    "readyCount",
-                    new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")
                 }
             };
 

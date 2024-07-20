@@ -76,7 +76,7 @@ public class Hayalet : NetworkBehaviour
                     if (targetRoleAssignment.role.Value == PlayerRole.BaşAvcı)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.roleAssignment.isDead = true;
+                        headHunter.isDead = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
                     
