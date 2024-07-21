@@ -18,26 +18,27 @@ public enum PlayerRole
 
 public class RoleAssignment : NetworkBehaviour
 {
-    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(
-        PlayerRole.Unassigned
-    );
+    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(PlayerRole.Unassigned);
 
     public bool usedSkill = false;
     public bool isDead = false;
 
     public int[] roleCountList = new int[5];
 
-    CurrentLobby currentLobby;
+    private CurrentLobby currentLobby;
 
     private void Start()
     {
+        Debug.Log($"RoleAssignment Start: IsServer: {IsServer}, IsOwner: {IsOwner}, IsLocalPlayer: {IsLocalPlayer}");
+
         if (IsServer && IsOwner)
         {
             Invoke("GetLobbyData", 5f);
+            //RemoveAllRoleComponents();
         }
 
         // Add a listener to the NetworkVariable to handle changes
-        // role.OnValueChanged += OnRoleChanged;
+        role.OnValueChanged += OnRoleChanged;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -63,41 +64,46 @@ public class RoleAssignment : NetworkBehaviour
     {
         RemoveAllRoleComponents();
 
+        Debug.Log($"Enabling role script for {newRole}");
+
+
         switch (newRole)
         {
-            case PlayerRole.Koylu:
-                gameObject.AddComponent<Koylu>();
-                break;
-            case PlayerRole.Hayalet:
-                gameObject.AddComponent<Hayalet>();
-                break;
-            case PlayerRole.AlphaHayalet:
-                gameObject.AddComponent<AlphaHayalet>();
-                break;
             case PlayerRole.Buyucu:
-                gameObject.AddComponent<Buyucu>();
+                GetComponent<Buyucu>().enabled = true;
+                break;
+            case PlayerRole.Koylu:
+                GetComponent<Koylu>().enabled = true;
                 break;
             case PlayerRole.Asik:
-                gameObject.AddComponent<Asik>();
+                GetComponent<Asik>().enabled = true;
                 break;
             case PlayerRole.Avci:
-                gameObject.AddComponent<Avci>();
+                GetComponent<Avci>().enabled = true;
+                break;
+            case PlayerRole.Hayalet:
+                GetComponent<Hayalet>().enabled = true;
+                break;
+            case PlayerRole.AlphaHayalet:
+                GetComponent<AlphaHayalet>().enabled = true;
                 break;
             case PlayerRole.BaşAvcı:
-                gameObject.AddComponent<HeadHunter>();
+                GetComponent<HeadHunter>().enabled = true;
                 break;
         }
     }
 
     private void RemoveAllRoleComponents()
     {
-        Destroy(GetComponent<Koylu>());
-        Destroy(GetComponent<Hayalet>());
-        Destroy(GetComponent<AlphaHayalet>());
-        Destroy(GetComponent<Buyucu>());
-        Destroy(GetComponent<Asik>());
-        Destroy(GetComponent<Avci>());
-        Destroy(GetComponent<HeadHunter>());
+        Debug.Log("Disabling all role components");
+
+        GetComponent<Avci>().enabled = false;
+        GetComponent<Koylu>().enabled = false;
+        GetComponent<Hayalet>().enabled = false;
+        GetComponent<AlphaHayalet>().enabled = false;
+        GetComponent<Buyucu>().enabled = false;
+        GetComponent<Asik>().enabled = false;
+        GetComponent<HeadHunter>().enabled = false;
     }
 
     private void OnValidate()
@@ -109,7 +115,7 @@ public class RoleAssignment : NetworkBehaviour
         }
     }
 
-    void GetLobbyData()
+    private void GetLobbyData()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
         roleCountList[0] = Convert.ToInt32(currentLobby.currentLobby.Data["ghost"].Value);
@@ -117,6 +123,9 @@ public class RoleAssignment : NetworkBehaviour
         roleCountList[2] = Convert.ToInt32(currentLobby.currentLobby.Data["villager"].Value);
         roleCountList[3] = Convert.ToInt32(currentLobby.currentLobby.Data["lover"].Value);
         roleCountList[4] = Convert.ToInt32(currentLobby.currentLobby.Data["wizard"].Value);
+
+        Debug.Log("Lobby data received. Assigning roles to players.");
+
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in players)
         {
@@ -128,25 +137,27 @@ public class RoleAssignment : NetworkBehaviour
                 {
                     case 0:
                         roleAssignment.AssignRole(PlayerRole.Hayalet);
+                        GetComponent<Hayalet>().enabled = true;
                         break;
                     case 1:
                         roleAssignment.AssignRole(PlayerRole.Avci);
+                        GetComponent<Avci>().enabled = true;
                         break;
                     case 2:
                         roleAssignment.AssignRole(PlayerRole.Koylu);
+                        GetComponent<Koylu>().enabled = true;
                         break;
                     case 3:
                         roleAssignment.AssignRole(PlayerRole.Asik);
+                        GetComponent<Asik>().enabled = true;
                         break;
                     case 4:
                         roleAssignment.AssignRole(PlayerRole.Buyucu);
+                        GetComponent<Buyucu>().enabled = true;
                         break;
                 }
                 roleCountList[roleClass]--;
-            }
-            else
-            {
-                return;
+                Debug.Log($"Assigned role {roleAssignment.role.Value} to player {player.name}");
             }
         }
     }

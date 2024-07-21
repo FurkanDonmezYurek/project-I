@@ -8,10 +8,9 @@ public class Avci : NetworkBehaviour
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
 
-    private HeadHunter headHunter;
-    
     private void Start()
     {
+        Debug.Log($"Avci Start: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
         roleAssignment = GetComponent<RoleAssignment>();
         pl_movement = GetComponent<PlayerMovement>();
 
@@ -27,17 +26,14 @@ public class Avci : NetworkBehaviour
 
     private void Update()
     {
-        Debug.Log("islocal: " +IsLocalPlayer);
-        if (Input.GetKeyDown(KeyCode.K))
+        Debug.Log($"Avci Update: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
+
+        if (IsLocalPlayer && roleAssignment.role.Value == PlayerRole.Avci && Input.GetKeyDown(KeyCode.K))
         {
-            var networkObject = ObjectRecognizer.Recognize(
-                pl_movement.camTransform,
-                pl_movement.recognizeDistance,
-                pl_movement.layerMask
-            );
-            
             Debug.Log("K key pressed. Attempting to find target to kill.");
-            
+
+            var networkObject = ObjectRecognizer.Recognize(pl_movement.camTransform, pl_movement.recognizeDistance, pl_movement.layerMask);
+
             if (networkObject != null)
             {
                 ulong targetId = networkObject.OwnerClientId;
@@ -49,12 +45,19 @@ public class Avci : NetworkBehaviour
                 Debug.Log("No target found to kill.");
             }
         }
+
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("T key pressed. Sending TestServerRpc.");
+            TestServerRpc();
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void KillPlayerServerRpc(ulong targetId)
     {
         Debug.Log($"Server received: {gameObject.name} wants to kill the player with ID {targetId}");
+
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
@@ -68,23 +71,7 @@ public class Avci : NetworkBehaviour
                         Debug.Log($"{netObj.name} is Koylu. Avci will be demoted to Koylu.");
                         roleAssignment.AssignRoleServerRpc(PlayerRole.Koylu);
                     }
-                    if (targetRoleAssignment.role.Value == PlayerRole.Asik)
-                    {
-                        Asik asikComponent = netObj.GetComponent<Asik>();
-                        if (asikComponent != null && asikComponent.loverId != ulong.MaxValue)
-                        {
-                            KillPlayerServerRpc(asikComponent.loverId);
-                            Debug.Log($"Asik {netObj.name} killed. Their lover will also die.");
-                        }
-                    }
-                    //make the vekil of the headhunter a hunter, i hope so...
-                    if (targetRoleAssignment.role.Value == PlayerRole.BaşAvcı)
-                    {
-                        headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.roleAssignment.isDead = true;
-                        headHunter.MakeVekilHunterServerRpc();
-                    }
-                    
+
                     Debug.Log($"Target object found on server: {netObj.name}");
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
                 }
@@ -99,21 +86,26 @@ public class Avci : NetworkBehaviour
     {
         if (target.TryGet(out NetworkObject targetObject))
         {
-            Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
+            Renderer targetRenderer = targetObject.GetComponent<Renderer>();
             if (targetRenderer != null)
             {
+                Debug.Log($"Changing target's color to red: {targetObject.name}");
                 targetRenderer.material.color = Color.yellow;
-                Debug.Log($"Avci killed {targetObject.name}.");
             }
             else
             {
-                Debug.Log("Target renderer not found.");
+                Debug.Log("Renderer component not found on target.");
             }
         }
         else
         {
-            Debug.Log("Target object not found on client.");
+            Debug.Log("Failed to get NetworkObject from NetworkObjectReference.");
         }
     }
-    
+
+    [ServerRpc(RequireOwnership = false)]
+    private void TestServerRpc()
+    {
+        Debug.Log($"Server received: {gameObject.name} called TestServerRpc.");
+    }
 }

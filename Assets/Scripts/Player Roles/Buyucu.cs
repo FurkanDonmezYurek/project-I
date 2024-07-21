@@ -22,7 +22,7 @@ public class Buyucu : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R))
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R) && roleAssignment.role.Value == PlayerRole.Buyucu)
         {
             Debug.Log("R key pressed. Attempting to find target to revive.");
             GameObject target = FindTarget();

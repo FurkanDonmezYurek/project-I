@@ -28,7 +28,7 @@ public class HeadHunter : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.H))
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.H) && roleAssignment.role.Value == PlayerRole.BaşAvcı)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -50,7 +50,7 @@ public class HeadHunter : NetworkBehaviour
             }
         }
 
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.V) && !roleAssignment.usedSkill)
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.V) && !roleAssignment.usedSkill && roleAssignment.role.Value == PlayerRole.BaşAvcı)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,

@@ -28,7 +28,7 @@ public class AlphaHayalet : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetMouseButtonDown(0))
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.AlphaHayalet)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -50,7 +50,7 @@ public class AlphaHayalet : NetworkBehaviour
             }
         }
 
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T) && !roleAssignment.usedSkill)
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T) && !roleAssignment.usedSkill && roleAssignment.role.Value == PlayerRole.AlphaHayalet)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,

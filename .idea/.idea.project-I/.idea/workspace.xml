@@ -8,12 +8,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.project-I/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.project-I/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/PlayerMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
@@ -31,7 +32,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/GameManager2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" root0="FORCE_HIGHLIGHTING" />
@@ -137,6 +137,10 @@
       <workItem from="1721049983230" duration="728000" />
       <workItem from="1721214622740" duration="2534000" />
       <workItem from="1721252832010" duration="2064000" />
+      <workItem from="1721343189507" duration="1533000" />
+      <workItem from="1721422037376" duration="5808000" />
+      <workItem from="1721508557892" duration="420000" />
+      <workItem from="1721553890707" duration="3299000" />
     </task>
     <servers />
   </component>

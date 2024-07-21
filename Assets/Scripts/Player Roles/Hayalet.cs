@@ -27,7 +27,7 @@ public class Hayalet : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetMouseButtonDown(0))
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.Hayalet)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
