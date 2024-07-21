@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Koylu : NetworkBehaviour
+public class Villager : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
-
-    public bool isVekil = false;
-    public bool isDead = false;
-
     private void Start()
     {
         roleAssignment = GetComponent<RoleAssignment>();

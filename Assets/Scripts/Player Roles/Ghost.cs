@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class Hayalet : NetworkBehaviour
+public class Ghost : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
@@ -27,7 +27,7 @@ public class Hayalet : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.Hayalet)
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.Ghost)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -62,9 +62,9 @@ public class Hayalet : NetworkBehaviour
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
                 if (targetRoleAssignment != null)
                 {
-                    if (targetRoleAssignment.role.Value == PlayerRole.Asik)
+                    if (targetRoleAssignment.role.Value == PlayerRole.Lover)
                     {
-                        Asik asikComponent = netObj.GetComponent<Asik>();
+                        Lover asikComponent = netObj.GetComponent<Lover>();
                         if (asikComponent != null && asikComponent.loverId != ulong.MaxValue)
                         {
                             KillPlayerServerRpc(asikComponent.loverId);
@@ -73,7 +73,7 @@ public class Hayalet : NetworkBehaviour
                     }
                     
                     //make the vekil of the headhunter a hunter, i hope so...
-                    if (targetRoleAssignment.role.Value == PlayerRole.BaşAvcı)
+                    if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
                         headHunter.roleAssignment.isDead = true;

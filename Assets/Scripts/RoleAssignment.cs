@@ -7,13 +7,13 @@ using Unity.Netcode;
 public enum PlayerRole
 {
     Unassigned,
-    Buyucu,
-    Koylu,
-    Asik,
-    BaşAvcı,
-    Avci,
-    Hayalet,
-    AlphaHayalet
+    Wizard,
+    Villager,
+    Lover,
+    HeadHunter,
+    Hunter,
+    Ghost,
+    AlphaGhost
 }
 
 public class RoleAssignment : NetworkBehaviour
@@ -21,6 +21,7 @@ public class RoleAssignment : NetworkBehaviour
     public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(PlayerRole.Unassigned);
 
     public bool usedSkill = false;
+    public bool isVekil = false;
     public bool isDead = false;
 
     public int[] roleCountList = new int[5];
@@ -29,12 +30,10 @@ public class RoleAssignment : NetworkBehaviour
 
     private void Start()
     {
-        Debug.Log($"RoleAssignment Start: IsServer: {IsServer}, IsOwner: {IsOwner}, IsLocalPlayer: {IsLocalPlayer}");
-
         if (IsServer && IsOwner)
         {
-            Invoke("GetLobbyData", 5f);
-            //RemoveAllRoleComponents();
+            Invoke("GetLobbyData", 10f);
+            //bunu 10sn yaptim
         }
 
         // Add a listener to the NetworkVariable to handle changes
@@ -66,28 +65,27 @@ public class RoleAssignment : NetworkBehaviour
 
         Debug.Log($"Enabling role script for {newRole}");
 
-
         switch (newRole)
         {
-            case PlayerRole.Buyucu:
-                GetComponent<Buyucu>().enabled = true;
+            case PlayerRole.Wizard:
+                GetComponent<Wizard>().enabled = true;
                 break;
-            case PlayerRole.Koylu:
-                GetComponent<Koylu>().enabled = true;
+            case PlayerRole.Villager:
+                GetComponent<Villager>().enabled = true;
                 break;
-            case PlayerRole.Asik:
-                GetComponent<Asik>().enabled = true;
+            case PlayerRole.Lover:
+                GetComponent<Lover>().enabled = true;
                 break;
-            case PlayerRole.Avci:
-                GetComponent<Avci>().enabled = true;
+            case PlayerRole.Hunter:
+                GetComponent<Hunter>().enabled = true;
                 break;
-            case PlayerRole.Hayalet:
-                GetComponent<Hayalet>().enabled = true;
+            case PlayerRole.Ghost:
+                GetComponent<Ghost>().enabled = true;
                 break;
-            case PlayerRole.AlphaHayalet:
-                GetComponent<AlphaHayalet>().enabled = true;
+            case PlayerRole.AlphaGhost:
+                GetComponent<AlphaGhost>().enabled = true;
                 break;
-            case PlayerRole.BaşAvcı:
+            case PlayerRole.HeadHunter:
                 GetComponent<HeadHunter>().enabled = true;
                 break;
         }
@@ -97,12 +95,12 @@ public class RoleAssignment : NetworkBehaviour
     {
         Debug.Log("Disabling all role components");
 
-        GetComponent<Avci>().enabled = false;
-        GetComponent<Koylu>().enabled = false;
-        GetComponent<Hayalet>().enabled = false;
-        GetComponent<AlphaHayalet>().enabled = false;
-        GetComponent<Buyucu>().enabled = false;
-        GetComponent<Asik>().enabled = false;
+        GetComponent<Hunter>().enabled = false;
+        GetComponent<Villager>().enabled = false;
+        GetComponent<Ghost>().enabled = false;
+        GetComponent<AlphaGhost>().enabled = false;
+        GetComponent<Wizard>().enabled = false;
+        GetComponent<Lover>().enabled = false;
         GetComponent<HeadHunter>().enabled = false;
     }
 
@@ -136,24 +134,19 @@ public class RoleAssignment : NetworkBehaviour
                 switch (roleClass)
                 {
                     case 0:
-                        roleAssignment.AssignRole(PlayerRole.Hayalet);
-                        GetComponent<Hayalet>().enabled = true;
+                        roleAssignment.AssignRole(PlayerRole.Ghost);
                         break;
                     case 1:
-                        roleAssignment.AssignRole(PlayerRole.Avci);
-                        GetComponent<Avci>().enabled = true;
+                        roleAssignment.AssignRole(PlayerRole.Hunter);
                         break;
                     case 2:
-                        roleAssignment.AssignRole(PlayerRole.Koylu);
-                        GetComponent<Koylu>().enabled = true;
+                        roleAssignment.AssignRole(PlayerRole.Villager);
                         break;
                     case 3:
-                        roleAssignment.AssignRole(PlayerRole.Asik);
-                        GetComponent<Asik>().enabled = true;
+                        roleAssignment.AssignRole(PlayerRole.Lover);
                         break;
                     case 4:
-                        roleAssignment.AssignRole(PlayerRole.Buyucu);
-                        GetComponent<Buyucu>().enabled = true;
+                        roleAssignment.AssignRole(PlayerRole.Wizard);
                         break;
                 }
                 roleCountList[roleClass]--;

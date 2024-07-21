@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class Buyucu : NetworkBehaviour
+public class Wizard : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     
@@ -22,7 +22,7 @@ public class Buyucu : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R) && roleAssignment.role.Value == PlayerRole.Buyucu)
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R) && roleAssignment.role.Value == PlayerRole.Wizard)
         {
             Debug.Log("R key pressed. Attempting to find target to revive.");
             GameObject target = FindTarget();
@@ -89,7 +89,7 @@ public class Buyucu : NetworkBehaviour
                 if (targetRoleAssignment != null)
                 {
                     Debug.Log($"Checking player {player.name} with role {targetRoleAssignment.role.Value}");
-                    if (targetRoleAssignment.role.Value == PlayerRole.Koylu) 
+                    if (targetRoleAssignment.role.Value == PlayerRole.Villager) 
                     {
                         Debug.Log($"Target player {player.name} found.");
                         return player;

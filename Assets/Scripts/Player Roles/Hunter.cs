@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class Avci : NetworkBehaviour
+public class Hunter : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
 
     private void Start()
     {
-        Debug.Log($"Avci Start: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
         roleAssignment = GetComponent<RoleAssignment>();
         pl_movement = GetComponent<PlayerMovement>();
 
@@ -28,7 +27,7 @@ public class Avci : NetworkBehaviour
     {
         Debug.Log($"Avci Update: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
 
-        if (IsLocalPlayer && roleAssignment.role.Value == PlayerRole.Avci && Input.GetKeyDown(KeyCode.K))
+        if (IsLocalPlayer && roleAssignment.role.Value == PlayerRole.Hunter && Input.GetKeyDown(KeyCode.K))
         {
             Debug.Log("K key pressed. Attempting to find target to kill.");
 
@@ -66,10 +65,10 @@ public class Avci : NetworkBehaviour
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
                 if (targetRoleAssignment != null)
                 {
-                    if (targetRoleAssignment.role.Value == PlayerRole.Koylu)
+                    if (targetRoleAssignment.role.Value == PlayerRole.Villager)
                     {
                         Debug.Log($"{netObj.name} is Koylu. Avci will be demoted to Koylu.");
-                        roleAssignment.AssignRoleServerRpc(PlayerRole.Koylu);
+                        roleAssignment.AssignRoleServerRpc(PlayerRole.Villager);
                     }
 
                     Debug.Log($"Target object found on server: {netObj.name}");
