@@ -55,8 +55,8 @@ ParticleSystem:
   autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
-    minMaxState: 3
-    scalar: 5
+    minMaxState: 0
+    scalar: 0
     minScalar: 1
     maxCurve:
       serializedVersion: 2
