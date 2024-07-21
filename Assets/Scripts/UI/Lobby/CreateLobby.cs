@@ -12,6 +12,7 @@ using Unity.Services.Relay.Models;
 using Unity.Services.Relay;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Services.Vivox;
 
 public class CreateLobby : MonoBehaviour
 {
@@ -31,6 +32,25 @@ public class CreateLobby : MonoBehaviour
         if (!AuthenticationService.Instance.IsSignedIn)
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
+        if (!VivoxService.Instance.IsLoggedIn)
+        {
+            await VivoxService.Instance.InitializeAsync();
+        }
+    }
+
+    public static async void LoginToVivoxAsync()
+    {
+        LoginOptions options = new LoginOptions()
+        {
+            DisplayName = PlayerPrefs.GetString("PlayerName"),
+            EnableTTS = false
+        };
+        await VivoxService.Instance.LoginAsync(options);
+
+        if (AuthenticationService.Instance.IsSignedIn && VivoxService.Instance.IsLoggedIn)
+        {
+            JoinLobby.LoadLobbyRoom();
         }
     }
 
@@ -108,12 +128,15 @@ public class CreateLobby : MonoBehaviour
         };
 
         Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyname, maxplayers, options);
-
+        LoginToVivoxAsync();
+        if (AuthenticationService.Instance.IsSignedIn && VivoxService.Instance.IsLoggedIn)
+        {
+            JoinLobby.LoadLobbyRoom();
+        }
         DontDestroyOnLoad(this);
         GetComponent<CurrentLobby>().currentLobby = lobby;
         GetComponent<CurrentLobby>().thisPlayer = options.Player;
 
-        JoinLobby.LoadLobbyRoom();
         Debug.Log("Create Lobby Done");
 
         StartCoroutine(PingLobbyCoroutine(lobby.Id, 15f));

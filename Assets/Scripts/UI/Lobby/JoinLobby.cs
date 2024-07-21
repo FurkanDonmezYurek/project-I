@@ -37,6 +37,7 @@ public class JoinLobby : MonoBehaviour
             };
             Lobby lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId, options);
             Debug.Log("Join Lobby Done:" + lobby.Name);
+            CreateLobby.LoginToVivoxAsync();
 
             DontDestroyOnLoad(this);
             GetComponent<CurrentLobby>().currentLobby = lobby;
@@ -73,6 +74,7 @@ public class JoinLobby : MonoBehaviour
             };
 
             Lobby lobby = await LobbyService.Instance.QuickJoinLobbyAsync(options);
+            CreateLobby.LoginToVivoxAsync();
 
             DontDestroyOnLoad(this);
             GetComponent<CurrentLobby>().currentLobby = lobby;

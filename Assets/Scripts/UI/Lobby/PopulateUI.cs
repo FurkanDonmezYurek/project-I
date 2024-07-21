@@ -10,6 +10,7 @@ using System;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using System.Linq;
+using Unity.Services.Vivox;
 
 public class PopulateUI : NetworkBehaviour
 {
@@ -46,12 +47,45 @@ public class PopulateUI : NetworkBehaviour
     public TMP_Dropdown lover;
     public TMP_Dropdown hunter;
 
+    public List<PlayerCardVivox> rosterList = new List<PlayerCardVivox>();
+
     private void Start()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
         relayManager = GameObject.Find("RelayManager").GetComponent<RelayManager>();
         PopulateUIElements();
         InvokeRepeating(nameof(UpdateLobby), 1.1f, 2f);
+    }
+
+    private void BindSessionEvents(bool doBind)
+    {
+        if (doBind)
+        {
+            VivoxService.Instance.ParticipantAddedToChannel += onParticipantAddedToChannel;
+            VivoxService.Instance.ParticipantRemovedFromChannel += onParticipantRemovedFromChannel;
+        }
+        else
+        {
+            VivoxService.Instance.ParticipantAddedToChannel -= onParticipantAddedToChannel;
+            VivoxService.Instance.ParticipantRemovedFromChannel -= onParticipantRemovedFromChannel;
+        }
+    }
+
+    private void onParticipantAddedToChannel(VivoxParticipant participant)
+    {
+        ///RosterItem is a class intended to store the participant object, and reflect events relating to it into the game's UI.
+        ///It is a sample of one way to use these events, and is detailed just below this snippet.
+        PlayerCardVivox newRosterItem = new PlayerCardVivox();
+        newRosterItem.SetupRosterItem(participant);
+        rosterList.Add(newRosterItem);
+    }
+
+    private void onParticipantRemovedFromChannel(VivoxParticipant participant)
+    {
+        PlayerCardVivox rosterItemToRemove = rosterList.FirstOrDefault(
+            p => p.Participant.PlayerId == participant.PlayerId
+        );
+        rosterList.Remove(rosterItemToRemove);
     }
 
     void PopulateUIElements()
@@ -104,7 +138,7 @@ public class PopulateUI : NetworkBehaviour
     void CreatePlayerCard(Player player)
     {
         GameObject card = Instantiate(playerCardPrefab, Vector3.zero, Quaternion.identity);
-        GameObject text = card.transform.GetChild(2).gameObject;
+        GameObject text = card.transform.GetChild(3).gameObject;
         GameObject countText = card.transform.GetChild(0).gameObject;
         countText.GetComponent<TextMeshProUGUI>().text = "#" + playerCount;
         text.GetComponent<TextMeshProUGUI>().text = player.Data["PlayerName"].Value;
@@ -117,10 +151,10 @@ public class PopulateUI : NetworkBehaviour
                 == currentLobby.thisPlayer.Data["PlayerName"].Value
             )
             {
-                card.transform.GetChild(3).gameObject.SetActive(false);
+                card.transform.GetChild(4).gameObject.SetActive(false);
             }
             card.transform
-                .GetChild(3)
+                .GetChild(4)
                 .GetComponent<Button>()
                 .onClick.AddListener(
                     delegate
@@ -131,7 +165,7 @@ public class PopulateUI : NetworkBehaviour
         }
         else
         {
-            card.transform.GetChild(3).gameObject.SetActive(false);
+            card.transform.GetChild(4).gameObject.SetActive(false);
         }
     }
 
