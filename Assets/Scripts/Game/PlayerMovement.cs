@@ -12,7 +12,7 @@ public class PlayerMovement : NetworkBehaviour
     public Transform camTransform;
 
     [SerializeField]
-    float recognizeDistance;
+    public float recognizeDistance;
 
     [SerializeField] public LayerMask layerMask;
 
