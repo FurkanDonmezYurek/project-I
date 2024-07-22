@@ -77,6 +77,8 @@ KPI Dökümanları; Oyun tasarım dökümanı,Pazar analizi ve stratejisi dökü
 
 
 - **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
+
+Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puanlık backlog bulunmaktadır. 3 sprint'e bölündüğünde 2'nci sprint'in en azından 100 ile başlaması gerektiğine karar verildi.
   
 
 - **Daily Scrum**: Daily Scrum toplantıları Discord üzerinden yapıldı. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
