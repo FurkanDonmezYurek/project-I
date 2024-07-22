@@ -50,8 +50,8 @@ Bir bölgede geçen ve her oyuncunun belirli rollerden rastgele birini aldığı
 - **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır. 
 
 - **Sprint board update**: Sprint board screenshotları: 
-![Backlog_1](https://github.com/FurkanDonmezYurek/project-I/assets/116437656/302badad-fb6b-444e-963b-38b10425885b) 
-![Backlog_2](https://github.com/FurkanDonmezYurek/project-I/assets/116437656/ac0a903e-fea0-45ee-8734-ce29197d17a4) 
+![Sprint1](https://github.com/user-attachments/assets/d2c449a0-179a-45fe-a297-bd0e26eb81f1)
+
 
 - **Ürün Durumu**: Ekran görüntüleri:
   ![Multiplayer](https://github.com/FurkanDonmezYurek/project-I/assets/116437656/5139bdbe-5f62-40a9-abc2-b1415cf130d7)
@@ -83,8 +83,7 @@ KPI Dökümanları; Oyun tasarım dökümanı,Pazar analizi ve stratejisi dökü
 - ![sprint2-0](https://github.com/user-attachments/files/16325292/Sprint2Daily.docx)
 
 - **Sprint board update**: Sprint board screenshotları: 
-![Backlog_1](https://github.com/user-attachments/assets/da4f5bc8-3e8d-4298-a6f1-9ab86cc0f850) 
-![Backlog_2](https://github.com/user-attachments/assets/18876950-8ea2-4603-b55c-e27f701dd380) 
+![sprint2](https://github.com/user-attachments/assets/cbe6045d-f394-4ed3-9490-7c83cd0ad2d9)
 
 - **Ürün Durumu**: Ekran görüntüleri:
   ![Logo](https://github.com/user-attachments/assets/a0f40851-6f24-487c-9302-5e0722edbaf0)
