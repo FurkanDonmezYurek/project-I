@@ -32,7 +32,7 @@ Bir bölgede geçen ve her oyuncunun belirli rollerden rastgele birini aldığı
 
 - Genel Kitle
 
-## Product Backlog URL
+## Miro Board URL
 
 [Miro Backlog Board](https://miro.com/app/board/uXjVK5KK3Ig=/?share_link_id=122507394564)
 
@@ -40,7 +40,7 @@ Bir bölgede geçen ve her oyuncunun belirli rollerden rastgele birini aldığı
 
 # Sprint 1
 
-- **Sprint Notları**: 22.06.24 tarihinde oyuna karar verildi. Planlama ve görev atamaları yapıldı, proje yönetim aracı olarak miro tercih edildi. Görevler ve ayrıntıları Miro'dan her gün takip edilmektedir. Temel olarak karakter kontrolleri yazıldı. Multiplayer sistemi için temel oluşturuldu. Roller mekanikleri kodlandı. Ui/Ux sisteminin temeli oluşturuldu geliştirmeler ihtiyaca göre eklenerek devam ediliyor.
+- **Sprint Notları**: 22.06.24 tarihinde oyuna karar verildi. Planlama ve görev atamaları yapıldı, proje yönetim aracı olarak miro ve jira tercih edildi. Görevler ve ayrıntıları Miro'dan her gün takip edilmektedir. Temel olarak karakter kontrolleri yazıldı. Multiplayer sistemi için temel oluşturuldu. Roller mekanikleri kodlandı. Ui/Ux sisteminin temeli oluşturuldu geliştirmeler ihtiyaca göre eklenerek devam ediliyor.
 - Level Tasarımı araştırılması yapılıyor.
 
 - **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
