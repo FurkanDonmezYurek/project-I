@@ -80,7 +80,7 @@ KPI Dökümanları; Oyun tasarım dökümanı,Pazar analizi ve stratejisi dökü
   
 
 - **Daily Scrum**: Daily Scrum toplantıları Discord üzerinden yapıldı. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
-- ![sprint2-0](https://github.com/user-attachments/files/16325292/Sprint2Daily.docx)
+- ![DailyScrumSS](https://github.com/user-attachments/files/16325292/Sprint2Daily.docx)
 
 - **Sprint board update**: Sprint board screenshotları: 
 ![sprint2](https://github.com/user-attachments/assets/cbe6045d-f394-4ed3-9490-7c83cd0ad2d9)
