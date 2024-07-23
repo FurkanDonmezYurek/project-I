@@ -22,6 +22,7 @@ public class PlayerMovement : NetworkBehaviour
     LayerMask layerMask;
 
     CharacterController cc;
+    Animator anim;
 
     [SerializeField]
     NetworkMovementComponent playerMovement;
@@ -45,6 +46,8 @@ public class PlayerMovement : NetworkBehaviour
     {
         cc = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Awake()
