@@ -13,6 +13,8 @@ public class PlayerMovement : NetworkBehaviour
     public Transform camTransform;
 
     [SerializeField]
+    public float recognizeDistance;
+
     float turnSpeed;
     float cameraAngle;
 
