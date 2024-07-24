@@ -12,6 +12,7 @@ using Unity.Services.Relay.Models;
 using Unity.Services.Relay;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Services.Vivox;
 
 public class CreateLobby : MonoBehaviour
 {
@@ -32,6 +33,35 @@ public class CreateLobby : MonoBehaviour
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
+        if (!VivoxService.Instance.IsLoggedIn)
+        {
+            await VivoxService.Instance.InitializeAsync();
+        }
+        // if (GameObject.Find("LobbyManager") != null)
+        // {
+        //     GameObject currentLobby = GameObject.Find("LobbyManager");
+        //
+        // }
+        // if (GameObject.Find("RelayManager") != null)
+        // {
+        //     GameObject relayManager = GameObject.Find("RelayManager");
+        //
+        // }
+    }
+
+    public static async void LoginToVivoxAsync()
+    {
+        LoginOptions options = new LoginOptions()
+        {
+            DisplayName = PlayerPrefs.GetString("PlayerName"),
+            EnableTTS = false
+        };
+        await VivoxService.Instance.LoginAsync(options);
+
+        if (AuthenticationService.Instance.IsSignedIn && VivoxService.Instance.IsLoggedIn)
+        {
+            JoinLobby.LoadLobbyRoom();
+        }
     }
 
     public async void CreateLobbyFunc()
@@ -49,7 +79,8 @@ public class CreateLobby : MonoBehaviour
                     PlayerDataObject.VisibilityOptions.Public,
                     PlayerPrefs.GetString("PlayerName")
                 )
-            }
+            },
+            { "readyCount", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "1") }
         };
 
         string villager = Convert.ToString(
@@ -107,12 +138,15 @@ public class CreateLobby : MonoBehaviour
         };
 
         Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyname, maxplayers, options);
-
+        LoginToVivoxAsync();
+        if (AuthenticationService.Instance.IsSignedIn && VivoxService.Instance.IsLoggedIn)
+        {
+            JoinLobby.LoadLobbyRoom();
+        }
         DontDestroyOnLoad(this);
         GetComponent<CurrentLobby>().currentLobby = lobby;
         GetComponent<CurrentLobby>().thisPlayer = options.Player;
 
-        JoinLobby.LoadLobbyRoom();
         Debug.Log("Create Lobby Done");
 
         StartCoroutine(PingLobbyCoroutine(lobby.Id, 15f));
