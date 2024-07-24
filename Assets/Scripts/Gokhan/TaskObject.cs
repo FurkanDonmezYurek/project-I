@@ -7,8 +7,11 @@ using UnityEngine;
 public class TaskObject : NetworkBehaviour
 {
     [Header("Player UI View")]
-    [SerializeField] public GameObject imposterSabotageUI;
-    [SerializeField] public GameObject otherTaskUI;
+    [SerializeField]
+    public GameObject imposterSabotageUI;
+
+    [SerializeField]
+    public GameObject otherTaskUI;
 
     private RoleAssignment roleAssignment;
 
@@ -17,19 +20,18 @@ public class TaskObject : NetworkBehaviour
         PlayerRole playerSelfRole = other.GetComponent<RoleAssignment>().role.Value;
 
         //Tetikleyiciye Giren Nesne Imposter ise
-        if (playerSelfRole == PlayerRole.Hayalet)
+        if (playerSelfRole == PlayerRole.Ghost)
         {
             imposterSabotageUI.SetActive(true);
             otherTaskUI.SetActive(false);
-            print("Imposter algýlandý");
+            print("Imposter algï¿½landï¿½");
         }
-        //Tetikleyiciye Giren Nesne Baþkabiþey ise
+        //Tetikleyiciye Giren Nesne Baï¿½kabiï¿½ey ise
         else
         {
             otherTaskUI.SetActive(true);
             imposterSabotageUI.SetActive(false);
-            print("Diðerleri algýlandý");
+            print("Diï¿½erleri algï¿½landï¿½");
         }
-
     }
 }

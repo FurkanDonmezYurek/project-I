@@ -19,9 +19,6 @@ public class PlayerMovement : NetworkBehaviour
     float cameraAngle;
 
     [SerializeField]
-    public float recognizeDistance;
-
-    [SerializeField]
     public LayerMask layerMask;
 
     CharacterController cc;
@@ -32,7 +29,8 @@ public class PlayerMovement : NetworkBehaviour
     GameObject taskObject;
 
     RoleAssignment roleAssignment;
-        //GameManager gManager;
+
+    //GameManager gManager;
     public ulong loverId = 999;
     public ulong proxyId = 999;
     public bool isDead = false;
@@ -67,7 +65,6 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Update()
     {
-       
         Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
         Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
         if (IsClient && IsLocalPlayer)
