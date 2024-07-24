@@ -8,12 +8,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.project-I/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.project-I/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/PlayerMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
@@ -134,10 +135,15 @@
       <workItem from="1719951486755" duration="9639000" />
       <workItem from="1720037788828" duration="10202000" />
       <workItem from="1720097536786" duration="8403000" />
-      <workItem from="1721143424280" duration="1863000" />
-      <workItem from="1721145390303" duration="1258000" />
-      <workItem from="1721300273726" duration="558000" />
-      <workItem from="1721337485385" duration="42000" />
+      <workItem from="1720634891322" duration="5599000" />
+      <workItem from="1720972832266" duration="13011000" />
+      <workItem from="1721049983230" duration="728000" />
+      <workItem from="1721214622740" duration="2534000" />
+      <workItem from="1721252832010" duration="2064000" />
+      <workItem from="1721343189507" duration="1533000" />
+      <workItem from="1721422037376" duration="5808000" />
+      <workItem from="1721508557892" duration="420000" />
+      <workItem from="1721553890707" duration="3299000" />
     </task>
     <servers />
   </component>

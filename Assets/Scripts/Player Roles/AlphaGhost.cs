@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class AlphaHayalet : NetworkBehaviour
+public class AlphaGhost : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
     private HeadHunter headHunter;
-
-    //private bool usedTransformAbility = false;
     
     private void Start()
     {
@@ -28,7 +26,7 @@ public class AlphaHayalet : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetMouseButtonDown(0))
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.AlphaGhost)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -50,7 +48,7 @@ public class AlphaHayalet : NetworkBehaviour
             }
         }
 
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T) && !roleAssignment.usedSkill)
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T) && !roleAssignment.usedSkill && roleAssignment.role.Value == PlayerRole.AlphaGhost)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -86,9 +84,9 @@ public class AlphaHayalet : NetworkBehaviour
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
                 if (targetRoleAssignment != null)
                 {
-                    if (targetRoleAssignment.role.Value == PlayerRole.Asik)
+                    if (targetRoleAssignment.role.Value == PlayerRole.Lover)
                     {
-                        Asik asikComponent = netObj.GetComponent<Asik>();
+                        Lover asikComponent = netObj.GetComponent<Lover>();
                         if (asikComponent != null && asikComponent.loverId != ulong.MaxValue)
                         {
                             KillPlayerServerRpc(asikComponent.loverId);
@@ -96,7 +94,7 @@ public class AlphaHayalet : NetworkBehaviour
                         }
                     }
 
-                    if (targetRoleAssignment.role.Value == PlayerRole.BaşAvcı)
+                    if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
                         headHunter.roleAssignment.isDead = true;
@@ -122,7 +120,7 @@ public class AlphaHayalet : NetworkBehaviour
             if (netObj.OwnerClientId == targetId)
             {
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
-                if (targetRoleAssignment != null && targetRoleAssignment.role.Value == PlayerRole.Koylu)
+                if (targetRoleAssignment != null && targetRoleAssignment.role.Value == PlayerRole.Villager)
                 {
                     Debug.Log($"Target object found on server: {netObj.name} will be transformed into a Hayalet.");
                     TransformToHayaletClientRpc(new NetworkObjectReference(netObj));
@@ -139,7 +137,7 @@ public class AlphaHayalet : NetworkBehaviour
         if (target.TryGet(out NetworkObject targetObject))
         {
             RoleAssignment targetRoleAssignment = targetObject.GetComponent<RoleAssignment>();
-            targetRoleAssignment.AssignRoleServerRpc(PlayerRole.Hayalet);
+            targetRoleAssignment.AssignRoleServerRpc(PlayerRole.Ghost);
             Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {

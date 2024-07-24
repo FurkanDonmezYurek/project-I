@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class Asik : NetworkBehaviour
+public class Lover : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
@@ -28,7 +28,7 @@ public class Asik : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.L) && !roleAssignment.usedSkill)
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.L) && !roleAssignment.usedSkill && roleAssignment.role.Value == PlayerRole.Lover)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,

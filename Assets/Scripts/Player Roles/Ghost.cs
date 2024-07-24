@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class Avci : NetworkBehaviour
+public class Ghost : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
@@ -14,21 +14,20 @@ public class Avci : NetworkBehaviour
     {
         roleAssignment = GetComponent<RoleAssignment>();
         pl_movement = GetComponent<PlayerMovement>();
-
+        
         if (roleAssignment == null)
         {
             Debug.LogError("RoleAssignment script not found on the player!");
         }
         else
         {
-            Debug.Log("Avci role assigned and script initialized.");
+            Debug.Log("Hayalet role assigned and script initialized.");
         }
     }
 
     private void Update()
     {
-        Debug.Log("islocal: " +IsLocalPlayer);
-        if (Input.GetKeyDown(KeyCode.K))
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.Ghost)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -36,7 +35,7 @@ public class Avci : NetworkBehaviour
                 pl_movement.layerMask
             );
             
-            Debug.Log("K key pressed. Attempting to find target to kill.");
+            Debug.Log("E key pressed. Attempting to find target to kill.");
             
             if (networkObject != null)
             {
@@ -63,22 +62,18 @@ public class Avci : NetworkBehaviour
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
                 if (targetRoleAssignment != null)
                 {
-                    if (targetRoleAssignment.role.Value == PlayerRole.Koylu)
+                    if (targetRoleAssignment.role.Value == PlayerRole.Lover)
                     {
-                        Debug.Log($"{netObj.name} is Koylu. Avci will be demoted to Koylu.");
-                        roleAssignment.AssignRoleServerRpc(PlayerRole.Koylu);
-                    }
-                    if (targetRoleAssignment.role.Value == PlayerRole.Asik)
-                    {
-                        Asik asikComponent = netObj.GetComponent<Asik>();
+                        Lover asikComponent = netObj.GetComponent<Lover>();
                         if (asikComponent != null && asikComponent.loverId != ulong.MaxValue)
                         {
                             KillPlayerServerRpc(asikComponent.loverId);
                             Debug.Log($"Asik {netObj.name} killed. Their lover will also die.");
                         }
                     }
+                    
                     //make the vekil of the headhunter a hunter, i hope so...
-                    if (targetRoleAssignment.role.Value == PlayerRole.BaşAvcı)
+                    if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
                         headHunter.roleAssignment.isDead = true;
@@ -102,8 +97,8 @@ public class Avci : NetworkBehaviour
             Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {
-                targetRenderer.material.color = Color.yellow;
-                Debug.Log($"Avci killed {targetObject.name}.");
+                targetRenderer.material.color = Color.black;
+                Debug.Log($"Hayalet killed {targetObject.name}.");
             }
             else
             {
