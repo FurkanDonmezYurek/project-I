@@ -10,10 +10,12 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class JoinLobby : MonoBehaviour
 {
     public GameObject QuickJoinPanel;
+    public TMP_InputField lobbyCodeArea;
 
     public async void JoinLobbyWithLobbyId(string lobbyId)
     {
@@ -43,8 +45,44 @@ public class JoinLobby : MonoBehaviour
             GetComponent<CurrentLobby>().currentLobby = lobby;
             GetComponent<CurrentLobby>().thisPlayer = options.Player;
             LoadLobbyRoom();
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogError(e);
+        }
+    }
 
-            // JoinRelay(lobby.LobbyCode);
+    public async void JoinLobbyWithLobbyCode()
+    {
+        try
+        {
+            JoinLobbyByCodeOptions options = new JoinLobbyByCodeOptions();
+            options.Player = new Player(AuthenticationService.Instance.PlayerId);
+            options.Player.Data = new Dictionary<string, PlayerDataObject>()
+            {
+                {
+                    "PlayerName",
+                    new PlayerDataObject(
+                        PlayerDataObject.VisibilityOptions.Public,
+                        PlayerPrefs.GetString("PlayerName")
+                    )
+                },
+                {
+                    "readyCount",
+                    new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")
+                }
+            };
+            Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(
+                lobbyCodeArea.text,
+                options
+            );
+            Debug.Log("Join Lobby Done:" + lobby.Name);
+            CreateLobby.LoginToVivoxAsync();
+
+            DontDestroyOnLoad(this);
+            GetComponent<CurrentLobby>().currentLobby = lobby;
+            GetComponent<CurrentLobby>().thisPlayer = options.Player;
+            LoadLobbyRoom();
         }
         catch (LobbyServiceException e)
         {
@@ -80,8 +118,6 @@ public class JoinLobby : MonoBehaviour
             GetComponent<CurrentLobby>().currentLobby = lobby;
             GetComponent<CurrentLobby>().thisPlayer = options.Player;
             LoadLobbyRoom();
-
-            // JoinRelay(lobby.LobbyCode);
 
             if (lobby != null)
             {

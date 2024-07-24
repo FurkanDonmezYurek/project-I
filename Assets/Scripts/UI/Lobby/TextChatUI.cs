@@ -10,7 +10,6 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.VersionControl;
 
 public class TextChatUI : MonoBehaviour
 {

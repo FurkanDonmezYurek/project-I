@@ -2336,6 +2336,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1558187432}
+        m_TargetAssemblyTypeName: PopulateUI, Assembly-CSharp
+        m_MethodName: CopyToLobbyCode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &256446802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2754,7 +2766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: -0.000030517578, y: -33.66}
   m_SizeDelta: {x: 274.8, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &343713917
@@ -2789,7 +2801,7 @@ MonoBehaviour:
     m_Top: 33
     m_Bottom: 5
   m_ChildAlignment: 3
-  m_Spacing: 37.12
+  m_Spacing: 54.04
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -3575,6 +3587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74114ef79ff9a374080b7c6e40b55642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rosterList: []
 --- !u!1 &427341645
 GameObject:
   m_ObjectHideFlags: 0
@@ -8775,6 +8788,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1558187432}
+        m_TargetAssemblyTypeName: PopulateUI, Assembly-CSharp
+        m_MethodName: CopyToLobbyCode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1252891991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10792,6 +10817,8 @@ MonoBehaviour:
   playerCardPrefab: {fileID: 6872286348879805800, guid: 421a91d827f9a6a4fa89e2d6a96a7ca5, type: 3}
   playerListContainer: {fileID: 8038934565399259134}
   setReady: 1
+  lobbyCode: {fileID: 650134773}
+  lobbyCode2nd: {fileID: 2133086056}
   setLobbyName: {fileID: 6654628594527122834}
   lobbyNameText: {fileID: 3280248277771610896}
   maxPlayers: {fileID: 7724914369623832357}
@@ -13626,7 +13653,7 @@ GameObject:
   - component: {fileID: 2133086057}
   - component: {fileID: 2133086056}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: JoinCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28731,6 +28758,30 @@ MonoBehaviour:
       - m_Target: {fileID: 1558187432}
         m_TargetAssemblyTypeName: PopulateUI, Assembly-CSharp
         m_MethodName: ExitLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 425928693}
+        m_TargetAssemblyTypeName: VivoxUI, Assembly-CSharp
+        m_MethodName: LeaveEchoChannelAsync
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 425928693}
+        m_TargetAssemblyTypeName: VivoxUI, Assembly-CSharp
+        m_MethodName: LogoutOfVivoxAsync
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -38,6 +38,8 @@ public class PopulateUI : NetworkBehaviour
 
     RelayManager relayManager;
 
+    public TMP_Text lobbyCode;
+    public TMP_Text lobbyCode2nd;
     public TMP_InputField setLobbyName;
     public TextMeshProUGUI lobbyNameText;
     public TMP_Dropdown maxPlayers;
@@ -47,14 +49,19 @@ public class PopulateUI : NetworkBehaviour
     public TMP_Dropdown lover;
     public TMP_Dropdown hunter;
 
+    public List<string> playerIDs = new List<string>();
+
     public List<PlayerCardVivox> rosterList = new List<PlayerCardVivox>();
 
     private void Start()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
         relayManager = GameObject.Find("RelayManager").GetComponent<RelayManager>();
+        lobbyCode.text = currentLobby.currentLobby.LobbyCode;
+        lobbyCode2nd.text = lobbyCode.text;
         PopulateUIElements();
         InvokeRepeating(nameof(UpdateLobby), 1.1f, 2f);
+        BindSessionEvents(true);
     }
 
     private void BindSessionEvents(bool doBind)
@@ -73,15 +80,24 @@ public class PopulateUI : NetworkBehaviour
 
     private void onParticipantAddedToChannel(VivoxParticipant participant)
     {
-        ///RosterItem is a class intended to store the participant object, and reflect events relating to it into the game's UI.
-        ///It is a sample of one way to use these events, and is detailed just below this snippet.
-        PlayerCardVivox newRosterItem = new PlayerCardVivox();
-        newRosterItem.SetupRosterItem(participant);
-        rosterList.Add(newRosterItem);
+        Debug.Log("BiriGeldi");
+        foreach (Player item in currentLobby.currentLobby.Players)
+        {
+            if (item.Id == participant.PlayerId)
+            {
+                PlayerCardVivox newRosterItem = GameObject
+                    .Find(item.Id)
+                    .gameObject.GetComponent<PlayerCardVivox>();
+
+                newRosterItem.SetupRosterItem(participant);
+                rosterList.Add(newRosterItem);
+            }
+        }
     }
 
     private void onParticipantRemovedFromChannel(VivoxParticipant participant)
     {
+        Debug.Log("GittiEleman");
         PlayerCardVivox rosterItemToRemove = rosterList.FirstOrDefault(
             p => p.Participant.PlayerId == participant.PlayerId
         );
@@ -106,16 +122,12 @@ public class PopulateUI : NetworkBehaviour
 
         foreach (Player player in currentLobby.currentLobby.Players)
         {
-            CreatePlayerCard(player);
             playerCount++;
-            if (player.Id == currentLobby.currentLobby.HostId)
-            {
-                hostPlayer = player;
-            }
+            CreatePlayerCard(player);
         }
         if (currentLobby.currentLobby.Players.Any(p => p.Id == currentLobby.thisPlayer.Id))
         {
-            if (hostPlayer.Id == currentLobby.thisPlayer.Id)
+            if (currentLobby.currentLobby.HostId == currentLobby.thisPlayer.Id)
             {
                 startButtonText.text = "Başlat";
                 isHost = true;
@@ -138,6 +150,7 @@ public class PopulateUI : NetworkBehaviour
     void CreatePlayerCard(Player player)
     {
         GameObject card = Instantiate(playerCardPrefab, Vector3.zero, Quaternion.identity);
+        card.name = player.Id;
         GameObject text = card.transform.GetChild(3).gameObject;
         GameObject countText = card.transform.GetChild(0).gameObject;
         countText.GetComponent<TextMeshProUGUI>().text = "#" + playerCount;
@@ -338,6 +351,8 @@ public class PopulateUI : NetworkBehaviour
                 currentLobby.currentLobby.Id,
                 currentLobby.thisPlayer.Id
             );
+            Destroy(currentLobby);
+            Destroy(relayManager);
             JoinLobby.ReturnMainMenu();
         }
         catch (LobbyServiceException e)
@@ -376,5 +391,13 @@ public class PopulateUI : NetworkBehaviour
         {
             Debug.LogError(e);
         }
+    }
+
+    public void CopyToLobbyCode()
+    {
+        TextEditor te = new TextEditor();
+        te.text = lobbyCode.text;
+        te.SelectAll();
+        te.Copy();
     }
 }

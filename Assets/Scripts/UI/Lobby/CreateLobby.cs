@@ -37,6 +37,16 @@ public class CreateLobby : MonoBehaviour
         {
             await VivoxService.Instance.InitializeAsync();
         }
+        // if (GameObject.Find("LobbyManager") != null)
+        // {
+        //     GameObject currentLobby = GameObject.Find("LobbyManager");
+        //
+        // }
+        // if (GameObject.Find("RelayManager") != null)
+        // {
+        //     GameObject relayManager = GameObject.Find("RelayManager");
+        //
+        // }
     }
 
     public static async void LoginToVivoxAsync()
