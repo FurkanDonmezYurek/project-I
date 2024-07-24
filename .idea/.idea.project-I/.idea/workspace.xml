@@ -7,14 +7,15 @@
     <list default="true" id="a6c8ec21-bae2-4b7d-92e6-2f0179914cff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.project-I/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.project-I/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ObjectRecognizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ObjectRecognizer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +39,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RoleManagement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.9.1/Runtime/Core/NetworkManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -62,14 +62,13 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\aslan\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\aslan\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\aslan\\AppData\\Local\\Symbols\\src&quot;
+      &quot;C:\\Users\\VICTUS\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\VICTUS\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\VICTUS\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
 }</component>
@@ -146,11 +145,6 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
-  <component name="UnityProjectDiscoverer">
-    <option name="hasUnityReference" value="true" />
-    <option name="unityProject" value="true" />
-    <option name="unityProjectFolder" value="true" />
-  </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

@@ -14,14 +14,13 @@ public class TaskManager : MonoBehaviour
         {
             taskArray[i] = transform.GetChild(i).gameObject;
         }
-        taskArray.ToList().ForEach(i => Debug.Log(i.ToString()));
     }
 
-    public static void RunTask(GameObject taskObject, bool taskStarted)
+    public static void RunTask(GameObject taskObject)
     {
         GameObject obj = Array.Find(taskArray, elm => elm.gameObject.name == taskObject.name);
 
-        if (obj != null && !obj.activeSelf && taskStarted)
+        if (obj != null && !obj.activeSelf)
         {
             obj.SetActive(true);
         }

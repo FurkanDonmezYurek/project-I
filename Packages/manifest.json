@@ -8,6 +8,7 @@
     "com.unity.netcode.gameobjects": "1.9.1",
     "com.unity.services.lobby": "1.2.1",
     "com.unity.services.relay": "1.0.5",
+    "com.unity.services.vivox": "16.4.0",
     "com.unity.textmeshpro": "3.0.9",
     "com.unity.timeline": "1.7.6",
     "com.unity.ugui": "1.0.0",

@@ -9,17 +9,33 @@ using UnityEngine;
 public class PlayerMovement : NetworkBehaviour
 {
     DefaultPlayerActions InputActions;
+    public Vector2 minMaxRotationX;
     public Transform camTransform;
 
     [SerializeField]
     public float recognizeDistance;
 
-    [SerializeField] public LayerMask layerMask;
+    float turnSpeed;
+    float cameraAngle;
+
+    [SerializeField]
+    public float recognizeDistance;
+
+    [SerializeField]
+    public LayerMask layerMask;
+
+    CharacterController cc;
 
     [SerializeField]
     NetworkMovementComponent playerMovement;
     bool taskStarted = false;
-    public GameObject taskObject;
+    GameObject taskObject;
+
+    RoleAssignment roleAssignment;
+        //GameManager gManager;
+    public ulong loverId = 999;
+    public ulong proxyId = 999;
+    public bool isDead = false;
 
     public override void OnNetworkSpawn()
     {
@@ -38,7 +54,9 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
+        cc = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+        roleAssignment = this.GetComponent<RoleAssignment>();
     }
 
     private void Awake()
@@ -49,51 +67,80 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Update()
     {
-        if (taskStarted)
+       
+        Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
+        Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
+        if (IsClient && IsLocalPlayer)
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            playerMovement.ProcessLocalPlayerMovement(movementInput, lookInput);
         }
         else
         {
-            taskObject = null;
-            Cursor.lockState = CursorLockMode.Locked;
-            Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
-            Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
-            if (IsClient && IsLocalPlayer)
-            {
-                playerMovement.ProcessLocalPlayerMovement(movementInput, lookInput);
-            }
-            else
-            {
-                playerMovement.ProcessSimulatedPlayerMovement();
-            }
+            playerMovement.ProcessSimulatedPlayerMovement();
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0))
         {
             var networkObject = ObjectRecognizer.Recognize(
                 camTransform,
                 recognizeDistance,
                 layerMask
             );
-        
+        }
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.E))
+        {
+            var networkObject = ObjectRecognizer.Recognize(
+                camTransform,
+                recognizeDistance,
+                layerMask
+            );
+            //For Task
             if (networkObject != null)
             {
-                if (taskObject == null)
-                {
-                    taskObject = networkObject.gameObject;
-                }
+                taskObject = networkObject.gameObject;
+
+                // if (networkObject.IsPlayerObject)
+                // {
+                //     Debug.Log("Player " + networkObject.NetworkObjectId);
+                // }
+                // else
                 if (
                     networkObject.IsSceneObject == true
                     && networkObject.gameObject.transform.tag == "Task"
-                    && taskObject == networkObject.gameObject
                 )
                 {
-                    Cursor.lockState = CursorLockMode.Confined;
-                    taskStarted = !taskStarted;
-                    TaskManager.RunTask(taskObject, taskStarted);
+                    TaskManager.RunTask(taskObject);
+                    taskStarted = true;
                 }
             }
         }
+
+        if (taskStarted && taskObject != null)
+        {
+            if (Vector3.Distance(transform.position, taskObject.transform.position) > 5f)
+            {
+                TaskManager.RunTask(taskObject);
+                taskObject = null;
+                taskStarted = false;
+            }
+        }
     }
+
+    // void RotateCamera(float lookInputY)
+    // {
+    //     cameraAngle = Vector3.SignedAngle(
+    //         transform.forward,
+    //         camTransform.forward,
+    //         camTransform.right
+    //     );
+    //     float cameraRotationAmount = lookInputY * turnSpeed * Time.deltaTime;
+    //     float newCameraAngle = cameraAngle - cameraRotationAmount;
+    //     if (newCameraAngle <= minMaxRotationX.x && newCameraAngle >= minMaxRotationX.y)
+    //     {
+    //         camTransform.RotateAround(
+    //             camTransform.position,
+    //             camTransform.right,
+    //             -lookInputY * turnSpeed * Time.deltaTime
+    //         );
+    //     }
+    // }
 }

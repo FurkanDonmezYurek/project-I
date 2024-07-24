@@ -22,8 +22,6 @@ namespace GameFramework.Network.Movement
 
         private Transform vcamTransform;
 
-        public Vector2 minMaxRotationX;
-
         private int tick = 0;
         private float tickRate = 1f / 60f;
         private float tickDeltaTime = 0;
@@ -134,21 +132,11 @@ namespace GameFramework.Network.Movement
 
         private void RotatePlayer(Vector2 lookInput)
         {
-            float cameraAngle = Vector3.SignedAngle(
-                transform.forward,
-                vcamTransform.forward,
-                vcamTransform.right
+            vcamTransform.RotateAround(
+                vcamTransform.position,
+                vcamTransform.right,
+                -lookInput.y * turnSpeed * tickRate
             );
-            float cameraRotationAmount = lookInput.y * turnSpeed * Time.deltaTime;
-            float newCameraAngle = cameraAngle - cameraRotationAmount;
-            if (newCameraAngle <= minMaxRotationX.x && newCameraAngle >= minMaxRotationX.y)
-            {
-                vcamTransform.RotateAround(
-                    vcamTransform.position,
-                    vcamTransform.right,
-                    -lookInput.y * turnSpeed * tickRate
-                );
-            }
             transform.RotateAround(
                 transform.position,
                 transform.up,
