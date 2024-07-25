@@ -22,7 +22,7 @@ public class ObjectRecognizer
                 // {
                 //     Debug.Log("Player");
                 // }
-
+                //
                 // //is it Object?
                 // if (networkObject.IsSceneObject == true)
                 // {
