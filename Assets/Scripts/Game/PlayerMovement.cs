@@ -14,12 +14,13 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField]
     public float recognizeDistance;
 
-    [SerializeField] public LayerMask layerMask;
+    [SerializeField]
+    public LayerMask layerMask;
 
     [SerializeField]
     NetworkMovementComponent playerMovement;
     bool taskStarted = false;
-    public GameObject taskObject;
+    GameObject taskObject;
 
     public override void OnNetworkSpawn()
     {
@@ -76,7 +77,7 @@ public class PlayerMovement : NetworkBehaviour
                 recognizeDistance,
                 layerMask
             );
-        
+
             if (networkObject != null)
             {
                 if (taskObject == null)

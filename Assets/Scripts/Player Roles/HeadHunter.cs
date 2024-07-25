@@ -28,7 +28,11 @@ public class HeadHunter : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.H))
+        if (
+            IsLocalPlayer
+            && Input.GetKeyDown(KeyCode.H)
+            && roleAssignment.role.Value == PlayerRole.HeadHunter
+        )
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -50,7 +54,12 @@ public class HeadHunter : NetworkBehaviour
             }
         }
 
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.V))
+        if (
+            IsLocalPlayer
+            && Input.GetKeyDown(KeyCode.V)
+            && !roleAssignment.usedSkill
+            && roleAssignment.role.Value == PlayerRole.HeadHunter
+        )
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -76,7 +85,9 @@ public class HeadHunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void KillPlayerServerRpc(ulong targetId)
     {
-        Debug.Log($"Server received: {gameObject.name} wants to kill the player with ID {targetId}");
+        Debug.Log(
+            $"Server received: {gameObject.name} wants to kill the player with ID {targetId}"
+        );
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
@@ -85,14 +96,14 @@ public class HeadHunter : NetworkBehaviour
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
                 if (targetRoleAssignment != null)
                 {
-                    if (targetRoleAssignment.role.Value == PlayerRole.Koylu)
+                    if (targetRoleAssignment.role.Value == PlayerRole.Villager)
                     {
                         Debug.Log($"{netObj.name} is Koylu. Head Hunter will be demoted to Koylu.");
-                        roleAssignment.AssignRoleServerRpc(PlayerRole.Koylu);
+                        roleAssignment.AssignRoleServerRpc(PlayerRole.Villager);
                     }
-                    if (targetRoleAssignment.role.Value == PlayerRole.Asik)
+                    if (targetRoleAssignment.role.Value == PlayerRole.Lover)
                     {
-                        Asik asikComponent = netObj.GetComponent<Asik>();
+                        Lover asikComponent = netObj.GetComponent<Lover>();
                         if (asikComponent != null && asikComponent.loverId != ulong.MaxValue)
                         {
                             KillPlayerServerRpc(asikComponent.loverId);
@@ -111,14 +122,18 @@ public class HeadHunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void VekilServerRpc(ulong targetId)
     {
-        Debug.Log($"Server received: {gameObject.name} wants to make the player with ID {targetId} its vekil.");
+        Debug.Log(
+            $"Server received: {gameObject.name} wants to make the player with ID {targetId} its vekil."
+        );
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
             if (netObj.OwnerClientId == targetId)
             {
                 vekilId = targetId;
-                Debug.Log($"Target object found on server: {netObj.name} is 'vekil' of {gameObject.name}");
+                Debug.Log(
+                    $"Target object found on server: {netObj.name} is 'vekil' of {gameObject.name}"
+                );
                 VekilClientRpc(new NetworkObjectReference(netObj));
                 return;
             }
@@ -134,7 +149,9 @@ public class HeadHunter : NetworkBehaviour
             foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
             {
                 NetworkObject netObj = spawnedObject.Value;
-                if (netObj.OwnerClientId == vekilId && !netObj.GetComponent<Koylu>().isDead)
+                if (
+                    netObj.OwnerClientId == vekilId && !netObj.GetComponent<RoleAssignment>().isDead
+                )
                 {
                     Debug.Log($"Vekil {netObj.name} will be promoted to Head Hunter.");
                     MakeVekilHunterClientRpc(new NetworkObjectReference(netObj));
@@ -151,7 +168,7 @@ public class HeadHunter : NetworkBehaviour
         if (target.TryGet(out NetworkObject targetObject))
         {
             RoleAssignment targetRoleAssignment = targetObject.GetComponent<RoleAssignment>();
-            targetRoleAssignment.AssignRoleServerRpc(PlayerRole.Avci);
+            targetRoleAssignment.AssignRoleServerRpc(PlayerRole.Hunter);
             Debug.Log($"Vekil {targetObject.name} is now a Head Hunter.");
         }
         else
@@ -190,7 +207,7 @@ public class HeadHunter : NetworkBehaviour
             Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {
-                targetObject.GetComponent<Koylu>().isVekil = true;
+                targetObject.GetComponent<RoleAssignment>().isVekil = true;
                 targetRenderer.material.color = Color.blue;
                 Debug.Log($"Head hunter made {targetObject.name} vekil.");
             }
