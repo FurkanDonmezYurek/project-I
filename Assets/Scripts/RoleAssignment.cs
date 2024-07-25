@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,7 @@ public class RoleAssignment : NetworkBehaviour
 
     private void Start()
     {
-        if (IsServer)
+        if (IsServer && IsOwner)
         {
             Invoke("GetLobbyData", 10f);
             //bunu 10sn yaptim
@@ -52,7 +53,6 @@ public class RoleAssignment : NetworkBehaviour
         role.Value = newRole;
         Debug.Log($"Server received: {gameObject.name} is assigned to {newRole} role");
         EnableRelevantRoleScript(newRole);
-        //print role
     }
 
     private void OnRoleChanged(PlayerRole oldRole, PlayerRole newRole)
@@ -63,13 +63,7 @@ public class RoleAssignment : NetworkBehaviour
 
     private void EnableRelevantRoleScript(PlayerRole newRole)
     {
-        GetComponent<Hayalet>().enabled = false;
-        GetComponent<AlphaHayalet>().enabled = false;
-        GetComponent<Buyucu>().enabled = false;
-        GetComponent<Asik>().enabled = false;
-        GetComponent<Avci>().enabled = false;
-        GetComponent<HeadHunter>().enabled = false;
-        GetComponent<Koylu>().enabled = false;
+        RemoveAllRoleComponents();
 
         Debug.Log($"Enabling role script for {newRole}");
 
@@ -114,10 +108,10 @@ public class RoleAssignment : NetworkBehaviour
 
     private void OnValidate()
     {
-        // This method allows you to change the role in the Unity Editor and see the changes immediately.
         if (!Application.isPlaying && role.Value != PlayerRole.Unassigned)
         {
             Debug.Log($"Editor: {gameObject.name} is assigned to {role.Value} role");
+            EnableRelevantRoleScript(role.Value);
         }
     }
 

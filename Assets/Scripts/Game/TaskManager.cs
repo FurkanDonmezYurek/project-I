@@ -17,11 +17,11 @@ public class TaskManager : MonoBehaviour
         taskArray.ToList().ForEach(i => Debug.Log(i.ToString()));
     }
 
-    public static void RunTask(GameObject taskObject)
+    public static void RunTask(GameObject taskObject, bool taskStarted)
     {
         GameObject obj = Array.Find(taskArray, elm => elm.gameObject.name == taskObject.name);
 
-        if (obj != null && !obj.activeSelf)
+        if (obj != null && !obj.activeSelf && taskStarted)
         {
             obj.SetActive(true);
         }

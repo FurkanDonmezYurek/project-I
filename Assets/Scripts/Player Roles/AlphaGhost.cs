@@ -72,7 +72,6 @@ public class AlphaGhost : NetworkBehaviour
                 ulong targetId = networkObject.OwnerClientId;
                 Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 TransformToHayaletServerRpc(targetId);
-                usedTransformAbility = true;
             }
             else
             {
