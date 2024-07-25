@@ -16,7 +16,6 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +39,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RoleManagement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.9.1/Runtime/Core/NetworkManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">

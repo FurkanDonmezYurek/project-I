@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FindWaterBottles : MonoBehaviour
+public class CollectBerrys : MonoBehaviour
 {
-    public Image[] waterBottles;  // Su şişesi Image elementlerini buraya sürükleyin
-    public Text scoreText;        // Skoru gösterecek Text elementini buraya sürükleyin
+     public Image[] berries;  // Böğürtlen Resmi
+    public Text scoreText;   // Score
     public float gameTime = 30.0f;
 
     private int score = 0;
-    private int totalBottles = 5;  // Toplam su şişesi sayısı
+    private int totalBerries = 5;  // Toplam Böğürtlen sayısı
     private float timer;
     private bool gameEnded = false;
 
     void Start()
     {
         timer = gameTime;
-        PlaceWaterBottlesRandomly();
+        PlaceBerriesRandomly();
         UpdateScoreText();
     }
 
@@ -33,39 +33,39 @@ public class FindWaterBottles : MonoBehaviour
         }
     }
 
-    void PlaceWaterBottlesRandomly()
+    void PlaceBerriesRandomly()
     {
-        for (int i = 0; i < waterBottles.Length; i++)
+        for (int i = 0; i < berries.Length; i++)
         {
-            Image bottle = waterBottles[i];
-            if (bottle != null)
+            Image berry = berries[i];
+            if (berry != null)
             {
                 float x = Random.Range(0f, Screen.width);
                 float y = Random.Range(0f, Screen.height);
-                bottle.rectTransform.position = new Vector3(x, y, 0);
-                bottle.gameObject.SetActive(true);
+                berry.rectTransform.position = new Vector3(x, y, 0);
+                berry.gameObject.SetActive(true);
 
-                // Button componentini ekleyip onClick eventini ayarla
-                Button bottleButton = bottle.gameObject.GetComponent<Button>();
-                if (bottleButton == null)
+                // Add Button component and set up onClick event
+                Button berryButton = berry.gameObject.GetComponent<Button>();
+                if (berryButton == null)
                 {
-                    bottleButton = bottle.gameObject.AddComponent<Button>();
+                    berryButton = berry.gameObject.AddComponent<Button>();
                 }
-                bottleButton.onClick.AddListener(() => OnBottleClick(bottle));
+                berryButton.onClick.AddListener(() => OnBerryClick(berry));
             }
         }
     }
 
-    void OnBottleClick(Image bottle)
+    void OnBerryClick(Image berry)
     {
         if (!gameEnded)
         {
-            bottle.gameObject.SetActive(false);
+            berry.gameObject.SetActive(false);
             score++;
             UpdateScoreText();
 
-            // Eğer tüm su şişelerini bulduysa oyunu bitir
-            if (score >= totalBottles)
+            // End game if all berries are collected
+            if (score >= totalBerries)
             {
                 EndGame();
             }
@@ -85,7 +85,7 @@ public class FindWaterBottles : MonoBehaviour
         gameEnded = true;
         Debug.Log("Game Over! Total Score: " + score);
 
-        // Canvas ekranını kapat
+        // Close the game screen
         gameObject.SetActive(false);
     }
 }

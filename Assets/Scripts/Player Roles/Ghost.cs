@@ -76,7 +76,7 @@ public class Ghost : NetworkBehaviour
                     if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.roleAssignment.isDead = true;
+                        headHunter.isDead = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
                     

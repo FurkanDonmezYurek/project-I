@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +17,9 @@ public enum PlayerRole
 
 public class RoleAssignment : NetworkBehaviour
 {
-    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(PlayerRole.Unassigned);
+    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(
+        PlayerRole.Unassigned
+    );
 
     public bool usedSkill = false;
     public bool isVekil = false;
@@ -30,7 +31,7 @@ public class RoleAssignment : NetworkBehaviour
 
     private void Start()
     {
-        if (IsServer && IsOwner)
+        if (IsServer)
         {
             Invoke("GetLobbyData", 10f);
             //bunu 10sn yaptim
@@ -51,6 +52,7 @@ public class RoleAssignment : NetworkBehaviour
         role.Value = newRole;
         Debug.Log($"Server received: {gameObject.name} is assigned to {newRole} role");
         EnableRelevantRoleScript(newRole);
+        //print role
     }
 
     private void OnRoleChanged(PlayerRole oldRole, PlayerRole newRole)
@@ -61,7 +63,13 @@ public class RoleAssignment : NetworkBehaviour
 
     private void EnableRelevantRoleScript(PlayerRole newRole)
     {
-        RemoveAllRoleComponents();
+        GetComponent<Hayalet>().enabled = false;
+        GetComponent<AlphaHayalet>().enabled = false;
+        GetComponent<Buyucu>().enabled = false;
+        GetComponent<Asik>().enabled = false;
+        GetComponent<Avci>().enabled = false;
+        GetComponent<HeadHunter>().enabled = false;
+        GetComponent<Koylu>().enabled = false;
 
         Debug.Log($"Enabling role script for {newRole}");
 
@@ -106,10 +114,10 @@ public class RoleAssignment : NetworkBehaviour
 
     private void OnValidate()
     {
+        // This method allows you to change the role in the Unity Editor and see the changes immediately.
         if (!Application.isPlaying && role.Value != PlayerRole.Unassigned)
         {
             Debug.Log($"Editor: {gameObject.name} is assigned to {role.Value} role");
-            EnableRelevantRoleScript(role.Value);
         }
     }
 

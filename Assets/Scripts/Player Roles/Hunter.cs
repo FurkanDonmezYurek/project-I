@@ -27,11 +27,19 @@ public class Hunter : NetworkBehaviour
     {
         Debug.Log($"Avci Update: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
 
-        if (IsLocalPlayer && roleAssignment.role.Value == PlayerRole.Hunter && Input.GetKeyDown(KeyCode.K))
+        if (
+            IsLocalPlayer
+            && roleAssignment.role.Value == PlayerRole.Hunter
+            && Input.GetKeyDown(KeyCode.K)
+        )
         {
             Debug.Log("K key pressed. Attempting to find target to kill.");
 
-            var networkObject = ObjectRecognizer.Recognize(pl_movement.camTransform, pl_movement.recognizeDistance, pl_movement.layerMask);
+            var networkObject = ObjectRecognizer.Recognize(
+                pl_movement.camTransform,
+                pl_movement.recognizeDistance,
+                pl_movement.layerMask
+            );
 
             if (networkObject != null)
             {
@@ -55,7 +63,9 @@ public class Hunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void KillPlayerServerRpc(ulong targetId)
     {
-        Debug.Log($"Server received: {gameObject.name} wants to kill the player with ID {targetId}");
+        Debug.Log(
+            $"Server received: {gameObject.name} wants to kill the player with ID {targetId}"
+        );
 
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
@@ -70,7 +80,6 @@ public class Hunter : NetworkBehaviour
                         Debug.Log($"{netObj.name} is Koylu. Avci will be demoted to Koylu.");
                         roleAssignment.AssignRoleServerRpc(PlayerRole.Villager);
                     }
-
                     Debug.Log($"Target object found on server: {netObj.name}");
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
                 }

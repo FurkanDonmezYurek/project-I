@@ -8,14 +8,13 @@ public class Lover : NetworkBehaviour
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
 
-    
     public ulong loverId = ulong.MaxValue;
 
     private void Start()
     {
         roleAssignment = GetComponent<RoleAssignment>();
         pl_movement = GetComponent<PlayerMovement>();
-        
+
         if (roleAssignment == null)
         {
             Debug.LogError("RoleAssignment script not found on the player!");
@@ -28,16 +27,21 @@ public class Lover : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.L) && !roleAssignment.usedSkill && roleAssignment.role.Value == PlayerRole.Lover)
+        if (
+            IsLocalPlayer
+            && Input.GetKeyDown(KeyCode.L)
+            && !roleAssignment.usedSkill
+            && roleAssignment.role.Value == PlayerRole.Lover
+        )
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
                 pl_movement.recognizeDistance,
                 pl_movement.layerMask
             );
-            
+
             Debug.Log("L key pressed. Attempting to find target to make in love.");
- 
+
             if (networkObject != null)
             {
                 ulong targetId = networkObject.GetComponent<NetworkObject>().OwnerClientId;
@@ -54,16 +58,19 @@ public class Lover : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void MakeInLoveServerRpc(ulong targetId)
     {
-        Debug.Log($"Server received: {gameObject.name} wants to make the player with ID {targetId} in love.");
+        Debug.Log(
+            $"Server received: {gameObject.name} wants to make the player with ID {targetId} in love."
+        );
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
             if (netObj.OwnerClientId == targetId)
             {
                 loverId = targetId;
-                Debug.Log($"Target object found on server: {netObj.name} is now in love with {gameObject.name}");
+                Debug.Log(
+                    $"Target object found on server: {netObj.name} is now in love with {gameObject.name}"
+                );
                 MakeInLoveClientRpc(new NetworkObjectReference(netObj));
-                roleAssignment.usedSkill = true;
                 return;
             }
         }
@@ -73,7 +80,7 @@ public class Lover : NetworkBehaviour
     [ClientRpc]
     private void MakeInLoveClientRpc(NetworkObjectReference target)
     {
-        if (target.TryGet(out NetworkObject targetObject) && !targetObject.GetComponent<RoleAssignment>().isDead)
+        if (target.TryGet(out NetworkObject targetObject))
         {
             Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
@@ -91,5 +98,4 @@ public class Lover : NetworkBehaviour
             Debug.Log("Target object not found on client.");
         }
     }
-
 }

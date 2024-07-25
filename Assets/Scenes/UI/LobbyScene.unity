@@ -10816,6 +10816,7 @@ MonoBehaviour:
   startButtonText: {fileID: 6622576474901391466}
   playerCardPrefab: {fileID: 6872286348879805800, guid: 421a91d827f9a6a4fa89e2d6a96a7ca5, type: 3}
   playerListContainer: {fileID: 8038934565399259134}
+  readyCount: 0
   setReady: 1
   lobbyCode: {fileID: 650134773}
   lobbyCode2nd: {fileID: 2133086056}
@@ -10858,7 +10859,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 3163584769
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 0
+  SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1

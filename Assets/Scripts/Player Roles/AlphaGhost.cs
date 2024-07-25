@@ -8,7 +8,7 @@ public class AlphaGhost : NetworkBehaviour
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
     private HeadHunter headHunter;
-    
+
     private void Start()
     {
         roleAssignment = GetComponent<RoleAssignment>();
@@ -26,7 +26,11 @@ public class AlphaGhost : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.AlphaGhost)
+        if (
+            IsLocalPlayer
+            && Input.GetMouseButtonDown(0)
+            && roleAssignment.role.Value == PlayerRole.AlphaGhost
+        )
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -48,7 +52,12 @@ public class AlphaGhost : NetworkBehaviour
             }
         }
 
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T) && !roleAssignment.usedSkill && roleAssignment.role.Value == PlayerRole.AlphaGhost)
+        if (
+            IsLocalPlayer
+            && Input.GetKeyDown(KeyCode.T)
+            && !roleAssignment.usedSkill
+            && roleAssignment.role.Value == PlayerRole.AlphaGhost
+        )
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -58,12 +67,12 @@ public class AlphaGhost : NetworkBehaviour
 
             Debug.Log("T key pressed. Attempting to find target to transform into Hayalet.");
 
-            if (networkObject != null) 
+            if (networkObject != null)
             {
                 ulong targetId = networkObject.OwnerClientId;
                 Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 TransformToHayaletServerRpc(targetId);
-                roleAssignment.usedSkill = true;
+                usedTransformAbility = true;
             }
             else
             {
@@ -75,7 +84,9 @@ public class AlphaGhost : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void KillPlayerServerRpc(ulong targetId)
     {
-        Debug.Log($"Server received: {gameObject.name} wants to kill the player with ID {targetId}");
+        Debug.Log(
+            $"Server received: {gameObject.name} wants to kill the player with ID {targetId}"
+        );
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
@@ -97,7 +108,7 @@ public class AlphaGhost : NetworkBehaviour
                     if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.roleAssignment.isDead = true;
+                        headHunter.isDead = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
 
@@ -113,16 +124,23 @@ public class AlphaGhost : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void TransformToHayaletServerRpc(ulong targetId)
     {
-        Debug.Log($"Server received: {gameObject.name} wants to transform the player with ID {targetId} into a Hayalet");
+        Debug.Log(
+            $"Server received: {gameObject.name} wants to transform the player with ID {targetId} into a Hayalet"
+        );
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
             if (netObj.OwnerClientId == targetId)
             {
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
-                if (targetRoleAssignment != null && targetRoleAssignment.role.Value == PlayerRole.Villager)
+                if (
+                    targetRoleAssignment != null
+                    && targetRoleAssignment.role.Value == PlayerRole.Villager
+                )
                 {
-                    Debug.Log($"Target object found on server: {netObj.name} will be transformed into a Hayalet.");
+                    Debug.Log(
+                        $"Target object found on server: {netObj.name} will be transformed into a Hayalet."
+                    );
                     TransformToHayaletClientRpc(new NetworkObjectReference(netObj));
                 }
                 return;

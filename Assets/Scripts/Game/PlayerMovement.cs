@@ -54,7 +54,6 @@ public class PlayerMovement : NetworkBehaviour
     {
         cc = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
-        roleAssignment = this.GetComponent<RoleAssignment>();
     }
 
     private void Awake()
@@ -75,22 +74,15 @@ public class PlayerMovement : NetworkBehaviour
         {
             playerMovement.ProcessSimulatedPlayerMovement();
         }
-        if (IsLocalPlayer && Input.GetMouseButtonDown(0))
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
             var networkObject = ObjectRecognizer.Recognize(
                 camTransform,
                 recognizeDistance,
                 layerMask
             );
-        }
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.E))
-        {
-            var networkObject = ObjectRecognizer.Recognize(
-                camTransform,
-                recognizeDistance,
-                layerMask
-            );
-            //For Task
+
             if (networkObject != null)
             {
                 taskObject = networkObject.gameObject;
