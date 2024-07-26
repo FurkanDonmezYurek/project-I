@@ -30,6 +30,12 @@ public class RoleAssignment : NetworkBehaviour
 
     private CurrentLobby currentLobby;
 
+    private void Awake()
+    {
+        currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
+        transform.name = currentLobby.thisPlayer.Data["PlayerName"].Value;
+    }
+
     private void Start()
     {
         if (IsServer && IsOwner)
@@ -117,7 +123,6 @@ public class RoleAssignment : NetworkBehaviour
 
     private void GetLobbyData()
     {
-        currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
         roleCountList[0] = Convert.ToInt32(currentLobby.currentLobby.Data["ghost"].Value);
         roleCountList[1] = Convert.ToInt32(currentLobby.currentLobby.Data["hunter"].Value);
         roleCountList[2] = Convert.ToInt32(currentLobby.currentLobby.Data["villager"].Value);
