@@ -39368,6 +39368,14 @@ PrefabInstance:
       propertyPath: m_TargetCamera
       value: 
       objectReference: {fileID: 374183000}
+    - target: {fileID: 153823792298279042, guid: 1b71a2fd4a92b0443a6961c66e0a0dd7, type: 3}
+      propertyPath: m_PlaybackSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337237831890158935, guid: 1b71a2fd4a92b0443a6961c66e0a0dd7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5776240134068557224, guid: 1b71a2fd4a92b0443a6961c66e0a0dd7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -39451,6 +39459,10 @@ PrefabInstance:
     - target: {fileID: 7419207921047101823, guid: 1b71a2fd4a92b0443a6961c66e0a0dd7, type: 3}
       propertyPath: m_Name
       value: LoadingCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419207921047101823, guid: 1b71a2fd4a92b0443a6961c66e0a0dd7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
