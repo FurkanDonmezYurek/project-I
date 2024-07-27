@@ -25,6 +25,8 @@ public class NPCManager : NetworkBehaviour
     public NetworkVariable<string> aiPrompt = new NetworkVariable<string>();
     public TMP_Text localAiPrompt;
 
+    public GameObject textObj;
+
     private void Awake()
     {
         localAiPrompt.text = "Hava Ne Kadar Güzel Yhaaa";
