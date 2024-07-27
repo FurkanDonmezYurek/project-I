@@ -361,6 +361,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.uralstech.ugemini": {
+      "version": "https://github.com/Uralstech/UGemini.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      },
+      "hash": "a6a540b879e69347e1ec08f534b6e840b2a68cf0"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
