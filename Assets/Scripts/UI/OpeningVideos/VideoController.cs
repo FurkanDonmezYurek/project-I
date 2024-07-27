@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class VideoController : MonoBehaviour
 {
-    public float waitTime=5f;
+    public float waitTime = 5f;
     private float skipTime = 10f;
     public GameObject skipButton;
+
     void Start()
     {
         StartCoroutine(WaitForIntro());
@@ -15,6 +16,21 @@ public class VideoController : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             StartCoroutine(ShowSkipButton());
+        }
+    }
+
+    private void Update()
+    {
+        if (
+            SceneManager.GetActiveScene().buildIndex == 1
+            && (
+                Input.GetKeyDown(KeyCode.Escape)
+                || Input.GetKeyDown(KeyCode.Return)
+                || Input.GetKeyDown(KeyCode.Space)
+            )
+        )
+        {
+            Skipping();
         }
     }
 
@@ -29,10 +45,10 @@ public class VideoController : MonoBehaviour
     {
         yield return new WaitForSeconds(skipTime);
 
-        skipButton.SetActive(true); 
+        skipButton.SetActive(true);
     }
 
-    public void skipping()
+    public void Skipping()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
