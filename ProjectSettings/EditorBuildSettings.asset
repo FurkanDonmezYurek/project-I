@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/LobbyScene.unity
     guid: 5060eea75ef9e1a44a30342d08d4bffc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AIScene.unity
     guid: 31db712058dce8a4fa9be809aac9085f
   - enabled: 0
@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GokhanReaktor.unity
     guid: c3e9cd6116302d54884977f25cf91aa3
+  - enabled: 1
+    path: Assets/Scenes/Troya.unity
+    guid: 49a90d3c50649ac43b866293985625a9
   m_configObjects: {}
