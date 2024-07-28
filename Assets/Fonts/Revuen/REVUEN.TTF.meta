@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fae8e27800edb094a97e56cb0d1cc79c
+guid: 8b552b1880664d648aaf096d278173cd
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - 321impact
+  - Revue BT
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
