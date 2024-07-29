@@ -107,7 +107,7 @@ public class AlphaGhost : NetworkBehaviour
                     if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.isDead = true;
+                        headHunter.roleAssignment.isDead = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
 
@@ -140,6 +140,7 @@ public class AlphaGhost : NetworkBehaviour
                     Debug.Log(
                         $"Target object found on server: {netObj.name} will be transformed into a Hayalet."
                     );
+                    roleAssignment.usedSkill = true; //mark that skill is already used
                     TransformToHayaletClientRpc(new NetworkObjectReference(netObj));
                 }
                 return;
@@ -177,6 +178,9 @@ public class AlphaGhost : NetworkBehaviour
     {
         if (target.TryGet(out NetworkObject targetObject))
         {
+            roleAssignment.NPCRequest();
+            
+            //sil
             Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {

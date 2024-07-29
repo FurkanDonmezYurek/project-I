@@ -52,7 +52,7 @@ public class NPCManager : NetworkBehaviour
     //     }
     // }
 
-    private async void FieldOfViewCheck()
+    public async void FieldOfViewCheck(GameObject playerSelf)
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
@@ -93,14 +93,12 @@ public class NPCManager : NetworkBehaviour
                             {
                                 victum = targetArray[i].name;
                             }
-                            if (roleAssignment.usedSkill)
-                            {
-                                killer = targetArray[i].name;
-                            }
                             if (!roleAssignment.isDead && !roleAssignment.usedSkill)
                             {
                                 witnesses.SetValue(targetArray[i].name, 0);
                             }
+
+                            killer = playerSelf.transform.name;
                         }
                     }
                     else

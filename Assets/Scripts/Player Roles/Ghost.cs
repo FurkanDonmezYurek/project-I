@@ -7,9 +7,13 @@ public class Ghost : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
-
     private HeadHunter headHunter;
-    
+
+    private float cooldownTime = 5f;  
+    private bool canKill = true;
+    private float potionMechanicTime = 30f;
+    private Coroutine potionMechanicCoroutine;
+
     private void Start()
     {
         roleAssignment = GetComponent<RoleAssignment>();
@@ -22,12 +26,13 @@ public class Ghost : NetworkBehaviour
         else
         {
             Debug.Log("Hayalet role assigned and script initialized.");
+            StartPotionMechanicCoroutine();
         }
     }
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.Ghost)
+        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.Ghost && canKill)
         {
             var networkObject = ObjectRecognizer.Recognize(
                 pl_movement.camTransform,
@@ -35,18 +40,27 @@ public class Ghost : NetworkBehaviour
                 pl_movement.layerMask
             );
             
-            Debug.Log("E key pressed. Attempting to find target to kill.");
+            Debug.Log("Mouse button pressed. Attempting to find target to kill.");
             
             if (networkObject != null)
             {
                 ulong targetId = networkObject.OwnerClientId;
                 Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 KillPlayerServerRpc(targetId);
+                StartCoroutine(KillCooldown());
+                ResetPotionMechanicCoroutine();
             }
             else
             {
                 Debug.Log("No target found to kill.");
             }
+        }
+
+        //potion kullanımı, daha sonra toplanacak şekilde değiştir P yerine
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.P) && roleAssignment.role.Value == PlayerRole.Ghost)
+        {
+            Debug.Log("Potion used.");
+            ResetPotionMechanicCoroutine();
         }
     }
 
@@ -71,18 +85,19 @@ public class Ghost : NetworkBehaviour
                             Debug.Log($"Asik {netObj.name} killed. Their lover will also die.");
                         }
                     }
-                    
-                    //make the vekil of the headhunter a hunter, i hope so...
+
+                    // Make the vekil of the headhunter a hunter
                     if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.isDead = true;
+                        headHunter.roleAssignment.isDead = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
-                    
+
                     Debug.Log($"Target object found on server: {netObj.name}");
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
                 }
+                targetRoleAssignment.isDead = true;
                 return;
             }
         }
@@ -94,6 +109,8 @@ public class Ghost : NetworkBehaviour
     {
         if (target.TryGet(out NetworkObject targetObject))
         {
+            roleAssignment.NPCRequest();
+
             Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {
@@ -110,5 +127,52 @@ public class Ghost : NetworkBehaviour
             Debug.Log("Target object not found on client.");
         }
     }
-    
+
+    private IEnumerator KillCooldown()
+    {
+        canKill = false; 
+        Debug.Log("Kill skill is on cooldown.");
+        yield return new WaitForSeconds(cooldownTime);
+        canKill = true; 
+        Debug.Log("Kill skill is ready to use again.");
+    }
+
+    private void StartPotionMechanicCoroutine()
+    {
+        if (potionMechanicCoroutine != null)
+        {
+            StopCoroutine(potionMechanicCoroutine);
+        }
+        potionMechanicCoroutine = StartCoroutine(PotionMechanicCoroutine());
+    }
+
+    private void ResetPotionMechanicCoroutine()
+    {
+        if (potionMechanicCoroutine != null)
+        {
+            StopCoroutine(potionMechanicCoroutine);
+        }
+        potionMechanicCoroutine = StartCoroutine(PotionMechanicCoroutine());
+    }
+
+    private IEnumerator PotionMechanicCoroutine()
+    {
+        yield return new WaitForSeconds(potionMechanicTime);
+        LoseHumanAppearance();
+    }
+
+    private void LoseHumanAppearance()
+    {
+        Renderer ghostRenderer = GetComponentInChildren<Renderer>();
+        if (ghostRenderer != null)
+        {
+            // buraya hayalet form gelcek
+            ghostRenderer.material.color = Color.grey; // Change the appearance to non-human
+            Debug.Log("Hayalet lost its human appearance.");
+        }
+        else
+        {
+            Debug.Log("Renderer not found on Hayalet.");
+        }
+    }
 }
