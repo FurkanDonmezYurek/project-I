@@ -36,16 +36,26 @@ public class RoleAssignment : NetworkBehaviour
     private void Awake()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
-        transform.name = currentLobby.thisPlayer.Data["PlayerName"].Value;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        if (IsOwner)
+        {
+            transform.name = currentLobby.thisPlayer.Data["PlayerName"].Value;
+        }
+
     }
 
     private void Start()
     {
-        if (IsServer && IsOwner)
-        {
-            Invoke("GetLobbyData", 10f);
-            //bunu 10sn yaptim
-        }
+        // if (IsServer && IsOwner)
+        // {
+        //     Invoke("GetLobbyData", 10f);
+        //     //bunu 10sn yaptim
+        // }
+
         // Add a listener to the NetworkVariable to handle changes
         role.OnValueChanged += OnRoleChanged;
 
@@ -135,7 +145,7 @@ public class RoleAssignment : NetworkBehaviour
         }
     }
 
-    private void GetLobbyData()
+    public void GetLobbyData()
     {
         roleCountList[0] = Convert.ToInt32(currentLobby.currentLobby.Data["ghost"].Value);
         roleCountList[1] = Convert.ToInt32(currentLobby.currentLobby.Data["hunter"].Value);

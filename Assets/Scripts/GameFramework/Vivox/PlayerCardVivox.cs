@@ -49,25 +49,28 @@ public class PlayerCardVivox : MonoBehaviour
 
     private void UpdateChatStateImage()
     {
-        // Update the UI of the game to the state of the participant
-        if (Participant.IsMuted)
+        if (ChatStateImage != null)
         {
-            isMuted = true;
-            ChatStateImage.sprite = MutedImage;
-        }
-        else
-        {
-            isMuted = false;
-            if (Participant.SpeechDetected)
+            // Update the UI of the game to the state of the participant
+            if (Participant.IsMuted)
             {
-                ChatStateImage.sprite = SpeakingImage;
+                isMuted = true;
+                ChatStateImage.sprite = MutedImage;
             }
             else
             {
-                ChatStateImage.sprite = NotSpeakingImage;
+                isMuted = false;
+                if (Participant.SpeechDetected)
+                {
+                    ChatStateImage.sprite = SpeakingImage;
+                }
+                else
+                {
+                    ChatStateImage.sprite = NotSpeakingImage;
+                }
             }
+            ChatStateImage.gameObject.transform.localScale = Vector3.one;
         }
-        ChatStateImage.gameObject.transform.localScale = Vector3.one;
     }
 
     public void MuteAndUnmuteButton()

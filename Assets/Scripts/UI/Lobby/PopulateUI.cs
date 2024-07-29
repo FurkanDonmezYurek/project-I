@@ -32,11 +32,11 @@ public class PopulateUI : NetworkBehaviour
     public GameObject playerListContainer;
 
     Player hostPlayer;
-
+    int totalReadyCount = 0;
+    public TMP_Text readyCountText;
+    public Button startButton;
     public bool setReady = true;
     bool isHost;
-
-    RelayManager relayManager;
 
     public TMP_Text lobbyCode;
     public TMP_Text lobbyCode2nd;
@@ -56,12 +56,15 @@ public class PopulateUI : NetworkBehaviour
     private void Start()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
-        relayManager = GameObject.Find("RelayManager").GetComponent<RelayManager>();
         lobbyCode.text = currentLobby.currentLobby.LobbyCode;
         lobbyCode2nd.text = lobbyCode.text;
         PopulateUIElements();
         InvokeRepeating(nameof(UpdateLobby), 1.1f, 2f);
         BindSessionEvents(true);
+        if (isHost)
+        {
+            startButton.interactable = false;
+        }
     }
 
     private void BindSessionEvents(bool doBind)
@@ -97,7 +100,6 @@ public class PopulateUI : NetworkBehaviour
 
     private void onParticipantRemovedFromChannel(VivoxParticipant participant)
     {
-        Debug.Log("GittiEleman");
         PlayerCardVivox rosterItemToRemove = rosterList.FirstOrDefault(
             p => p.Participant.PlayerId == participant.PlayerId
         );
@@ -122,8 +124,24 @@ public class PopulateUI : NetworkBehaviour
 
         foreach (Player player in currentLobby.currentLobby.Players)
         {
+            if (GameObject.Find(player.Id) == null)
+            {
+                CreatePlayerCard(player);
+            }
             playerCount++;
-            CreatePlayerCard(player);
+            totalReadyCount += Convert.ToInt32(player.Data["readyCount"].Value);
+            readyCountText.text = $"{totalReadyCount} / {currentLobby.currentLobby.Players.Count}";
+            if (isHost)
+            {
+                if (totalReadyCount == currentLobby.currentLobby.Players.Count)
+                {
+                    startButton.interactable = true;
+                }
+                else
+                {
+                    startButton.interactable = false;
+                }
+            }
         }
         if (currentLobby.currentLobby.Players.Any(p => p.Id == currentLobby.thisPlayer.Id))
         {
@@ -132,7 +150,7 @@ public class PopulateUI : NetworkBehaviour
                 startButtonText.text = "Başlat";
                 isHost = true;
 
-                SetJoinCode();
+                // SetJoinCode();
             }
             else
             {
@@ -141,7 +159,6 @@ public class PopulateUI : NetworkBehaviour
                 if (!isHost && currentLobby.currentLobby.Data["joinCode"].Value != "")
                 {
                     JoinLobby.LoadGame();
-                    relayManager.OnJoinClick();
                 }
             }
         }
@@ -285,14 +302,17 @@ public class PopulateUI : NetworkBehaviour
 
     private void CleanerContainer()
     {
-        if (playerListContainer is not null && playerListContainer.transform.childCount > 0)
-        {
-            foreach (Transform item in playerListContainer.transform)
-            {
-                Destroy(item.gameObject);
-                playerCount = 1;
-            }
-        }
+        // if (playerListContainer is not null && playerListContainer.transform.childCount > 0)
+        // {
+        //     foreach (Transform item in playerListContainer.transform)
+        //     {
+        //         Destroy(item.gameObject);
+        //         playerCount = 1;
+        //         totalReadyCount = 0;
+        //     }
+        // }
+        playerCount = 1;
+        totalReadyCount = 0;
     }
 
     //ButtonEvents
@@ -301,15 +321,9 @@ public class PopulateUI : NetworkBehaviour
     {
         if (isHost)
         {
-            int totalReadyCount = 0;
-            foreach (Player player in currentLobby.currentLobby.Players)
-            {
-                totalReadyCount += Convert.ToInt32(player.Data["readyCount"].Value);
-            }
             if (totalReadyCount == currentLobby.currentLobby.Players.Count)
             {
                 JoinLobby.LoadGame();
-                relayManager.OnHostClick();
             }
         }
         else if (!isHost && setReady == true)
@@ -352,7 +366,6 @@ public class PopulateUI : NetworkBehaviour
                 currentLobby.thisPlayer.Id
             );
             Destroy(currentLobby);
-            Destroy(relayManager);
             JoinLobby.ReturnMainMenu();
         }
         catch (LobbyServiceException e)
@@ -373,25 +386,25 @@ public class PopulateUI : NetworkBehaviour
         }
     }
 
-    public async void SetJoinCode()
-    {
-        try
-        {
-            UpdateLobbyOptions options = new UpdateLobbyOptions();
-            options.Data = new Dictionary<string, DataObject>()
-            {
-                { "joinCode", new DataObject(DataObject.VisibilityOptions.Member, "") }
-            };
-            currentLobby.currentLobby = await Lobbies.Instance.UpdateLobbyAsync(
-                currentLobby.currentLobby.Id,
-                options
-            );
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.LogError(e);
-        }
-    }
+    // public async void SetJoinCode()
+    // {
+    //     try
+    //     {
+    //         UpdateLobbyOptions options = new UpdateLobbyOptions();
+    //         options.Data = new Dictionary<string, DataObject>()
+    //         {
+    //             { "joinCode", new DataObject(DataObject.VisibilityOptions.Member, "") }
+    //         };
+    //         currentLobby.currentLobby = await Lobbies.Instance.UpdateLobbyAsync(
+    //             currentLobby.currentLobby.Id,
+    //             options
+    //         );
+    //     }
+    //     catch (LobbyServiceException e)
+    //     {
+    //         Debug.LogError(e);
+    //     }
+    // }
 
     public void CopyToLobbyCode()
     {
