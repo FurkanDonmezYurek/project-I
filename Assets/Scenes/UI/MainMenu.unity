@@ -18310,7 +18310,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6034407597126230142}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: SFXVolume
         m_Mode: 1
@@ -34554,7 +34554,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6034407597126230142}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: ToggleAmbiance
         m_Mode: 1
@@ -35130,7 +35130,6 @@ GameObject:
   - component: {fileID: 2047506695317889507}
   - component: {fileID: 3098398987937710014}
   - component: {fileID: 3082424232654507558}
-  - component: {fileID: 6034407597126230142}
   - component: {fileID: 6034407597126230143}
   m_Layer: 5
   m_Name: Canvas
@@ -35139,18 +35138,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6034407597126230142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6034407597126230141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 299230bed2254de479097ea74bdcd35b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6034407597126230143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40753,7 +40740,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6034407597126230142}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
         m_MethodName: ToggleMusic
         m_Mode: 1

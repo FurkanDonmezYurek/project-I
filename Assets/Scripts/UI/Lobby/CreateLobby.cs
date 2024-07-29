@@ -40,21 +40,24 @@ public class CreateLobby : MonoBehaviour
         // if (GameObject.Find("LobbyManager") != null)
         // {
         //     GameObject currentLobby = GameObject.Find("LobbyManager");
-        //
+        //     Destroy(currentLobby);
         // }
         // if (GameObject.Find("RelayManager") != null)
         // {
         //     GameObject relayManager = GameObject.Find("RelayManager");
-        //
+        //     Destroy(relayManager);
         // }
     }
 
     public static async void LoginToVivoxAsync()
     {
+        if (VivoxService.Instance.IsLoggedIn)
+        {
+            await VivoxService.Instance.LogoutAsync();
+        }
         LoginOptions options = new LoginOptions()
         {
-            DisplayName = PlayerPrefs.GetString("PlayerName"),
-            EnableTTS = false
+            DisplayName = PlayerPrefs.GetString("PlayerName")
         };
         await VivoxService.Instance.LoginAsync(options);
 
@@ -134,7 +137,8 @@ public class CreateLobby : MonoBehaviour
                     villager,
                     DataObject.IndexOptions.S5
                 )
-            }
+            },
+            { "joinCode", new DataObject(DataObject.VisibilityOptions.Member, "") }
         };
 
         Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyname, maxplayers, options);
