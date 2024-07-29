@@ -22,23 +22,18 @@ public class NPCManager : NetworkBehaviour
 
     ApiManager apiManager;
 
-    public NetworkVariable<string> aiPrompt = new NetworkVariable<string>();
-    public TMP_Text localAiPrompt;
+    public TMP_Text globalAiPrompt;
+    public string localAiPrompt;
 
     public GameObject textObj;
-
-    private void Awake()
-    {
-        localAiPrompt.text = "Hava Ne Kadar Güzel Yhaaa";
-        if (IsHost)
-        {
-            aiPrompt.Value = localAiPrompt.text;
-        }
-    }
 
     private void Start()
     {
         apiManager = GetComponent<ApiManager>();
+
+        localAiPrompt = "Hava Ne Kadar Güzel Yhaaa";
+
+        globalAiPrompt.text = localAiPrompt;
 
         // StartCoroutine(FOVRoutine());
     }
@@ -121,10 +116,11 @@ public class NPCManager : NetworkBehaviour
 
         if (victum != "" && killer != "")
         {
-            localAiPrompt.text = await apiManager.QueryGemini(killer, victum, witnesses);
+            localAiPrompt = await apiManager.QueryGemini(killer, victum, witnesses);
+            Debug.Log(localAiPrompt);
             if (IsHost)
             {
-                aiPrompt.Value = localAiPrompt.text;
+                globalAiPrompt.text = localAiPrompt;
             }
             else
             {
@@ -188,6 +184,6 @@ public class NPCManager : NetworkBehaviour
     [ServerRpc]
     public void AiPromptServerRpc()
     {
-        aiPrompt.Value = localAiPrompt.text;
+        globalAiPrompt.text = localAiPrompt;
     }
 }
