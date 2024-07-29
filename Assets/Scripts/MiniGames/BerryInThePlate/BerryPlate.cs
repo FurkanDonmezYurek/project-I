@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class BerryPlate : MonoBehaviour
 {
     public Image[] berries; // Böğürtlen Image öğeleri
     public Text scoreText; // Skoru gösterecek Text öğesi
     public Image bowl; // Tabak için Image öğesi
+    public Text taskCompleteText; // TASK COMPLETE mesajı için Text bileşeni
     public float gameTime = 30.0f;
 
     private int score = 0;
@@ -22,7 +22,8 @@ public class BerryPlate : MonoBehaviour
         timer = gameTime;
         PlaceBerriesRandomly();
         UpdateScoreText();
-        bowl.gameObject.SetActive(false); // Tabağı başlangıçta gizle
+        bowl.gameObject.SetActive(true); // Tabağı başlangıçta göster
+        taskCompleteText.gameObject.SetActive(false); // TASK COMPLETE mesajını başlangıçta gizle
     }
 
     void Update()
@@ -34,6 +35,13 @@ public class BerryPlate : MonoBehaviour
             {
                 EndGame();
             }
+        }
+
+        // Böğürtlenlerin ekrandan kaybolduğunu kontrol et
+        if (!placingBerries && AreAllBerriesOutOfScreen())
+        {
+            ShowTaskComplete();
+            CloseBowl();
         }
     }
 
@@ -57,6 +65,12 @@ public class BerryPlate : MonoBehaviour
                 }
 
                 berryButton.onClick.AddListener(() => OnBerryClick(berry));
+                // DragHandler ekle
+                if (berry.gameObject.GetComponent<DragHandler>() == null)
+                {
+                    DragHandler dragHandler = berry.gameObject.AddComponent<DragHandler>();
+                    dragHandler.bowl = bowl; // DragHandler'da tabak referansını ayarla
+                }
             }
         }
     }
@@ -73,16 +87,16 @@ public class BerryPlate : MonoBehaviour
             if (score >= totalBerries)
             {
                 placingBerries = true;
-                ShowBowl();
             }
         }
     }
 
-    void ShowBowl()
+    void CloseBowl()
     {
-        bowl.gameObject.SetActive(true);
-        Debug.Log("Tüm böğürtlenler toplandı! Onları tabağa yerleştirin.");
+        bowl.gameObject.SetActive(false);
     }
+
+   
 
     void UpdateScoreText()
     {
@@ -108,6 +122,36 @@ public class BerryPlate : MonoBehaviour
             score++; // Böğürtlenleri tabağa yerleştirirken skoru güncelle veya istediğiniz başka bir işlemi yapın
             Debug.Log("Böğürtlen tabağa kondu!");
             // Böğürtlenleri tabağa yerleştirmek için ek mantık
+        }
+    }
+
+    bool AreAllBerriesOutOfScreen()
+    {
+        foreach (Image berry in berries)
+        {
+            if (berry != null && berry.gameObject.activeSelf)
+            {
+                RectTransform berryRect = berry.rectTransform;
+                Vector3[] corners = new Vector3[4];
+                berryRect.GetWorldCorners(corners);
+
+                // Ekranın içindeki köşe noktaları
+                if (corners[0].x >= 0 && corners[0].x <= Screen.width && 
+                    corners[0].y >= 0 && corners[0].y <= Screen.height)
+                {
+                    return false; // En az bir böğürtlen ekran içinde
+                }
+            }
+        }
+        return true; // Tüm böğürtlenler ekran dışında
+    }
+
+    void ShowTaskComplete()
+    {
+        if (taskCompleteText != null)
+        {
+            taskCompleteText.gameObject.SetActive(true);
+            Debug.Log("Görev Tamamlandı!");
         }
     }
 }

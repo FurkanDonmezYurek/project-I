@@ -6,16 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="a6c8ec21-bae2-4b7d-92e6-2f0179914cff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.project-I/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.project-I/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Roles/Koylu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoleAssignment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LowPolyWater_Pack/Plane Meshes/Ocean50x50W750H750.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LowPolyWater_Pack/Plane Meshes/Ocean50x50W750H750.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGame/Matchitem/line.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGame/Matchitem/line.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Troya.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Troya.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGames/BerryInThePlate/BerryPlate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGames/BerryInThePlate/BerryPlate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGames/CollectBerrys/CollectBerrys.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGames/CollectBerrys/CollectBerrys.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGames/MatchItem/MatchLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGames/MatchItem/MatchLogic.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,13 +29,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/PlayerMovement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/TaskManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/AlphaHayalet.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Asik.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Avci.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Buyucu.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/Hayalet.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MiniGames/BerryInThePlate/BerryPlate.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MiniGames/BerryInThePlate/DragHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Roles/HeadHunter.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RoleManagement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.9.1/Runtime/Core/NetworkManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -53,26 +45,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Map&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "TaskUpdate",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\VICTUS\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\VICTUS\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\VICTUS\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\aslan\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\aslan\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\aslan\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$USER_HOME$/Desktop/Builds/project-I.exe" />
@@ -144,6 +137,7 @@
       <workItem from="1721422037376" duration="5808000" />
       <workItem from="1721508557892" duration="420000" />
       <workItem from="1721553890707" duration="3299000" />
+      <workItem from="1722277045265" duration="6618000" />
     </task>
     <servers />
   </component>
@@ -151,6 +145,11 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

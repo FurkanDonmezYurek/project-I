@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Collections; // IEnumerator için gerekli
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CollectBerrys : MonoBehaviour
 {
-     public Image[] berries;  // Böğürtlen Resmi
-    public Text scoreText;   // Score
-    public float gameTime = 30.0f;
+    public Image[] berries;  // Böğürtlen Resimleri
+    public Text scoreText;   // Skor
+    public Text taskCompleteText; // Görev Tamamlandı Metni
+    public float gameTime = 30.0f; // Oyun Süresi
 
     private int score = 0;
-    private int totalBerries = 5;  // Toplam Böğürtlen sayısı
+    private int totalBerries = 5;  // Toplam Böğürtlen Sayısı
     private float timer;
     private bool gameEnded = false;
 
@@ -19,6 +19,16 @@ public class CollectBerrys : MonoBehaviour
         timer = gameTime;
         PlaceBerriesRandomly();
         UpdateScoreText();
+        
+        // Görev Tamamlandı metninin başlangıçta gizli olduğundan emin ol
+        if (taskCompleteText != null)
+        {
+            taskCompleteText.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Task Complete Text is not assigned.");
+        }
     }
 
     void Update()
@@ -35,9 +45,8 @@ public class CollectBerrys : MonoBehaviour
 
     void PlaceBerriesRandomly()
     {
-        for (int i = 0; i < berries.Length; i++)
+        foreach (Image berry in berries)
         {
-            Image berry = berries[i];
             if (berry != null)
             {
                 float x = Random.Range(0f, Screen.width);
@@ -45,12 +54,13 @@ public class CollectBerrys : MonoBehaviour
                 berry.rectTransform.position = new Vector3(x, y, 0);
                 berry.gameObject.SetActive(true);
 
-                // Add Button component and set up onClick event
                 Button berryButton = berry.gameObject.GetComponent<Button>();
                 if (berryButton == null)
                 {
                     berryButton = berry.gameObject.AddComponent<Button>();
                 }
+
+                berryButton.onClick.RemoveAllListeners();
                 berryButton.onClick.AddListener(() => OnBerryClick(berry));
             }
         }
@@ -64,7 +74,7 @@ public class CollectBerrys : MonoBehaviour
             score++;
             UpdateScoreText();
 
-            // End game if all berries are collected
+            // Bütün böğürtlenler toplandı mı kontrol et
             if (score >= totalBerries)
             {
                 EndGame();
@@ -83,11 +93,27 @@ public class CollectBerrys : MonoBehaviour
     void EndGame()
     {
         gameEnded = true;
-        Debug.Log("Game Over! Total Score: " + score);
 
-        // Close the game screen
-        gameObject.SetActive(false);
+        // Bütün böğürtlenler toplandıysa görev tamamlandı metnini göster
+        if (score >= totalBerries)
+        {
+            if (taskCompleteText != null)
+            {
+                taskCompleteText.gameObject.SetActive(true);
+                // Eğer metni belli bir süre göstermek istersen aşağıdaki Coroutine'i kullanabilirsin:
+                // StartCoroutine(ShowTaskCompleteText());
+            }
+        }
+
+        // Diğer oyun elemanlarını devre dışı bırakabilirsin
+        // gameObject.SetActive(false); Bu satırı kaldırarak tüm oyun nesnelerinin görünmesini sağlayabilirsin
+    }
+
+    // Bu Coroutine, taskCompleteText gösterildikten sonra bir süre bekleyebilir.
+    IEnumerator ShowTaskCompleteText()
+    {
+        taskCompleteText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2); // 2 saniye bekle
+        taskCompleteText.gameObject.SetActive(false);
     }
 }
-
-
