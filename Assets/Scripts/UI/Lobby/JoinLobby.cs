@@ -129,16 +129,19 @@ public class JoinLobby : MonoBehaviour
 
     public static void LoadLobbyRoom()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(3);
+        Debug.Log("Lobby");
     }
 
     public static void ReturnMainMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Debug.Log("ReturnMenu");
+        SceneManager.LoadScene(2);
     }
 
     public static void LoadGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Debug.Log("LoadGame");
+        SceneManager.LoadScene(4);
     }
 }

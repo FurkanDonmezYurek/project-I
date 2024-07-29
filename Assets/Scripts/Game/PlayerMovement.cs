@@ -70,16 +70,27 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             var networkObject = ObjectRecognizer.Recognize(
                 camTransform,
                 recognizeDistance,
                 layerMask
             );
-
             if (networkObject != null)
             {
+                if (networkObject.gameObject.transform.tag == "NPC")
+                {
+                    GameObject text = networkObject.gameObject.GetComponent<NPCManager>().textObj;
+                    if (text.activeSelf)
+                    {
+                        text.SetActive(false);
+                    }
+                    else
+                    {
+                        text.SetActive(true);
+                    }
+                }
                 if (taskObject == null)
                 {
                     taskObject = networkObject.gameObject;

@@ -1,27 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.Services;
-using Unity.Services.Core;
-using Unity.Services.Authentication;
-using TMPro;
 using System;
 using Unity.Services.Relay.Models;
 using Unity.Services.Relay;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using Unity.Services.Lobbies.Models;
 using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
+using System.Collections.Generic;
 
 public class RelayManager : MonoBehaviour
 {
     RelayHostData hostData;
     RelayJointData joinData;
+
     CurrentLobby currentLobby;
 
-    async void Start()
+    void Start()
     {
-        await UnityServices.InitializeAsync();
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
     }
 
@@ -41,9 +36,6 @@ public class RelayManager : MonoBehaviour
         };
         Debug.Log("Allocate Complete" + hostData.AllocationID);
 
-        hostData.JoinCode = await RelayService.Instance.GetJoinCodeAsync(hostData.AllocationID);
-        SetJoinCode();
-
         UnityTransport transport =
             NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 
@@ -56,6 +48,8 @@ public class RelayManager : MonoBehaviour
         );
 
         NetworkManager.Singleton.StartHost();
+        hostData.JoinCode = await RelayService.Instance.GetJoinCodeAsync(hostData.AllocationID);
+        SetJoinCode();
     }
 
     public async void OnJoinClick()
