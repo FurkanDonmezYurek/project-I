@@ -1,25 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.Netcode;
 using UnityEngine;
 
 public class CallChoise : NetworkBehaviour
 {
     [Header("Player UI View")]
-    [SerializeField] public GameObject callButtonUI;
+    //[SerializeField] public GameObject callButtonUI;
 
-    private RoleAssignment roleAssignment;
+    [SerializeField] private Transform meetingPoint; 
+    private Voting voting;
 
-    private void OnTriggerEnter(Collider other)
+    private PlayerMovement pl_movement;
+    private void Start()
     {
-        PlayerRole playerSelfRole = other.GetComponent<RoleAssignment>().role.Value;
+        voting = FindObjectOfType<Voting>();
+    }
 
-        //Tetikleyiciye Giren Nesne Oyuncu ise
-        if (playerSelfRole != null)
+    private void Update()
+    {
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R))
         {
-            callButtonUI.SetActive(true);
-            print("Oyuncu Algýlandý");
+            var networkObject = ObjectRecognizer.Recognize(
+                pl_movement.camTransform,
+                pl_movement.recognizeDistance,
+                pl_movement.layerMask
+            );
+            if (networkObject != null)
+            {
+                ReportServerRpc();
+            }
+            
         }
+    }
 
+    [ServerRpc]
+    private void ReportServerRpc()
+    {
+        voting.CallMeeting();
     }
 }

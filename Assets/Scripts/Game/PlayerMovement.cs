@@ -22,6 +22,7 @@ public class PlayerMovement : NetworkBehaviour
     bool taskStarted = false;
     GameObject taskObject;
 
+    private Voting voting;
     public override void OnNetworkSpawn()
     {
         CinemachineVirtualCamera cvm =
@@ -40,6 +41,7 @@ public class PlayerMovement : NetworkBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        voting = FindObjectOfType<Voting>();
     }
 
     private void Awake()
@@ -107,5 +109,18 @@ public class PlayerMovement : NetworkBehaviour
                 }
             }
         }
+        
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R))
+        {
+            ReportServerRpc();
+        }
+        
     }
+    
+    [ServerRpc]
+    private void ReportServerRpc()
+    {
+        voting.CallMeeting();
+    }
+
 }

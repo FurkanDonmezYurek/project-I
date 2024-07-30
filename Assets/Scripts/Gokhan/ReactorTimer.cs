@@ -1,43 +1,34 @@
 using UnityEngine;
-using UnityEngine.UI; // UI elemanlarýný kullanmak için gerekli
-using Unity.Netcode; // Netcode için gerekli
+using UnityEngine.UI;
+using Unity.Netcode;
 using TMPro;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
-
 
 public class ReactorTimer : NetworkBehaviour
 {
-
-    // Geri sayýmýn gösterileceði Text nesnesi
-    [SerializeField] public TextMeshProUGUI announcementTextUI;
-    [SerializeField] public GameObject gameOverPanelUI;
-    public float startTimer; // Örneðin 60 saniye (1 dakika)
+    [SerializeField] private TextMeshProUGUI announcementTextUI;
+    [SerializeField] private GameObject gameOverPanelUI;
+    public float startTimer;
 
     [Header("Time Control")]
     [SerializeField] public float taskCompletedOnTime;
     [SerializeField] public float SabotageTaskOnTime;
 
-    // Geri sayýmýn þu anki deðeri (saniye cinsinden)
     private float countDownTime = 0.0f;
+    private bool isPaused = false;
 
     public float leftMinute;
     public float leftSec;
-
     public string announcement;
 
     private void Start()
     {
-    
-    // Baþlangýç süresi (saniye cinsinden)
-    taskCompletedOnTime = 10.0f;
-    SabotageTaskOnTime = 20.0f;
-
+        taskCompletedOnTime = 10.0f;
+        SabotageTaskOnTime = 20.0f;
     }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
-        // Herkese açýk bir RPC ile geri sayýmý baþlat (sadece sunucu tarafýndan çaðrýlýr)
         if (IsServer)
         {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
@@ -46,66 +37,58 @@ public class ReactorTimer : NetworkBehaviour
 
     void OnClientConnected(ulong clientId)
     {
-        // Yeni bir istemci baðlandýðýnda geri sayýmý baþlat
         if (IsServer)
         {
             CountDownStartServerRpc();
         }
     }
 
-    [ServerRpc] // Herkese açýk bir RPC
+    [ServerRpc]
     void CountDownStartServerRpc()
     {
-        // Geri sayýmý baþlat
         countDownTime = startTimer;
-
-        // Geri sayým metnini güncelle
         UpdateCountDownText();
     }
 
     void Update()
     {
-        // Her saniye geri sayýmý bir saniye azalt
-        countDownTime -= Time.deltaTime;
-
-        // Geri sayým sýfýra ulaþtýðýnda oyunu bitir (isteðe baðlý)
-        if (countDownTime <= 0.0f)
+        if (!isPaused)
         {
-            // Oyun bitti!
-            // Sunucuya özel kodlarý çalýþtýr
-            if (NetworkManager.Singleton.IsServer)
-            {
-                // Fizik kurallarýný durdur
-                countDownTime = 0.0f;
-                gameOverPanelUI.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0;
-            }
-        }
-        // Geri sayým metnini güncelle
-        UpdateCountDownText();
+            countDownTime -= Time.deltaTime;
 
-        if (IsServer)
-        {
-            // Geri sayým metnini formatla ve göster
-            if (leftMinute == 2.0f)
+            if (countDownTime <= 0.0f)
             {
-                announcementTextUI.text = "Yaklaþýk 2 dk kaldý!";
+                if (NetworkManager.Singleton.IsServer)
+                {
+                    countDownTime = 0.0f;
+                    gameOverPanelUI.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+                    Time.timeScale = 0;
+                }
             }
-            else if (leftMinute == 1.0f)
+
+            UpdateCountDownText();
+
+            if (IsServer)
             {
-                announcementTextUI.text = "1 dk'dan az zaman kaldý!";
+                if (leftMinute == 2.0f)
+                {
+                    announcementTextUI.text = "YaklaÅŸÄ±k 2 dk kaldÄ±!";
+                }
+                else if (leftMinute == 1.0f)
+                {
+                    announcementTextUI.text = "1 dk'dan az zaman kaldÄ±!";
+                }
             }
         }
     }
 
-    // Geri sayým metnini dakika ve saniye olarak günceller
     void UpdateCountDownText()
     {
-        int minute = Mathf.FloorToInt(countDownTime / 60.0f); // Dakikalarý hesapla
+        int minute = Mathf.FloorToInt(countDownTime / 60.0f);
         leftMinute = minute;
 
-        int second = Mathf.RoundToInt(countDownTime % 60.0f); // Saniye hesapla
+        int second = Mathf.RoundToInt(countDownTime % 60.0f);
         leftSec = second;
 
         if (countDownTime <= 30.0f)
@@ -114,36 +97,36 @@ public class ReactorTimer : NetworkBehaviour
         }
     }
 
-    // Geri sayýmý artýrmak için bir fonksiyon
     public void SabotageTimer()
     {
-        // Herkese açýk bir RPC ile geri sayýmý 10 saniye artýr (sadece sunucu tarafýndan çaðrýlýr)
         if (IsServer)
         {
-            CountDownIncreaseServerRpc(SabotageTaskOnTime); // Artýrýlacak saniye miktarýný parametre olarak gönder
+            CountDownIncreaseServerRpc(SabotageTaskOnTime);
         }
     }
 
-    [ServerRpc] // Herkese açýk bir RPC
+    [ServerRpc]
     void CountDownIncreaseServerRpc(float IncreasingSecond)
     {
         countDownTime += IncreasingSecond;
         UpdateCountDownText();
     }
 
-    // Geri sayýmý azaltmak için bir fonksiyon
-    public void QuickTimer()
-    {
-        // Herkese açýk bir RPC ile geri sayýmý 5 saniye azalt (sadece sunucu tarafýndan çaðrýlýr)
-        if (IsServer)
-        {
-            CountDownDecreaseServerRpc(taskCompletedOnTime); // Azaltýlacak saniye miktarýný parametre olarak gönder
-        }
-    }
-    [ServerRpc] // Herkese açýk bir RPC
+    [ServerRpc]
     void CountDownDecreaseServerRpc(float DecreasingTime)
     {
         countDownTime -= DecreasingTime;
     }
 
+    [ServerRpc]
+    public void PauseReactorServerRpc()
+    {
+        isPaused = true;
+    }
+
+    [ServerRpc]
+    public void ResumeReactorServerRpc()
+    {
+        isPaused = false;
+    }
 }
