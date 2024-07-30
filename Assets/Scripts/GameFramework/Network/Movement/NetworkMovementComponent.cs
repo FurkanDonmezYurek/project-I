@@ -36,6 +36,14 @@ namespace GameFramework.Network.Movement
             new NetworkVariable<TransformState>();
         public TransformState previousTransformState;
 
+        private void Start()
+        {
+            if (ServerTransformState == null)
+            {
+                ServerTransformState = new NetworkVariable<TransformState>(new TransformState());
+            }
+        }
+
         private void OnEnable()
         {
             ServerTransformState.OnValueChanged += OnServerStateChanged;
@@ -108,12 +116,15 @@ namespace GameFramework.Network.Movement
             tickDeltaTime += Time.deltaTime;
             if (tickDeltaTime > tickRate)
             {
-                if (ServerTransformState.Value.HasStartedMoving)
+                if (
+                    ServerTransformState != null
+                    && ServerTransformState.Value != null
+                    && ServerTransformState.Value.HasStartedMoving
+                )
                 {
                     transform.position = ServerTransformState.Value.Position;
                     transform.rotation = ServerTransformState.Value.Rotation;
                 }
-
                 tickDeltaTime -= tickRate;
                 tick++;
             }
