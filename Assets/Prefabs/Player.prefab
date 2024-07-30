@@ -488,7 +488,6 @@ GameObject:
   - component: {fileID: 2370034185022035048}
   - component: {fileID: 478683538085179568}
   - component: {fileID: 5146556202236729096}
-  - component: {fileID: -8492759357349856103}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -687,6 +686,12 @@ MonoBehaviour:
   isVekil: 0
   isDead: 0
   roleCountList: 0000000000000000000000000000000000000000
+  npcArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1701663980554177145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,8 +728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce10f396afe53db41bc997c7b4a44ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roleAssignment: {fileID: 0}
   vekilId: 18446744073709551615
-  isDead: 0
 --- !u!114 &9063367772612680081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,17 +779,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a463d9f685eab774185ed77e7a88c549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8492759357349856103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7094258657147457176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8b495f16c8d92d49b008bef67c3d327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameStarted: 0
-  loadingPanel: {fileID: 0}
