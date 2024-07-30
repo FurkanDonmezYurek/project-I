@@ -5,30 +5,41 @@ using Unity.Netcode;
 
 public class Voting : NetworkBehaviour
 {
-    [SerializeField] private ReactorTimer reactorTimer;
-    [SerializeField] private GameObject votingUIPanel; 
+    [SerializeField]
+    private ReactorTimer reactorTimer;
+
+    [SerializeField]
+    private GameObject votingUIPanel;
+    private VotingUI votingUI;
 
     private Dictionary<ulong, ulong> votes = new Dictionary<ulong, ulong>(); // voter, voted
     private bool isVotingInProgress = false;
 
-    public int numOfPlayers = 0;
+    // public int numOfPlayers = 0;
     public Vector3 meetingArea;
+    CurrentLobby currentLobby;
+
     private void Start()
     {
-        numOfPlayers = FindObjectsOfType<RoleAssignment>().Length;
-    }
+        currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
+        GameObject playerSelf = GameObject.Find(currentLobby.thisPlayer.Data["PlayerName"].Value);
+        if (playerSelf != null)
+        {
+            votingUIPanel = votingUI.voteUIPanel;
+        }
 
-    private void Update()
-    {
-        numOfPlayers = FindObjectsOfType<RoleAssignment>().Length;
+        // numOfPlayers = votingUI.playerListAlive.Count;
+        // Debug.Log("Voting Start: Number of players: " + numOfPlayers);
     }
 
     public void CallMeeting()
     {
-        if (isVotingInProgress) return;
+        if (isVotingInProgress)
+            return;
         isVotingInProgress = true;
+        Debug.Log("Meeting Called. Voting started.");
 
-        reactorTimer.PauseReactorServerRpc();
+        // reactorTimer.PauseReactorServerRpc();
         MovePlayersToMeetingArea();
         ShowVotingUI();
     }
@@ -37,7 +48,8 @@ public class Voting : NetworkBehaviour
     {
         foreach (var player in FindObjectsOfType<PlayerMovement>())
         {
-            player.transform.position = meetingArea; 
+            player.transform.position = meetingArea;
+            Debug.Log("Moved player to meeting area: " + player.name);
         }
     }
 
@@ -47,13 +59,16 @@ public class Voting : NetworkBehaviour
         {
             foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
             {
-                ShowVotingUIClientRpc(new ClientRpcParams
-                {
-                    Send = new ClientRpcSendParams
+                ShowVotingUIClientRpc(
+                    new ClientRpcParams
                     {
-                        TargetClientIds = new List<ulong> { clientId }
+                        Send = new ClientRpcSendParams
+                        {
+                            TargetClientIds = new List<ulong> { clientId }
+                        }
                     }
-                });
+                );
+                Debug.Log("Showing voting UI to client: " + clientId);
             }
         }
     }
@@ -61,7 +76,8 @@ public class Voting : NetworkBehaviour
     [ClientRpc]
     private void ShowVotingUIClientRpc(ClientRpcParams clientRpcParams = default)
     {
-        votingUIPanel.SetActive(true); 
+        votingUIPanel.SetActive(true);
+        Debug.Log("Voting UI shown on client.");
     }
 
     public void CastVote(ulong voterId, ulong targetId)
@@ -69,18 +85,22 @@ public class Voting : NetworkBehaviour
         if (votes.ContainsKey(voterId))
         {
             votes[voterId] = targetId;
+            Debug.Log($"Voter {voterId} changed vote to {targetId}");
         }
         else
         {
             votes.Add(voterId, targetId);
+            Debug.Log($"Voter {voterId} voted for {targetId}");
         }
     }
 
     [ServerRpc]
     public void EndVotingServerRpc()
     {
-        if (!IsServer) return;
+        if (!IsServer)
+            return;
 
+        Debug.Log("Ending voting process.");
         ulong mostVotedPlayer = CalculateMostVotedPlayer();
         if (mostVotedPlayer != 0) // Check if a player is actually voted out
         {
@@ -88,7 +108,7 @@ public class Voting : NetworkBehaviour
         }
 
         isVotingInProgress = false;
-        reactorTimer.ResumeReactorServerRpc();
+        // reactorTimer.ResumeReactorServerRpc();
         ResetVotingState();
     }
 
@@ -123,9 +143,10 @@ public class Voting : NetworkBehaviour
 
         if (maxVotes <= alivePlayersCount / 2)
         {
-            mostVotedPlayer = 0; 
+            mostVotedPlayer = 0;
         }
 
+        Debug.Log($"Most voted player: {mostVotedPlayer} with {maxVotes} votes.");
         return mostVotedPlayer;
     }
 
@@ -139,6 +160,7 @@ public class Voting : NetworkBehaviour
                 alivePlayersCount++;
             }
         }
+        Debug.Log("Alive players count: " + alivePlayersCount);
         return alivePlayersCount;
     }
 
@@ -156,6 +178,7 @@ public class Voting : NetworkBehaviour
     {
         isVotingInProgress = false;
         votes.Clear();
+        Debug.Log("Voting state reset.");
         HideVotingUI();
     }
 
@@ -165,13 +188,16 @@ public class Voting : NetworkBehaviour
         {
             foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
             {
-                HideVotingUIClientRpc(new ClientRpcParams
-                {
-                    Send = new ClientRpcSendParams
+                HideVotingUIClientRpc(
+                    new ClientRpcParams
                     {
-                        TargetClientIds = new List<ulong> { clientId }
+                        Send = new ClientRpcSendParams
+                        {
+                            TargetClientIds = new List<ulong> { clientId }
+                        }
                     }
-                });
+                );
+                Debug.Log("Hiding voting UI from client: " + clientId);
             }
         }
     }
@@ -179,6 +205,7 @@ public class Voting : NetworkBehaviour
     [ClientRpc]
     private void HideVotingUIClientRpc(ClientRpcParams clientRpcParams = default)
     {
-        votingUIPanel.SetActive(false); 
+        votingUIPanel.SetActive(false);
+        Debug.Log("Voting UI hidden on client.");
     }
 }

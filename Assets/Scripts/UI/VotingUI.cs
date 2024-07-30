@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,10 +9,58 @@ public class VotingUI : MonoBehaviour
 {
     private Voting voting;
     public GameObject voteUI;
+    public GameObject voteUIPanel;
+    CurrentLobby currentLobby;
+    public List<GameObject> playerListAlive;
+    public GameObject playerCardVote;
+    public GameObject playerCardContainer;
 
     private void Start()
     {
         voting = FindObjectOfType<Voting>();
+        currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
+    }
+
+    private void Update()
+    {
+        if (!playerCardContainer.activeSelf)
+        {
+            if (playerCardContainer is not null && playerCardContainer.transform.childCount > 0)
+            {
+                foreach (Transform item in playerCardContainer.transform)
+                {
+                    Destroy(item.gameObject);
+                }
+            }
+        }
+    }
+
+    public void AddPlayerVoteCard()
+    {
+        foreach (Player player in currentLobby.currentLobby.Players)
+        {
+            GameObject playerObject = GameObject.Find(player.Data["PlayerName"].Value);
+            RoleAssignment roleAssignment = playerObject.GetComponent<RoleAssignment>();
+            if (!roleAssignment.isDead)
+            {
+                playerListAlive.Add(playerObject);
+                GameObject card = Instantiate(playerCardVote, Vector3.zero, Quaternion.identity);
+                GameObject text = card.transform.GetChild(2).gameObject;
+                text.GetComponent<TextMeshProUGUI>().text = player.Data["PlayerName"].Value;
+                var recTransform = card.GetComponent<RectTransform>();
+                recTransform.SetParent(playerCardContainer.transform);
+                NetworkObject networkObject = playerObject.GetComponent<NetworkObject>();
+                card.transform
+                    .GetChild(0)
+                    .gameObject.GetComponent<Button>()
+                    .onClick.AddListener(
+                        delegate
+                        {
+                            OnVoteButtonClicked(networkObject.OwnerClientId);
+                        }
+                    );
+            }
+        }
     }
 
     public void OnVoteButtonClicked(ulong targetId)
@@ -22,6 +73,5 @@ public class VotingUI : MonoBehaviour
     {
         voting.EndVotingServerRpc();
         voting.ResetVotingState();
-        voteUI.SetActive(false);
     }
 }

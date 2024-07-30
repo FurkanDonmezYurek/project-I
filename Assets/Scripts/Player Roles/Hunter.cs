@@ -25,8 +25,6 @@ public class Hunter : NetworkBehaviour
 
     private void Update()
     {
-        Debug.Log($"Avci Update: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
-
         if (
             IsLocalPlayer
             && roleAssignment.role.Value == PlayerRole.Hunter
@@ -89,7 +87,6 @@ public class Hunter : NetworkBehaviour
     {
         if (target.TryGet(out NetworkObject targetObject))
         {
-            
             //for test purposes
             Renderer targetRenderer = targetObject.GetComponent<Renderer>();
             if (targetRenderer != null)
