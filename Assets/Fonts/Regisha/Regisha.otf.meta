@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 31d7592731e79b141bcd0e60e57cc2e8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Regisha
+  fallbackFontReferences: []
+  customCharacters: "abc\xE7defg\u011Fh\u0131ijklmno\xF6prs\u015Ftu\xFCvyz.!?\",&+-/()^#'1234567890ABC\xC7DEFG\u011EHI\u0130JKLMNO\xD6PRS\u015ETU\xDCVYZ"
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

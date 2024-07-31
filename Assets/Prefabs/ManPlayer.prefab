@@ -313,9 +313,9 @@ GameObject:
   - component: {fileID: 1474560323009401356}
   - component: {fileID: 3254258761190159070}
   - component: {fileID: 6530225737387110623}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ManPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3345943081
+  GlobalObjectIdHash: 900197548
   InScenePlacedSourceGlobalObjectIdHash: 900197548
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -504,6 +504,12 @@ MonoBehaviour:
   isVekil: 0
   isDead: 0
   roleCountList: 0000000000000000000000000000000000000000
+  npcArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &131970081796139253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,8 +546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce10f396afe53db41bc997c7b4a44ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roleAssignment: {fileID: 0}
   vekilId: 18446744073709551615
-  isDead: 0
 --- !u!114 &2914716164101446328
 MonoBehaviour:
   m_ObjectHideFlags: 0

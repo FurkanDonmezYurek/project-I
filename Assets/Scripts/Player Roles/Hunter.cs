@@ -52,12 +52,6 @@ public class Hunter : NetworkBehaviour
                 Debug.Log("No target found to kill.");
             }
         }
-
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("T key pressed. Sending TestServerRpc.");
-            TestServerRpc();
-        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -83,6 +77,7 @@ public class Hunter : NetworkBehaviour
                     Debug.Log($"Target object found on server: {netObj.name}");
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
                 }
+                targetRoleAssignment.isDead = true;
                 return;
             }
         }
@@ -94,10 +89,13 @@ public class Hunter : NetworkBehaviour
     {
         if (target.TryGet(out NetworkObject targetObject))
         {
+            
+            //for test purposes
             Renderer targetRenderer = targetObject.GetComponent<Renderer>();
             if (targetRenderer != null)
             {
                 Debug.Log($"Changing target's color to red: {targetObject.name}");
+                //killed animation
                 targetRenderer.material.color = Color.yellow;
             }
             else
