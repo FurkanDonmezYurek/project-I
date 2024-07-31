@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cc: {fileID: 1969644553022664135}
-  speed: 10
+  speed: 7
   turnSpeed: 10
   camSocket: {fileID: 6478134132957308085}
   vcam: {fileID: 2765880617122689980}
