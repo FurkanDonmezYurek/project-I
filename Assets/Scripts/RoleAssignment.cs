@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 public enum PlayerRole
 {
@@ -30,22 +31,45 @@ public class RoleAssignment : NetworkBehaviour
 
     private CurrentLobby currentLobby;
 
+    public GameObject[] npcArray = new GameObject[5];
+    
     private void Awake()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
-        transform.name = currentLobby.thisPlayer.Data["PlayerName"].Value;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        if (IsOwner)
+        {
+            transform.name = currentLobby.thisPlayer.Data["PlayerName"].Value;
+        }
+
     }
 
     private void Start()
     {
-        if (IsServer && IsOwner)
-        {
-            Invoke("GetLobbyData", 10f);
-            //bunu 10sn yaptim
-        }
+        // if (IsServer && IsOwner)
+        // {
+        //     Invoke("GetLobbyData", 10f);
+        //     //bunu 10sn yaptim
+        // }
 
         // Add a listener to the NetworkVariable to handle changes
         role.OnValueChanged += OnRoleChanged;
+
+        npcArray = GameObject.FindGameObjectsWithTag("NPC");
+
+    }
+    
+    //NPC Method
+    public void NPCRequest()
+    {
+        for (int i = 0; i < npcArray.Length ; i++)
+        {
+            npcArray[i].GetComponent<NPCManager>().FieldOfViewCheck(this.gameObject);
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -121,7 +145,7 @@ public class RoleAssignment : NetworkBehaviour
         }
     }
 
-    private void GetLobbyData()
+    public void GetLobbyData()
     {
         roleCountList[0] = Convert.ToInt32(currentLobby.currentLobby.Data["ghost"].Value);
         roleCountList[1] = Convert.ToInt32(currentLobby.currentLobby.Data["hunter"].Value);

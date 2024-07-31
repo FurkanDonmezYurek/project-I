@@ -5,11 +5,10 @@ using Unity.Netcode;
 
 public class HeadHunter : NetworkBehaviour
 {
-    private RoleAssignment roleAssignment;
+    public RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
 
     public ulong vekilId = ulong.MaxValue;
-    public bool isDead;
 
     private void Start()
     {
@@ -122,9 +121,7 @@ public class HeadHunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void VekilServerRpc(ulong targetId)
     {
-        Debug.Log(
-            $"Server received: {gameObject.name} wants to make the player with ID {targetId} its vekil."
-        );
+        Debug.Log($"Server received: {gameObject.name} wants to make the player with ID {targetId} its vekil.");
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
@@ -144,14 +141,13 @@ public class HeadHunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void MakeVekilHunterServerRpc()
     {
-        if (isDead && vekilId != ulong.MaxValue)
+        if (roleAssignment.isDead && vekilId != ulong.MaxValue)
         {
             foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
             {
                 NetworkObject netObj = spawnedObject.Value;
-                if (
-                    netObj.OwnerClientId == vekilId && !netObj.GetComponent<RoleAssignment>().isDead
-                )
+                if (netObj.OwnerClientId == vekilId && !netObj.GetComponent<RoleAssignment>().isDead 
+                    && netObj.GetComponent<RoleAssignment>().role.Value != PlayerRole.Ghost || netObj.GetComponent<RoleAssignment>().role.Value !=PlayerRole.AlphaGhost )
                 {
                     Debug.Log($"Vekil {netObj.name} will be promoted to Head Hunter.");
                     MakeVekilHunterClientRpc(new NetworkObjectReference(netObj));
