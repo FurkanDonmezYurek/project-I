@@ -27295,6 +27295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: level (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0e0f4566268363b4f96b172e0ee26374, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7143527185745988027, guid: 0e0f4566268363b4f96b172e0ee26374, type: 3}
       propertyPath: m_Name
       value: "ye\u015Filalan"
