@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class TaskManager : NetworkBehaviour
 {
-    public static GameObject[] taskArray = new GameObject[4];
+    public static GameObject[] taskArray = new GameObject[16];
     public NetworkVariable<int> totalTaskCount = new NetworkVariable<int>(0);
 
     private void Start()

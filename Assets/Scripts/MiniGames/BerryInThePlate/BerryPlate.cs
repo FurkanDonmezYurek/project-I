@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class BerryPlate : MonoBehaviour
 {
+
     public Image[] berries; // Böğürtlen Image öğeleri
     public Text scoreText; // Skoru gösterecek Text öğesi
     public Image bowl; // Tabak için Image öğesi
     public Text taskCompleteText; // TASK COMPLETE mesajı için Text bileşeni
+    public Image background; // Arkaplan için Image öğesi
     public float gameTime = 30.0f;
 
     private int score = 0;
@@ -17,7 +19,9 @@ public class BerryPlate : MonoBehaviour
     private float timer;
     private bool gameEnded = false;
     private bool placingBerries = false;
-    TaskManager taskManager;
+    private bool taskCompleteShown = false; // Task complete bayrağı
+    private TaskManager taskManager;
+
 
     void Start()
     {
@@ -27,6 +31,16 @@ public class BerryPlate : MonoBehaviour
         bowl.gameObject.SetActive(true); // Tabağı başlangıçta göster
         taskCompleteText.gameObject.SetActive(false); // TASK COMPLETE mesajını başlangıçta gizle
         taskManager = gameObject.transform.parent.gameObject.GetComponent<TaskManager>();
+
+        // Arkaplanın DragHandler'ını kaldır
+        if (background != null)
+        {
+            var dragHandler = background.GetComponent<DragHandler>();
+            if (dragHandler != null)
+            {
+                Destroy(dragHandler);
+            }
+        }
     }
 
     void Update()
@@ -41,7 +55,7 @@ public class BerryPlate : MonoBehaviour
         }
 
         // Böğürtlenlerin ekrandan kaybolduğunu kontrol et
-        if (!placingBerries && AreAllBerriesOutOfScreen())
+        if (!placingBerries && AreAllBerriesOutOfScreen() && !taskCompleteShown)
         {
             ShowTaskComplete();
             CloseBowl();
@@ -153,10 +167,11 @@ public class BerryPlate : MonoBehaviour
 
     void ShowTaskComplete()
     {
-        if (taskCompleteText != null)
+        if (taskCompleteText != null && !taskCompleteShown)
         {
             taskCompleteText.gameObject.SetActive(true);
             gameEnded = true;
+            taskCompleteShown = true; // Task complete bayrağını güncelle
             Debug.Log("Görev Tamamlandı!");
             taskManager.GameEnded();
         }

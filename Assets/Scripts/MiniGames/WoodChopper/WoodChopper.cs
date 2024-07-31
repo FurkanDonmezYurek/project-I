@@ -1,12 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.VersionControl;
+
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class WoodChopper : MonoBehaviour
 {
+   
+
     public Image woodImage;
     public Button axeButton;
     public Text scoreText;
@@ -14,6 +14,13 @@ public class WoodChopper : MonoBehaviour
     private int score = 0;
     private int chopCount = 0;
     private int chopsToCut = 5;
+
+    private TaskManager TaskManager;
+
+    
+    
+
+   
 
     public GameObject BG;
     public GameObject TaskComplete;
@@ -23,12 +30,13 @@ public class WoodChopper : MonoBehaviour
     {
         axeButton.onClick.AddListener(OnAxeClick);
         UpdateScoreText();
-        BG.gameObject.SetActive(true);
-        TaskComplete.gameObject.SetActive(false);
-        ScoreBar.gameObject.SetActive(true);
-    }
+        BG.SetActive(true);
+        TaskComplete.SetActive(false);
+        ScoreBar.SetActive(true);
+        TaskManager = gameObject.transform.parent.gameObject.GetComponent<TaskManager>();
 
-   
+
+    }
 
     public void OnAxeClick()
     {
@@ -38,7 +46,7 @@ public class WoodChopper : MonoBehaviour
             chopCount = 0;
             score++;
             UpdateScoreText();
-            if (score == 10)
+            if (score >= 10)
             {
                 EndGame();
             }
@@ -53,15 +61,16 @@ public class WoodChopper : MonoBehaviour
 
     void EndGame()
     {
-        if (score == 10)
+        if (score >= 10)
         {
-            BG.gameObject.SetActive(true);
-            TaskComplete.gameObject.SetActive(true);
+            BG.SetActive(true);
+            TaskComplete.SetActive(true);
             axeButton.gameObject.SetActive(false);
             woodImage.gameObject.SetActive(false);
             scoreText.gameObject.SetActive(false);
-            ScoreBar.gameObject.SetActive(false);
-            
+            ScoreBar.SetActive(false);
+            TaskManager.GameEnded();
         }
     }
 }
+
