@@ -2,12 +2,14 @@ using System.Collections; // IEnumerator için gerekli
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CollectBerrys : MonoBehaviour
 {
     public Image[] berries;  // Böğürtlen Resimleri
     public Text scoreText;   // Skor
     public Text taskCompleteText; // Görev Tamamlandı Metni
     public float gameTime = 30.0f; // Oyun Süresi
+    public GameObject GameObject;
 
     private int score = 0;
     private int totalBerries = 5;  // Toplam Böğürtlen Sayısı
@@ -102,6 +104,9 @@ public class CollectBerrys : MonoBehaviour
                 taskCompleteText.gameObject.SetActive(true);
                 // Eğer metni belli bir süre göstermek istersen aşağıdaki Coroutine'i kullanabilirsin:
                 // StartCoroutine(ShowTaskCompleteText());
+                GameObject.gameObject.SetActive(false);
+                
+                
             }
         }
 
