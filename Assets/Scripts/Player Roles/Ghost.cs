@@ -56,7 +56,6 @@ public class Ghost : NetworkBehaviour
             }
         }
 
-        //potion kullanımı, daha sonra toplanacak şekilde değiştir P yerine
         if (IsLocalPlayer && Input.GetKeyDown(KeyCode.P) && roleAssignment.role.Value == PlayerRole.Ghost)
         {
             Debug.Log("Potion used.");
@@ -152,6 +151,7 @@ public class Ghost : NetworkBehaviour
         {
             StopCoroutine(potionMechanicCoroutine);
         }
+        RegainHumanAppearance();
         potionMechanicCoroutine = StartCoroutine(PotionMechanicCoroutine());
     }
 
@@ -166,9 +166,22 @@ public class Ghost : NetworkBehaviour
         Renderer ghostRenderer = GetComponentInChildren<Renderer>();
         if (ghostRenderer != null)
         {
-            // buraya hayalet form gelcek
-            ghostRenderer.material.color = Color.grey; // Change the appearance to non-human
+            ghostRenderer.material.color = Color.grey; 
             Debug.Log("Hayalet lost its human appearance.");
+        }
+        else
+        {
+            Debug.Log("Renderer not found on Hayalet.");
+        }
+    }
+
+    private void RegainHumanAppearance()
+    {
+        Renderer ghostRenderer = GetComponentInChildren<Renderer>();
+        if (ghostRenderer != null)
+        {
+            ghostRenderer.material.color = Color.red; 
+            Debug.Log("Hayalet regained its human appearance.");
         }
         else
         {
