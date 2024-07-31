@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 
-public class TaskManager : MonoBehaviour
+public class TaskManager : NetworkBehaviour
 {
     public static GameObject[] taskArray = new GameObject[4];
+    public NetworkVariable<int> totalTaskCount = new NetworkVariable<int>(0);
 
     private void Start()
     {
@@ -29,5 +31,23 @@ public class TaskManager : MonoBehaviour
         {
             obj.SetActive(false);
         }
+    }
+
+    public void GameEnded()
+    {
+        if (IsHost)
+        {
+            totalTaskCount.Value++;
+        }
+        else
+        {
+            SendTaskCountServerRpc();
+        }
+    }
+
+    [ServerRpc]
+    void SendTaskCountServerRpc()
+    {
+        totalTaskCount.Value++;
     }
 }

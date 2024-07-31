@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class BerryPlate : MonoBehaviour
     private float timer;
     private bool gameEnded = false;
     private bool placingBerries = false;
+    TaskManager taskManager;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class BerryPlate : MonoBehaviour
         UpdateScoreText();
         bowl.gameObject.SetActive(true); // Tabağı başlangıçta göster
         taskCompleteText.gameObject.SetActive(false); // TASK COMPLETE mesajını başlangıçta gizle
+        taskManager = gameObject.transform.parent.gameObject.GetComponent<TaskManager>();
     }
 
     void Update()
@@ -96,8 +99,6 @@ public class BerryPlate : MonoBehaviour
         bowl.gameObject.SetActive(false);
     }
 
-   
-
     void UpdateScoreText()
     {
         if (scoreText != null)
@@ -136,8 +137,12 @@ public class BerryPlate : MonoBehaviour
                 berryRect.GetWorldCorners(corners);
 
                 // Ekranın içindeki köşe noktaları
-                if (corners[0].x >= 0 && corners[0].x <= Screen.width && 
-                    corners[0].y >= 0 && corners[0].y <= Screen.height)
+                if (
+                    corners[0].x >= 0
+                    && corners[0].x <= Screen.width
+                    && corners[0].y >= 0
+                    && corners[0].y <= Screen.height
+                )
                 {
                     return false; // En az bir böğürtlen ekran içinde
                 }
@@ -151,7 +156,9 @@ public class BerryPlate : MonoBehaviour
         if (taskCompleteText != null)
         {
             taskCompleteText.gameObject.SetActive(true);
+            gameEnded = true;
             Debug.Log("Görev Tamamlandı!");
+            taskManager.GameEnded();
         }
     }
 }

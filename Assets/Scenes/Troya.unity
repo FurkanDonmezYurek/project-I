@@ -5303,7 +5303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6102761482781201966, guid: 87a84ff6cc8afa448bf8882aecb2cb0f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6178146361603432641, guid: 87a84ff6cc8afa448bf8882aecb2cb0f, type: 3}
       propertyPath: m_Sprite
@@ -12067,6 +12067,8 @@ MonoBehaviour:
   bowl: {fileID: 1793203331}
   taskCompleteText: {fileID: 362588489}
   gameTime: 30
+  taskCount:
+    m_InternalValue: 0
 --- !u!114 &504581454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23590,6 +23592,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 933557012}
+  - component: {fileID: 933557014}
   - component: {fileID: 933557013}
   m_Layer: 5
   m_Name: TaskManager
@@ -23633,6 +23636,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486cfa6f04e01bc428a4b6e5f53113d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &933557014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933557011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1317546351
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1001 &935677444
 PrefabInstance:
   m_ObjectHideFlags: 0
