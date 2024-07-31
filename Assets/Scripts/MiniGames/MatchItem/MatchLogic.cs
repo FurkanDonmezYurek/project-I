@@ -40,3 +40,4 @@ public class MatchLogic : MonoBehaviour
         Instance.UpdatePotinsText();
     }
 }
+
