@@ -29,6 +29,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Troya.unity
     guid: 49a90d3c50649ac43b866293985625a9
-  m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: f99eed5a4da1cf845a366c6ad962bf19, type: 2}
-    com.unity.localization.settings: {fileID: 11400000, guid: e230fe256a3a14c46a74f4314885fe58, type: 2}
+  m_configObjects: {}
