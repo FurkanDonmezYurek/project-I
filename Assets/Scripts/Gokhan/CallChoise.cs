@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Unity.Netcode;
 using UnityEngine;
 
-public class CallChoise : NetworkBehaviour
+public class CallChoice : NetworkBehaviour
 {
-    [Header("Player UI View")]
-    //[SerializeField] public GameObject callButtonUI;
-
-    [SerializeField] private Transform meetingPoint; 
+    [SerializeField] private Transform meetingPoint;
+    [SerializeField] private AudioClip bellSound;
+    private AudioSource audioSource;
     private Voting voting;
-
     private PlayerMovement pl_movement;
+
     private void Start()
     {
         voting = FindObjectOfType<Voting>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -27,11 +26,11 @@ public class CallChoise : NetworkBehaviour
                 pl_movement.recognizeDistance,
                 pl_movement.layerMask
             );
-            if (networkObject != null)
+
+            if (networkObject != null && networkObject.CompareTag("CallButton"))
             {
                 ReportServerRpc();
             }
-            
         }
     }
 
@@ -39,5 +38,12 @@ public class CallChoise : NetworkBehaviour
     private void ReportServerRpc()
     {
         voting.CallMeeting();
+        RingBellClientRpc();
+    }
+
+    [ClientRpc]
+    private void RingBellClientRpc()
+    {
+        audioSource.PlayOneShot(bellSound);
     }
 }

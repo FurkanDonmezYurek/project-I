@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
@@ -5,7 +6,7 @@ using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VotingUI : MonoBehaviour
+public class VotingUI : NetworkBehaviour
 {
     private Voting voting;
     public GameObject voteUI;
@@ -14,7 +15,8 @@ public class VotingUI : MonoBehaviour
     public List<GameObject> playerListAlive;
     public GameObject playerCardVote;
     public GameObject playerCardContainer;
-
+    private ulong selectedPlayerId;
+    
     private void Start()
     {
         voting = FindObjectOfType<Voting>();
@@ -56,22 +58,61 @@ public class VotingUI : MonoBehaviour
                     .onClick.AddListener(
                         delegate
                         {
-                            OnVoteButtonClicked(networkObject.OwnerClientId);
+                            OnPlayerCardClicked(networkObject.OwnerClientId);
                         }
                     );
             }
         }
     }
 
-    public void OnVoteButtonClicked(ulong targetId)
+    public void OnPlayerCardClicked(ulong playerId)
+    {
+        selectedPlayerId = playerId;
+        Debug.Log("Selected player: " + selectedPlayerId);
+    }
+
+    public void OnVoteButtonClicked()
     {
         ulong voterId = NetworkManager.Singleton.LocalClientId;
-        voting.CastVote(voterId, targetId);
+        voting.CastVote(voterId, selectedPlayerId);
+        Debug.Log("Voter " + voterId + " voted for " + selectedPlayerId);
+        //gameObject.SetActive(false);
     }
 
     public void OnEndVotingButtonClicked()
     {
         voting.EndVotingServerRpc();
         voting.ResetVotingState();
+        //gameObject.SetActive(false);
     }
+
+    //kim oldu kim kaldi gormek icin
+    public void ShowAnnouncement(string message)
+    {
+        var announcementText = transform.Find("AnnouncementText").GetComponent<TextMeshProUGUI>();
+        announcementText.text = message;
+
+        var announcementPanel = transform.Find("AnnouncementPanel").gameObject;
+        announcementPanel.SetActive(true);
+
+        StartCoroutine(HideAnnouncementAfterDelay(5.0f));
+    }
+
+    private IEnumerator HideAnnouncementAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        var announcementPanel = transform.Find("AnnouncementPanel").gameObject;
+        announcementPanel.SetActive(false);
+    }
+//    public void OnVoteButtonClicked(ulong targetId)
+//    {
+//        ulong voterId = NetworkManager.Singleton.LocalClientId;
+//        voting.CastVote(voterId, targetId);
+//    }
+//
+//    public void OnEndVotingButtonClicked()
+//    {
+//        voting.EndVotingServerRpc();
+//        voting.ResetVotingState();
+//    }
 }

@@ -5,51 +5,47 @@ using Unity.Netcode;
 
 public class Voting : NetworkBehaviour
 {
-    [SerializeField]
-    private ReactorTimer reactorTimer;
+    [SerializeField] private ReactorTimer reactorTimer;
+    [SerializeField] private GameObject votingUIPrefab;
 
-    [SerializeField]
-    private GameObject votingUIPanel;
-    private VotingUI votingUI;
-
-    private Dictionary<ulong, ulong> votes = new Dictionary<ulong, ulong>(); // voter, voted
+    public Dictionary<ulong, ulong> votes = new Dictionary<ulong, ulong>(); // voter, voted
     private bool isVotingInProgress = false;
+    private float votingDuration = 45.0f;
+    private float votingTimer = 0.0f;
 
-    // public int numOfPlayers = 0;
-    public Vector3 meetingArea;
-    CurrentLobby currentLobby;
-
-    private void Start()
+    private void Update()
     {
-        currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
-        GameObject playerSelf = GameObject.Find(currentLobby.thisPlayer.Data["PlayerName"].Value);
-        if (playerSelf != null)
+        if (isVotingInProgress)
         {
-            votingUIPanel = votingUI.voteUIPanel;
+            votingTimer -= Time.deltaTime;
+            if (votingTimer <= 0.0f)
+            {
+                EndVotingServerRpc();
+            }
         }
-
-        // numOfPlayers = votingUI.playerListAlive.Count;
-        // Debug.Log("Voting Start: Number of players: " + numOfPlayers);
     }
 
     public void CallMeeting()
     {
-        if (isVotingInProgress)
-            return;
+        if (isVotingInProgress) return;
         isVotingInProgress = true;
-        Debug.Log("Meeting Called. Voting started.");
 
-        // reactorTimer.PauseReactorServerRpc();
+        reactorTimer.PauseReactorServerRpc();
         MovePlayersToMeetingArea();
         ShowVotingUI();
+        votingTimer = votingDuration;
     }
 
     private void MovePlayersToMeetingArea()
     {
         foreach (var player in FindObjectsOfType<PlayerMovement>())
         {
-            player.transform.position = meetingArea;
-            Debug.Log("Moved player to meeting area: " + player.name);
+            var roleAssignment = player.GetComponent<RoleAssignment>();
+            Debug.Log("Player " + player.OwnerClientId + " isDead: " + roleAssignment.isDead);
+            if (!roleAssignment.isDead)
+            {
+                player.transform.position = Vector3.zero; // or meetingPoint.position
+            }
         }
     }
 
@@ -59,16 +55,18 @@ public class Voting : NetworkBehaviour
         {
             foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
             {
-                ShowVotingUIClientRpc(
-                    new ClientRpcParams
+                var player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+                var roleAssignment = player.GetComponent<RoleAssignment>();
+                if (player && !roleAssignment.isDead)
+                {
+                    ShowVotingUIClientRpc(new ClientRpcParams
                     {
                         Send = new ClientRpcSendParams
                         {
                             TargetClientIds = new List<ulong> { clientId }
                         }
-                    }
-                );
-                Debug.Log("Showing voting UI to client: " + clientId);
+                    });
+                }
             }
         }
     }
@@ -76,39 +74,45 @@ public class Voting : NetworkBehaviour
     [ClientRpc]
     private void ShowVotingUIClientRpc(ClientRpcParams clientRpcParams = default)
     {
-        votingUIPanel.SetActive(true);
-        Debug.Log("Voting UI shown on client.");
+        var votingUIInstance = Instantiate(votingUIPrefab);
+        votingUIInstance.GetComponent<VotingUI>().enabled = true;
+        votingUIInstance.SetActive(true);
     }
 
     public void CastVote(ulong voterId, ulong targetId)
     {
+        Debug.Log($"CastVote called: voterId = {voterId}, targetId = {targetId}");
+
         if (votes.ContainsKey(voterId))
         {
             votes[voterId] = targetId;
-            Debug.Log($"Voter {voterId} changed vote to {targetId}");
         }
         else
         {
             votes.Add(voterId, targetId);
-            Debug.Log($"Voter {voterId} voted for {targetId}");
+        }
+        Debug.Log("Voter " + voterId + " voted for " + targetId);
+        Debug.Log("Current votes:");
+        foreach (var vote in votes)
+        {
+            Debug.Log("Voter: " + vote.Key + ", Voted for: " + vote.Value);
         }
     }
 
     [ServerRpc]
     public void EndVotingServerRpc()
     {
-        if (!IsServer)
-            return;
+        if (!IsServer) return;
 
-        Debug.Log("Ending voting process.");
         ulong mostVotedPlayer = CalculateMostVotedPlayer();
-        if (mostVotedPlayer != 0) // Check if a player is actually voted out
+        if (mostVotedPlayer != 0)
         {
+            Debug.Log("Most voted player: " + mostVotedPlayer);
             KillPlayer(mostVotedPlayer);
         }
 
         isVotingInProgress = false;
-        // reactorTimer.ResumeReactorServerRpc();
+        reactorTimer.ResumeReactorServerRpc();
         ResetVotingState();
     }
 
@@ -116,24 +120,26 @@ public class Voting : NetworkBehaviour
     {
         Dictionary<ulong, int> voteCounts = new Dictionary<ulong, int>();
 
-        foreach (var vote in votes.Values)
+        Debug.Log("Entering CalculateMostVotedPlayer. Current votes count: " + votes.Count);
+        foreach (var vote in votes)
         {
-            if (voteCounts.ContainsKey(vote))
+            Debug.Log(vote.Key + " voted for " + vote.Value);
+            if (voteCounts.ContainsKey(vote.Value))
             {
-                voteCounts[vote]++;
+                voteCounts[vote.Value]++;
             }
             else
             {
-                voteCounts.Add(vote, 1);
+                voteCounts.Add(vote.Value, 1);
             }
         }
 
         ulong mostVotedPlayer = 0;
         int maxVotes = 0;
-        int alivePlayersCount = GetAlivePlayersCount();
 
         foreach (var vote in voteCounts)
         {
+            Debug.Log(vote.Key + " has " + vote.Value + " votes");
             if (vote.Value > maxVotes)
             {
                 maxVotes = vote.Value;
@@ -141,45 +147,49 @@ public class Voting : NetworkBehaviour
             }
         }
 
-        if (maxVotes <= alivePlayersCount / 2)
-        {
-            mostVotedPlayer = 0;
-        }
-
-        Debug.Log($"Most voted player: {mostVotedPlayer} with {maxVotes} votes.");
+        Debug.Log(mostVotedPlayer + " got " + maxVotes + " votes.");
         return mostVotedPlayer;
-    }
-
-    private int GetAlivePlayersCount()
-    {
-        int alivePlayersCount = 0;
-        foreach (var player in FindObjectsOfType<RoleAssignment>())
-        {
-            if (!player.isDead)
-            {
-                alivePlayersCount++;
-            }
-        }
-        Debug.Log("Alive players count: " + alivePlayersCount);
-        return alivePlayersCount;
     }
 
     private void KillPlayer(ulong playerId)
     {
-        var player = NetworkManager.Singleton.ConnectedClients[playerId].PlayerObject;
-        if (player != null)
+        Debug.Log("Attempting to kill player: " + playerId);
+
+        if (NetworkManager.Singleton.ConnectedClients.ContainsKey(playerId))
         {
-            player.GetComponent<RoleAssignment>().isDead = true;
-            Debug.Log($"Player {playerId} was killed.");
+            var player = NetworkManager.Singleton.ConnectedClients[playerId].PlayerObject;
+            if (player != null)
+            {
+                Debug.Log("Player object found for: " + playerId);
+                var roleAssignment = player.GetComponent<RoleAssignment>();
+                roleAssignment.isDead = true;
+                Debug.Log($"Player {playerId} was killed.");
+                AnnounceDeathClientRpc(playerId, roleAssignment.role.Value);
+            }
+            else
+            {
+                Debug.Log("Player object is null for: " + playerId);
+            }
         }
+        else
+        {
+            Debug.Log("Player ID not found in connected clients: " + playerId);
+        }
+    }
+
+    [ClientRpc]
+    private void AnnounceDeathClientRpc(ulong playerId, PlayerRole role)
+    {
+        // Implement UI to announce the killed player and their role.
+        Debug.Log($"Player {playerId} ({role}) was killed.");
     }
 
     public void ResetVotingState()
     {
         isVotingInProgress = false;
-        votes.Clear();
-        Debug.Log("Voting state reset.");
+        votes.Clear();  // Clear votes for the next round
         HideVotingUI();
+        Debug.Log("Voting process has ended for this call/round.");
     }
 
     private void HideVotingUI()
@@ -188,16 +198,17 @@ public class Voting : NetworkBehaviour
         {
             foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
             {
-                HideVotingUIClientRpc(
-                    new ClientRpcParams
+                var player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+                if (player && !player.GetComponent<RoleAssignment>().isDead)
+                {
+                    HideVotingUIClientRpc(new ClientRpcParams
                     {
                         Send = new ClientRpcSendParams
                         {
                             TargetClientIds = new List<ulong> { clientId }
                         }
-                    }
-                );
-                Debug.Log("Hiding voting UI from client: " + clientId);
+                    });
+                }
             }
         }
     }
@@ -205,7 +216,10 @@ public class Voting : NetworkBehaviour
     [ClientRpc]
     private void HideVotingUIClientRpc(ClientRpcParams clientRpcParams = default)
     {
-        votingUIPanel.SetActive(false);
-        Debug.Log("Voting UI hidden on client.");
+        var votingUIInstance = FindObjectOfType<VotingUI>();
+        if (votingUIInstance != null)
+        {
+            votingUIInstance.gameObject.SetActive(false);
+        }
     }
 }

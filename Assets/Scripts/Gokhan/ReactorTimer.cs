@@ -122,6 +122,7 @@ public class ReactorTimer : NetworkBehaviour
     public void PauseReactorServerRpc()
     {
         isPaused = true;
+        Debug.Log("Reactor has been paused. I hope so...");
     }
 
     [ServerRpc]

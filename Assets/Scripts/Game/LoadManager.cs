@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 
 public class LoadManager : NetworkBehaviour
@@ -11,10 +12,9 @@ public class LoadManager : NetworkBehaviour
     public GameObject loadingPanel;
     RoleAssignment roleAssignment;
     public GameObject playerPrefab;
-
-    // public List<Transform> spawnPoints;
-
-    // public GameObject gameUi;
+    
+    public List<Transform> spawnPoints;
+    public GameObject gameUi;
 
     void Start()
     {
@@ -33,27 +33,27 @@ public class LoadManager : NetworkBehaviour
             relayManager.OnJoinClick();
         }
     }
-
-    // Spawn Noktasi
+    
     // public override void OnNetworkSpawn()
     // {
-    //     if (IsServer)
+    //     NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+    // }
+    //
+    // private void OnClientConnected(ulong clientId)
+    // {
+    //     foreach (Player player in currentLobby.currentLobby.Players)
     //     {
-    //         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedClientRpc;
+    //         Debug.Log(clientId.ToString());
+    //         Debug.Log(player.Data["RelayClientId"].Value); 
+    //         if (clientId.ToString() == player.Data["RelayClientId"].Value)
+    //         {
+    //             NetworkObject netObj = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(clientId);
+    //             netObj.transform.name = player.Data["PlayerName"].Value;
+    //             Debug.Log( "name: "+netObj.transform.name);
+    //         }
     //     }
     // }
-
-    // [ClientRpc]
-    // private void OnClientConnectedClientRpc(ulong clientId)
-    // {
-    //     Transform spawnPoint = GetRandomSpawnPoint();
-    //     spawnPoints.Remove(spawnPoint);
-    //     NetworkObject playerInstance = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(
-    //         clientId
-    //     );
-    //     playerInstance.transform.position = spawnPoint.position;
-    // }
-
+    //
     // private Transform GetRandomSpawnPoint()
     // {
     //     int index = Random.Range(0, spawnPoints.Count);
