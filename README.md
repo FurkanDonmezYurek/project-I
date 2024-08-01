@@ -30,7 +30,7 @@ Bir bölgede geçen ve her oyuncunun belirli rollerden rastgele birini aldığı
 
 ## Hedef Kitle
 
-- Genel Kitle
+- 13 - 30 Yaş Kişiler
 
 ## Miro Board URL
 
