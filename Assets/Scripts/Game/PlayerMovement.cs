@@ -113,13 +113,7 @@ public class PlayerMovement : NetworkBehaviour
 
         if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R))
         {
-            ReportServerRpc();
+            voting.CallForMeeting();
         }
-    }
-
-    [ServerRpc]
-    private void ReportServerRpc()
-    {
-        voting.CallMeeting();
     }
 }

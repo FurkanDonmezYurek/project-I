@@ -16,7 +16,7 @@ public class VotingUI : NetworkBehaviour
     public GameObject playerCardVote;
     public GameObject playerCardContainer;
     private ulong selectedPlayerId;
-    
+
     private void Start()
     {
         voting = FindObjectOfType<Voting>();
@@ -81,8 +81,8 @@ public class VotingUI : NetworkBehaviour
 
     public void OnEndVotingButtonClicked()
     {
-        voting.EndVotingServerRpc();
-        voting.ResetVotingState();
+        // voting.EndVotingServerRpc();
+        // voting.ResetVotingState();
         //gameObject.SetActive(false);
     }
 
@@ -104,15 +104,15 @@ public class VotingUI : NetworkBehaviour
         var announcementPanel = transform.Find("AnnouncementPanel").gameObject;
         announcementPanel.SetActive(false);
     }
-//    public void OnVoteButtonClicked(ulong targetId)
-//    {
-//        ulong voterId = NetworkManager.Singleton.LocalClientId;
-//        voting.CastVote(voterId, targetId);
-//    }
-//
-//    public void OnEndVotingButtonClicked()
-//    {
-//        voting.EndVotingServerRpc();
-//        voting.ResetVotingState();
-//    }
+    //    public void OnVoteButtonClicked(ulong targetId)
+    //    {
+    //        ulong voterId = NetworkManager.Singleton.LocalClientId;
+    //        voting.CastVote(voterId, targetId);
+    //    }
+    //
+    //    public void OnEndVotingButtonClicked()
+    //    {
+    //        voting.EndVotingServerRpc();
+    //        voting.ResetVotingState();
+    //    }
 }
