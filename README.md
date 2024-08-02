@@ -18,7 +18,11 @@ TROYA
 
 ## Asansör Konuşması
 
-Adada geçen ve her oyuncunun belirli rollerden rastgele birini aldığı, rolüne uygun görevleri yaptığı, temelinde köylüler ve hayaletlerin çatışmasını konu alan multiplayer sosyal çıkarım oyunu.  
+TROYA: Strateji ve Gerilimin Yeni Adı
+- TROYA, oyuncuların rastgele roller üstlendiği ve görevlerini tamamlamaya çalışırken diğer oyuncuların kimliklerini anlamaya çalıştığı bir oyun. Masumlar görevleri tamamlamaya çalışırken, katiller gizlice sabotaj yapıp masumları öldürmeye çalışır.
+- 3D low poly grafikler, mini oyunlar ve stratejik oylama sistemleriyle zenginleştirilmiş bu oyun, sosyal etkileşim ve stratejik düşünmeyi teşvik eder. Katillerin insan formunda kalmak için iksir içmesi gereken mekanik ise oyuna ekstra gerilim katar.
+- TROYA, düşük sistem gereksinimleriyle geniş bir oyuncu kitlesine hitap eder ve sürekli güncellemelerle yeni içerikler sunar.
+TROYA ile strateji ve gerilimi bir araya getiriyoruz. Hazır mısınız? 
 
 ## Ürün Açıklaması
 
