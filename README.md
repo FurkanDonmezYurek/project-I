@@ -208,9 +208,7 @@ Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puan
 - **Ürün Durumu**: Ekran görüntüleri:
 
 ![Yeni Oyun Logosu](https://github.com/user-attachments/assets/62891e8b-9394-4336-98b6-5d8032e977c8)
-![Karakterler](https://github.com/user-attachments/assets/4c84cfda-b75c-4279-98cb-8bf56066ef74)![](https://github.com/user-attachments/assets/a31fbae1-7c54-412b-be51-f8eea3547f7f)![](https://github.com/user-attachments/assets/5c55c0d1-881a-4135-9771-3b09e1c37576)![](https://github.com/user-attachments/assets/d35b50b4-25d8-4fb1-8a3e-b5f6b8409031)
-
-
+![Karakterler](https://github.com/user-attachments/assets/4c84cfda-b75c-4279-98cb-8bf56066ef74)![](https://github.com/user-attachments/assets/a31fbae1-7c54-412b-be51-f8eea3547f7f)![](https://github.com/user-attachments/assets/5c55c0d1-881a-4135-9771-3b09e1c37576)![](https://github.com/user-attachments/assets/d35b50b4-25d8-4fb1-8a3e-b5f6b8409031)![](https://github.com/user-attachments/assets/c42abf79-1174-4acb-b99c-0e1b5d25177b)
 
 
 
