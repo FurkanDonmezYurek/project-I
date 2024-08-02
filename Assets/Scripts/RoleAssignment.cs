@@ -19,24 +19,19 @@ public enum PlayerRole
 
 public class RoleAssignment : NetworkBehaviour
 {
-    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(
-        PlayerRole.Unassigned
-    );
+    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(PlayerRole.Unassigned);
+    public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false);
 
     public bool usedSkill = false;
     public bool isVekil = false;
-    public bool isDead = false;
 
     public int[] roleCountList = new int[5];
 
     private CurrentLobby currentLobby;
-
     public GameObject[] npcArray = new GameObject[5];
-
     private AnimationManager animManager;
-
     private Animator Animator;
-    
+
     private void Awake()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
@@ -49,41 +44,31 @@ public class RoleAssignment : NetworkBehaviour
         {
             transform.name = currentLobby.thisPlayer.Data["PlayerName"].Value;
         }
-
     }
 
     private void Start()
     {
-        // if (IsServer && IsOwner)
-        // {
-        //     Invoke("GetLobbyData", 10f);
-        //     //bunu 10sn yaptim
-        // }
-
-        
         // Add a listener to the NetworkVariable to handle changes
         role.OnValueChanged += OnRoleChanged;
+        isDead.OnValueChanged += OnIsDeadChanged;
 
         npcArray = GameObject.FindGameObjectsWithTag("NPC");
-
         animManager = GetComponent<AnimationManager>();
-
         Animator = GetComponentInChildren<Animator>();
-
     }
 
     private void Update()
     {
-        if (isDead == true)
+        if (isDead.Value)
         {
             Animator.SetBool("IsDead", true);
         }
     }
 
-    //NPC Method
+    // NPC Method
     public void NPCRequest()
     {
-        for (int i = 0; i < npcArray.Length ; i++)
+        for (int i = 0; i < npcArray.Length; i++)
         {
             npcArray[i].GetComponent<NPCManager>().FieldOfViewCheck(this.gameObject);
         }
@@ -106,14 +91,19 @@ public class RoleAssignment : NetworkBehaviour
     {
         Debug.Log($"Role changed: {gameObject.name} was {oldRole}, now {newRole}");
         EnableRelevantRoleScript(newRole);
-        
-      
+    }
+
+    private void OnIsDeadChanged(bool oldIsDead, bool newIsDead)
+    {
+        if (newIsDead)
+        {
+            Animator.SetBool("IsDead", true);
+        }
     }
 
     private void EnableRelevantRoleScript(PlayerRole newRole)
     {
         RemoveAllRoleComponents();
-
         Debug.Log($"Enabling role script for {newRole}");
 
         switch (newRole)
@@ -202,8 +192,14 @@ public class RoleAssignment : NetworkBehaviour
                 animManager.UpdateAnimationState();
                 roleCountList[roleClass]--;
                 Debug.Log($"Assigned role {roleAssignment.role.Value} to player {player.name}");
-                
             }
         }
+    }
+
+    [ClientRpc]
+    public void UpdateIsDeadClientRpc(bool newIsDead)
+    {
+        Debug.Log("sending client the dead announcement / aka RPC");
+        isDead.Value = newIsDead; //ya burası biraz şaibeli bence ama kalsın
     }
 }

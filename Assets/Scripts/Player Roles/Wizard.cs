@@ -22,7 +22,7 @@ public class Wizard : NetworkBehaviour
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R) && roleAssignment.role.Value == PlayerRole.Wizard)
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.X) && roleAssignment.role.Value == PlayerRole.Wizard)
         {
             Debug.Log("R key pressed. Attempting to find target to revive.");
             GameObject target = FindTarget();

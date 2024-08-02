@@ -97,7 +97,7 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             var networkObject = ObjectRecognizer.Recognize(
                 camTransform,

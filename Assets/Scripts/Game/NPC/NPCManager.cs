@@ -86,11 +86,11 @@ public class NPCManager : NetworkBehaviour
                             )
                         )
                         {
-                            if (roleAssignment.isDead)
+                            if (roleAssignment.isDead.Value)
                             {
                                 victum = targetArray[i].name;
                             }
-                            if (!roleAssignment.isDead && !roleAssignment.usedSkill)
+                            if (!roleAssignment.isDead.Value && !roleAssignment.usedSkill)
                             {
                                 witnesses.SetValue(targetArray[i].name, 0);
                             }

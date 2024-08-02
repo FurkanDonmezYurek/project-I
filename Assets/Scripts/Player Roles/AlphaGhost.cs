@@ -8,6 +8,12 @@ public class AlphaGhost : NetworkBehaviour
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
     private HeadHunter headHunter;
+    private Animator animator;
+
+    private float cooldownTime = 5f;
+    private bool canKill = true;
+    private float potionMechanicTime = 30f;
+    private Coroutine potionMechanicCoroutine;
 
     private void Start()
     {
@@ -21,30 +27,29 @@ public class AlphaGhost : NetworkBehaviour
         else
         {
             Debug.Log("Alpha Hayalet role assigned and script initialized.");
+            StartPotionMechanicCoroutine();
         }
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        if (
-            IsLocalPlayer
-            && Input.GetMouseButtonDown(0)
-            && roleAssignment.role.Value == PlayerRole.AlphaGhost
-        )
+        if (IsLocalPlayer && !roleAssignment.isDead.Value && Input.GetMouseButtonDown(0) &&
+            roleAssignment.role.Value == PlayerRole.AlphaGhost && canKill)
         {
-            var networkObject = ObjectRecognizer.Recognize(
-                pl_movement.camTransform,
-                pl_movement.recognizeDistance,
-                pl_movement.layerMask
-            );
+            var networkObject = ObjectRecognizer.Recognize(pl_movement.camTransform, pl_movement.recognizeDistance,
+                pl_movement.layerMask);
 
-            Debug.Log("Left mouse button clicked. Attempting to find target to kill.");
+            Debug.Log("Mouse button pressed. Attempting to find target to kill.");
 
             if (networkObject != null)
             {
                 ulong targetId = networkObject.OwnerClientId;
                 Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 KillPlayerServerRpc(targetId);
+                StartCoroutine(KillCooldown());
+                //ResetPotionMechanicCoroutine();  ************ yanlis yerde ondan kullanilmiyor ********
             }
             else
             {
@@ -54,7 +59,7 @@ public class AlphaGhost : NetworkBehaviour
 
         if (
             IsLocalPlayer
-            && Input.GetKeyDown(KeyCode.T)
+            && Input.GetKeyDown(KeyCode.X)
             && !roleAssignment.usedSkill
             && roleAssignment.role.Value == PlayerRole.AlphaGhost
         )
@@ -65,7 +70,7 @@ public class AlphaGhost : NetworkBehaviour
                 pl_movement.layerMask
             );
 
-            Debug.Log("T key pressed. Attempting to find target to transform into Hayalet.");
+            Debug.Log("X key pressed. Attempting to find target to transform into Hayalet.");
 
             if (networkObject != null)
             {
@@ -78,14 +83,18 @@ public class AlphaGhost : NetworkBehaviour
                 Debug.Log("No target found to transform.");
             }
         }
+        if (IsLocalPlayer && !roleAssignment.isDead.Value && Input.GetKeyDown(KeyCode.P) &&
+            roleAssignment.role.Value == PlayerRole.AlphaGhost)
+        {
+            Debug.Log("Potion used.");
+            ResetPotionMechanicCoroutine();
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void KillPlayerServerRpc(ulong targetId)
     {
-        Debug.Log(
-            $"Server received: {gameObject.name} wants to kill the player with ID {targetId}"
-        );
+        Debug.Log($"Server received: {gameObject.name} wants to kill the player with ID {targetId}");
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
@@ -107,13 +116,17 @@ public class AlphaGhost : NetworkBehaviour
                     if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.roleAssignment.isDead = true;
+                        headHunter.roleAssignment.isDead.Value = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
 
                     Debug.Log($"Target object found on server: {netObj.name}");
+                    targetRoleAssignment.isDead.Value = true;
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
+                    targetRoleAssignment.UpdateIsDeadClientRpc(true);
+                    ResetPotionMechanicCoroutine();
                 }
+                
                 return;
             }
         }
@@ -146,6 +159,7 @@ public class AlphaGhost : NetworkBehaviour
                 return;
             }
         }
+
         Debug.Log("Target object not found on server.");
     }
 
@@ -179,12 +193,12 @@ public class AlphaGhost : NetworkBehaviour
         if (target.TryGet(out NetworkObject targetObject))
         {
             roleAssignment.NPCRequest();
-            
-            //sil
+            //rendereri sil
             Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {
                 targetRenderer.material.color = Color.black;
+                targetObject.gameObject.GetComponent<Animator>().SetBool("IsDead", true);
                 Debug.Log($"Alpha Hayalet killed {targetObject.name}.");
             }
             else
@@ -195,6 +209,49 @@ public class AlphaGhost : NetworkBehaviour
         else
         {
             Debug.Log("Target object not found on client.");
+        }
+    }
+
+    private IEnumerator KillCooldown()
+    {
+        canKill = false;
+        yield return new WaitForSeconds(cooldownTime);
+        canKill = true;
+    }
+
+    private void StartPotionMechanicCoroutine()
+    {
+        potionMechanicCoroutine = StartCoroutine(PotionMechanicCoroutine());
+    }
+
+    private void ResetPotionMechanicCoroutine()
+    {
+        if (potionMechanicCoroutine != null)
+        {
+            StopCoroutine(potionMechanicCoroutine);
+        }
+
+        StartPotionMechanicCoroutine();
+    }
+
+    private IEnumerator PotionMechanicCoroutine()
+    {
+        yield return new WaitForSeconds(potionMechanicTime);
+        LoseHumanAppearance();
+    }
+
+    private void LoseHumanAppearance()
+    {
+        Renderer alphaGhostRenderer = GetComponentInChildren<Renderer>();
+        if (alphaGhostRenderer != null)
+        {
+            alphaGhostRenderer.material.color = Color.grey;
+            Debug.Log("Alpha Hayalet lost its human appearance.");
+            animator.SetBool("ChangeGhost", true);
+        }
+        else
+        {
+            Debug.Log("Renderer not found on Alpha Hayalet.");
         }
     }
 }

@@ -28,13 +28,10 @@ public class Hunter : NetworkBehaviour
 
     private void Update()
     {
-        Debug.Log($"Avci Update: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
+        //Debug.Log($"Avci Update: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
 
-        if (
-            IsLocalPlayer
-            && roleAssignment.role.Value == PlayerRole.Hunter
-            && Input.GetKeyDown(KeyCode.K)
-        )
+        if (IsLocalPlayer && roleAssignment.role.Value == PlayerRole.Hunter && 
+            !roleAssignment.isDead.Value && Input.GetMouseButtonDown(0))
         {
             Debug.Log("K key pressed. Attempting to find target to kill.");
 
@@ -60,9 +57,7 @@ public class Hunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void KillPlayerServerRpc(ulong targetId)
     {
-        Debug.Log(
-            $"Server received: {gameObject.name} wants to kill the player with ID {targetId}"
-        );
+        Debug.Log($"Server received: {gameObject.name} wants to kill the player with ID {targetId}");
 
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
@@ -70,17 +65,23 @@ public class Hunter : NetworkBehaviour
             if (netObj.OwnerClientId == targetId)
             {
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
-                if (targetRoleAssignment != null)
+                if (targetRoleAssignment != null && !targetRoleAssignment.isDead.Value)
                 {
                     if (targetRoleAssignment.role.Value == PlayerRole.Villager)
                     {
                         Debug.Log($"{netObj.name} is Koylu. Avci will be demoted to Koylu.");
                         roleAssignment.AssignRoleServerRpc(PlayerRole.Villager);
                     }
+
                     Debug.Log($"Target object found on server: {netObj.name}");
+                    targetRoleAssignment.isDead.Value = true; 
+                    targetRoleAssignment.UpdateIsDeadClientRpc(true);
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
                 }
-                targetRoleAssignment.isDead = true;
+                else
+                {
+                    Debug.Log($"Target {netObj.name} is already dead.");
+                }
                 return;
             }
         }
@@ -92,16 +93,13 @@ public class Hunter : NetworkBehaviour
     {
         if (target.TryGet(out NetworkObject targetObject))
         {
-            
-            //for test purposes
-            Renderer targetRenderer = targetObject.GetComponent<Renderer>();
+            Renderer targetRenderer = targetObject.GetComponentInChildren<Renderer>();
             if (targetRenderer != null)
             {
-                Debug.Log($"Changing target's color to red: {targetObject.name}");
-                //killed animation
-                targetRenderer.material.color = Color.yellow;
+                Debug.Log($"Changing target's color to yellow: {targetObject.name}");
+                targetRenderer.material.color = Color.yellow; 
+                //targetObject.gameObject.SetActive(false); 
                 Animator.SetTrigger("HunterSkill");
-                
             }
             else
             {
@@ -112,11 +110,5 @@ public class Hunter : NetworkBehaviour
         {
             Debug.Log("Failed to get NetworkObject from NetworkObjectReference.");
         }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void TestServerRpc()
-    {
-        Debug.Log($"Server received: {gameObject.name} called TestServerRpc.");
     }
 }

@@ -32,7 +32,7 @@ public class Lover : NetworkBehaviour
     {
         if (
             IsLocalPlayer
-            && Input.GetKeyDown(KeyCode.L)
+            && Input.GetKeyDown(KeyCode.X)
             && !roleAssignment.usedSkill
             && roleAssignment.role.Value == PlayerRole.Lover
         )
