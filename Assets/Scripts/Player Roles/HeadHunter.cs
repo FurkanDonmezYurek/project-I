@@ -7,6 +7,7 @@ public class HeadHunter : NetworkBehaviour
 {
     public RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
+    private Animator Animator;
 
     public ulong vekilId = ulong.MaxValue;
 
@@ -23,21 +24,15 @@ public class HeadHunter : NetworkBehaviour
         {
             Debug.Log("Head Hunter role assigned and script initialized.");
         }
+
+        Animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        if (
-            IsLocalPlayer
-            && Input.GetKeyDown(KeyCode.H)
-            && roleAssignment.role.Value == PlayerRole.HeadHunter
-        )
+        if (IsLocalPlayer && !roleAssignment.isDead.Value && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.HeadHunter)
         {
-            var networkObject = ObjectRecognizer.Recognize(
-                pl_movement.camTransform,
-                pl_movement.recognizeDistance,
-                pl_movement.layerMask
-            );
+            var networkObject = ObjectRecognizer.Recognize(pl_movement.camTransform, pl_movement.recognizeDistance, pl_movement.layerMask);
 
             Debug.Log("H key pressed. Attempting to find target to kill.");
 
@@ -53,18 +48,9 @@ public class HeadHunter : NetworkBehaviour
             }
         }
 
-        if (
-            IsLocalPlayer
-            && Input.GetKeyDown(KeyCode.V)
-            && !roleAssignment.usedSkill
-            && roleAssignment.role.Value == PlayerRole.HeadHunter
-        )
+        if (IsLocalPlayer && !roleAssignment.isDead.Value && Input.GetKeyDown(KeyCode.X) && !roleAssignment.usedSkill && roleAssignment.role.Value == PlayerRole.HeadHunter)
         {
-            var networkObject = ObjectRecognizer.Recognize(
-                pl_movement.camTransform,
-                pl_movement.recognizeDistance,
-                pl_movement.layerMask
-            );
+            var networkObject = ObjectRecognizer.Recognize(pl_movement.camTransform, pl_movement.recognizeDistance, pl_movement.layerMask);
 
             Debug.Log("V key pressed. Attempting to find target to make 'vekil'.");
 
@@ -84,16 +70,14 @@ public class HeadHunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void KillPlayerServerRpc(ulong targetId)
     {
-        Debug.Log(
-            $"Server received: {gameObject.name} wants to kill the player with ID {targetId}"
-        );
+        Debug.Log($"Server received: {gameObject.name} wants to kill the player with ID {targetId}");
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
             NetworkObject netObj = spawnedObject.Value;
             if (netObj.OwnerClientId == targetId)
             {
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
-                if (targetRoleAssignment != null)
+                if (targetRoleAssignment != null && !targetRoleAssignment.isDead.Value) 
                 {
                     if (targetRoleAssignment.role.Value == PlayerRole.Villager)
                     {
@@ -110,7 +94,13 @@ public class HeadHunter : NetworkBehaviour
                         }
                     }
                     Debug.Log($"Target object found on server: {netObj.name}");
+                    targetRoleAssignment.isDead.Value = true;
+                    targetRoleAssignment.UpdateIsDeadClientRpc(true);
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
+                }
+                else
+                {
+                    Debug.Log($"Target {netObj.name} is already dead.");
                 }
                 return;
             }
@@ -128,9 +118,7 @@ public class HeadHunter : NetworkBehaviour
             if (netObj.OwnerClientId == targetId)
             {
                 vekilId = targetId;
-                Debug.Log(
-                    $"Target object found on server: {netObj.name} is 'vekil' of {gameObject.name}"
-                );
+                Debug.Log($"Target object found on server: {netObj.name} is 'vekil' of {gameObject.name}");
                 VekilClientRpc(new NetworkObjectReference(netObj));
                 return;
             }
@@ -141,15 +129,16 @@ public class HeadHunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void MakeVekilHunterServerRpc()
     {
-        if (roleAssignment.isDead && vekilId != ulong.MaxValue)
+        if (roleAssignment.isDead.Value && vekilId != ulong.MaxValue)
         {
             foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
             {
                 NetworkObject netObj = spawnedObject.Value;
-                if (netObj.OwnerClientId == vekilId && !netObj.GetComponent<RoleAssignment>().isDead 
-                    && netObj.GetComponent<RoleAssignment>().role.Value != PlayerRole.Ghost || netObj.GetComponent<RoleAssignment>().role.Value !=PlayerRole.AlphaGhost )
+                if (netObj.OwnerClientId == vekilId && !netObj.GetComponent<RoleAssignment>().isDead.Value 
+                    && netObj.GetComponent<RoleAssignment>().role.Value != PlayerRole.Ghost && 
+                    netObj.GetComponent<RoleAssignment>().role.Value != PlayerRole.AlphaGhost)
                 {
-                    Debug.Log($"Vekil {netObj.name} will be promoted to Head Hunter.");
+                    Debug.Log($"Vekil {netObj.name} will be promoted to Hunter.");
                     MakeVekilHunterClientRpc(new NetworkObjectReference(netObj));
                     return;
                 }
@@ -165,7 +154,7 @@ public class HeadHunter : NetworkBehaviour
         {
             RoleAssignment targetRoleAssignment = targetObject.GetComponent<RoleAssignment>();
             targetRoleAssignment.AssignRoleServerRpc(PlayerRole.Hunter);
-            Debug.Log($"Vekil {targetObject.name} is now a Head Hunter.");
+            Debug.Log($"Vekil {targetObject.name} is now a Hunter.");
         }
         else
         {
@@ -183,6 +172,7 @@ public class HeadHunter : NetworkBehaviour
             {
                 targetRenderer.material.color = Color.yellow;
                 Debug.Log($"Head hunter killed {targetObject.name}.");
+                Animator.SetTrigger("HunterSkill");
             }
             else
             {

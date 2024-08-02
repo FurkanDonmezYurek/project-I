@@ -7,6 +7,7 @@ public class Lover : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
+    private Animator Animator;
 
     public ulong loverId = ulong.MaxValue;
 
@@ -23,13 +24,15 @@ public class Lover : NetworkBehaviour
         {
             Debug.Log("Asik role assigned and script initialized.");
         }
+
+        Animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
         if (
             IsLocalPlayer
-            && Input.GetKeyDown(KeyCode.L)
+            && Input.GetKeyDown(KeyCode.X)
             && !roleAssignment.usedSkill
             && roleAssignment.role.Value == PlayerRole.Lover
         )
@@ -87,6 +90,7 @@ public class Lover : NetworkBehaviour
             {
                 targetRenderer.material.color = Color.magenta;
                 Debug.Log($"Asik made {targetObject.name} in love.");
+                Animator.SetTrigger("LoverSkill");
             }
             else
             {

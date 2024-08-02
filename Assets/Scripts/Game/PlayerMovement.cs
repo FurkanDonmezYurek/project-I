@@ -19,6 +19,12 @@ public class PlayerMovement : NetworkBehaviour
 
     [SerializeField]
     NetworkMovementComponent playerMovement;
+
+    [SerializeField]
+    private float speedCheck = 1f; // Animasyon hızı için kullanılan değişken
+
+    private Animator animator; // Animator bileşeni
+
     bool taskStarted = false;
     GameObject taskObject;
 
@@ -41,6 +47,11 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        if (IsOwner)
+        {
+            animator = GetComponentInChildren<Animator>(); // Animator bileşenini alın
+        }
         // Cursor.lockState = CursorLockMode.Locked;
         voting = FindObjectOfType<Voting>();
     }
@@ -63,7 +74,24 @@ public class PlayerMovement : NetworkBehaviour
             // Cursor.lockState = CursorLockMode.Locked;
             Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
             Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
-            if (IsClient && IsLocalPlayer)
+
+            // Speed güncellemesi animasyon için
+            if (movementInput.magnitude > 0)
+            {
+                speedCheck = 1f; // Hareket ederken animasyon hızını artır
+            }
+            else
+            {
+                speedCheck = 0f; // Hareket etmediğinde animasyon hızını normal tut
+            }
+
+            // Animator'a speed parametresini güncelleyin
+            if (animator != null && IsOwner)
+            {
+                animator.SetFloat("SpeedCheck", speedCheck);
+            }
+
+            if (IsLocalPlayer)
             {
                 playerMovement.ProcessLocalPlayerMovement(movementInput, lookInput);
             }
@@ -73,7 +101,7 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             var networkObject = ObjectRecognizer.Recognize(
                 camTransform,

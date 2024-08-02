@@ -8,8 +8,9 @@ public class Ghost : NetworkBehaviour
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
     private HeadHunter headHunter;
+    private Animator Animator;
 
-    private float cooldownTime = 5f;  
+    private float cooldownTime = 5f;
     private bool canKill = true;
     private float potionMechanicTime = 30f;
     private Coroutine potionMechanicCoroutine;
@@ -18,7 +19,7 @@ public class Ghost : NetworkBehaviour
     {
         roleAssignment = GetComponent<RoleAssignment>();
         pl_movement = GetComponent<PlayerMovement>();
-        
+
         if (roleAssignment == null)
         {
             Debug.LogError("RoleAssignment script not found on the player!");
@@ -28,27 +29,27 @@ public class Ghost : NetworkBehaviour
             Debug.Log("Hayalet role assigned and script initialized.");
             StartPotionMechanicCoroutine();
         }
+
+        Animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        if (IsLocalPlayer && Input.GetMouseButtonDown(0) && roleAssignment.role.Value == PlayerRole.Ghost && canKill)
+        if (IsLocalPlayer && !roleAssignment.isDead.Value && Input.GetMouseButtonDown(0) &&
+            roleAssignment.role.Value == PlayerRole.Ghost && canKill)
         {
-            var networkObject = ObjectRecognizer.Recognize(
-                pl_movement.camTransform,
-                pl_movement.recognizeDistance,
-                pl_movement.layerMask
-            );
-            
+            var networkObject = ObjectRecognizer.Recognize(pl_movement.camTransform, pl_movement.recognizeDistance,
+                pl_movement.layerMask);
+
             Debug.Log("Mouse button pressed. Attempting to find target to kill.");
-            
+
             if (networkObject != null)
             {
                 ulong targetId = networkObject.OwnerClientId;
                 Debug.Log($"Target found: {networkObject.name} with ID {targetId}");
                 KillPlayerServerRpc(targetId);
                 StartCoroutine(KillCooldown());
-                ResetPotionMechanicCoroutine();
+               // ResetPotionMechanicCoroutine();
             }
             else
             {
@@ -56,11 +57,14 @@ public class Ghost : NetworkBehaviour
             }
         }
 
-        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.P) && roleAssignment.role.Value == PlayerRole.Ghost)
+        if (IsLocalPlayer && !roleAssignment.isDead.Value && Input.GetKeyDown(KeyCode.P) &&
+            roleAssignment.role.Value == PlayerRole.Ghost)
         {
             Debug.Log("Potion used.");
             ResetPotionMechanicCoroutine();
         }
+        
+        
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -73,8 +77,9 @@ public class Ghost : NetworkBehaviour
             if (netObj.OwnerClientId == targetId)
             {
                 RoleAssignment targetRoleAssignment = netObj.GetComponent<RoleAssignment>();
-                if (targetRoleAssignment != null)
+                if (targetRoleAssignment != null && !targetRoleAssignment.isDead.Value)
                 {
+                    targetRoleAssignment.isDead.Value = true; 
                     if (targetRoleAssignment.role.Value == PlayerRole.Lover)
                     {
                         Lover asikComponent = netObj.GetComponent<Lover>();
@@ -84,22 +89,24 @@ public class Ghost : NetworkBehaviour
                             Debug.Log($"Asik {netObj.name} killed. Their lover will also die.");
                         }
                     }
-
                     // Make the vekil of the headhunter a hunter
                     if (targetRoleAssignment.role.Value == PlayerRole.HeadHunter)
                     {
                         headHunter = targetRoleAssignment.gameObject.GetComponent<HeadHunter>();
-                        headHunter.roleAssignment.isDead = true;
+                        headHunter.roleAssignment.isDead.Value = true;
                         headHunter.MakeVekilHunterServerRpc();
                     }
-
                     Debug.Log($"Target object found on server: {netObj.name}");
+                    targetRoleAssignment.isDead.Value = true;
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
+                    targetRoleAssignment.UpdateIsDeadClientRpc(true);
+                    ResetPotionMechanicCoroutine();
                 }
-                targetRoleAssignment.isDead = true;
+                Animator.SetTrigger("GhostAttack");
                 return;
             }
         }
+
         Debug.Log("Target object not found on server.");
     }
 
@@ -114,7 +121,9 @@ public class Ghost : NetworkBehaviour
             if (targetRenderer != null)
             {
                 targetRenderer.material.color = Color.black;
-                Debug.Log($"Hayalet killed {targetObject.name}.");
+                //targetObject.gameObject.GetComponent<Animator>().SetBool("IsDead",true); ///////not so sure -_-
+                //targetObject.gameObject.SetActive(false);
+                Debug.Log($"Ghost killed {targetObject.name}.");
             }
             else
             {
@@ -168,13 +177,13 @@ public class Ghost : NetworkBehaviour
         {
             ghostRenderer.material.color = Color.grey; 
             Debug.Log("Hayalet lost its human appearance.");
+            Animator.SetBool("ChangeGhost", true);
         }
         else
         {
             Debug.Log("Renderer not found on Hayalet.");
         }
     }
-
     private void RegainHumanAppearance()
     {
         Renderer ghostRenderer = GetComponentInChildren<Renderer>();
@@ -188,4 +197,6 @@ public class Ghost : NetworkBehaviour
             Debug.Log("Renderer not found on Hayalet.");
         }
     }
+
+
 }
