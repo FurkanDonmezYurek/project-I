@@ -14,7 +14,7 @@ public class Voting : NetworkBehaviour
     [SerializeField]
     private GameObject votingUIPrefab;
     public Dictionary<ulong, ulong> votes = new Dictionary<ulong, ulong>(); // voter, voted
-    private bool isVotingInProgress = false;
+    public bool isVotingInProgress = false;
     private float votingDuration = 45.0f;
     private float votingTimer = 0.0f;
     public static Voting Instance;

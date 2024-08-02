@@ -64,14 +64,14 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Update()
     {
-        if (taskStarted)
+        if (taskStarted || voting.isVotingInProgress)
         {
             Cursor.lockState = CursorLockMode.Confined;
         }
         else
         {
             taskObject = null;
-            // Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;
             Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
             Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
 
