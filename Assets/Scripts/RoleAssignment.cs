@@ -61,7 +61,7 @@ public class RoleAssignment : NetworkBehaviour
     {
         if (isDead.Value)
         {
-            Animator.SetBool("IsDead", true);
+            Animator.SetTrigger("IsDead");
         }
     }
 
@@ -97,7 +97,7 @@ public class RoleAssignment : NetworkBehaviour
     {
         if (newIsDead)
         {
-            Animator.SetBool("IsDead", true);
+            Animator.SetTrigger("IsDead");                                                                                                                                                                                                                                                                                                                                                         
         }
     }
 

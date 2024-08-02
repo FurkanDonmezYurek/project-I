@@ -27,14 +27,14 @@ RectTransform:
   m_GameObject: {fileID: 28056496757960297}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -65.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5882611, y: 1.3251613, z: 0.69107074}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 343488924227620384}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -431.3, y: 212.5}
+  m_AnchoredPosition: {x: -585, y: 393}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8810684832076098347
@@ -66,7 +66,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 8b552b1880664d648aaf096d278173cd, type: 3}
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
     m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
@@ -115,8 +115,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -427, y: 214}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: -584.5, y: 387.27}
+  m_SizeDelta: {x: 332.7581, y: 176.1217}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3362353975056277893
 CanvasRenderer:
@@ -248,7 +248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4269198304313795379
 RectTransform:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_SizeDelta: {x: 666.9772, y: 598.4098}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3295012250505751213
 CanvasRenderer:
@@ -309,7 +309,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "G\xF6rev Tamamland\u0131 \"Y\" ye bas\u0131n\u0131z"
+  m_Text: "G\xF6rev Tamamland\u0131 \"E\" ye bas\u0131n\u0131z"
 --- !u!1 &5473395862338801927
 GameObject:
   m_ObjectHideFlags: 0
