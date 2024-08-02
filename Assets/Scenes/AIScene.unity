@@ -1190,6 +1190,9 @@ MonoBehaviour:
   gameStarted: 0
   loadingPanel: {fileID: 0}
   playerPrefab: {fileID: 2528823654101273685, guid: 53f63d403f131f3449a4cff7f9b94635, type: 3}
+  spawnPoints: []
+  gameUi: {fileID: 0}
+  playerInfoJson: 
 --- !u!4 &1372881129
 Transform:
   m_ObjectHideFlags: 0
@@ -1218,9 +1221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactorTimer: {fileID: 0}
-  votingUIPanel: {fileID: 0}
-  numOfPlayers: 0
-  meetingArea: {x: 0, y: 0, z: 0}
+  votingUIPrefab: {fileID: 0}
 --- !u!1 &1377849584
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class CallChoice : NetworkBehaviour
 {
-    [SerializeField] private Transform meetingPoint;
-    [SerializeField] private AudioClip bellSound;
-    private AudioSource audioSource;
+    //[SerializeField] private Transform meetingPoint;
+    // [SerializeField] private AudioClip bellSound;
+    // private AudioSource audioSource;
+    
     private Voting voting;
     private PlayerMovement pl_movement;
 
     private void Start()
     {
         voting = FindObjectOfType<Voting>();
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -31,6 +32,7 @@ public class CallChoice : NetworkBehaviour
             {
                 ReportServerRpc();
             }
+            
         }
     }
 
@@ -38,12 +40,12 @@ public class CallChoice : NetworkBehaviour
     private void ReportServerRpc()
     {
         voting.CallMeeting();
-        RingBellClientRpc();
+        //RingBellClientRpc();
     }
 
-    [ClientRpc]
-    private void RingBellClientRpc()
-    {
-        audioSource.PlayOneShot(bellSound);
-    }
+    // [ClientRpc]
+    // private void RingBellClientRpc()
+    // {
+    //     audioSource.PlayOneShot(bellSound);
+    // }
 }

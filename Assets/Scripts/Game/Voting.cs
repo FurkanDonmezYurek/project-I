@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
@@ -7,17 +6,32 @@ public class Voting : NetworkBehaviour
 {
     [SerializeField] private ReactorTimer reactorTimer;
     [SerializeField] private GameObject votingUIPrefab;
-
     public Dictionary<ulong, ulong> votes = new Dictionary<ulong, ulong>(); // voter, voted
     private bool isVotingInProgress = false;
     private float votingDuration = 45.0f;
     private float votingTimer = 0.0f;
+    public static Voting Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    
 
     private void Update()
     {
         if (isVotingInProgress)
         {
             votingTimer -= Time.deltaTime;
+            Debug.Log("Time " + votingTimer);
             if (votingTimer <= 0.0f)
             {
                 EndVotingServerRpc();
@@ -27,26 +41,16 @@ public class Voting : NetworkBehaviour
 
     public void CallMeeting()
     {
-        if (isVotingInProgress) return;
-        isVotingInProgress = true;
-
-        reactorTimer.PauseReactorServerRpc();
-        MovePlayersToMeetingArea();
-        ShowVotingUI();
-        votingTimer = votingDuration;
-    }
-
-    private void MovePlayersToMeetingArea()
-    {
-        foreach (var player in FindObjectsOfType<PlayerMovement>())
+        if (isVotingInProgress)
         {
-            var roleAssignment = player.GetComponent<RoleAssignment>();
-            Debug.Log("Player " + player.OwnerClientId + " isDead: " + roleAssignment.isDead);
-            if (!roleAssignment.isDead)
-            {
-                player.transform.position = Vector3.zero; // or meetingPoint.position
-            }
+            Debug.LogWarning("Voting is already in progress.");
+            return;
         }
+        isVotingInProgress = true;
+        votingTimer = votingDuration;
+
+        Debug.Log("Calling meeting and starting voting process.");
+        ShowVotingUI();
     }
 
     private void ShowVotingUI()
@@ -74,6 +78,7 @@ public class Voting : NetworkBehaviour
     [ClientRpc]
     private void ShowVotingUIClientRpc(ClientRpcParams clientRpcParams = default)
     {
+        Debug.Log("Showing voting screen on client");
         var votingUIInstance = Instantiate(votingUIPrefab);
         votingUIInstance.GetComponent<VotingUI>().enabled = true;
         votingUIInstance.SetActive(true);
@@ -99,7 +104,7 @@ public class Voting : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void EndVotingServerRpc()
     {
         if (!IsServer) return;
@@ -180,7 +185,6 @@ public class Voting : NetworkBehaviour
     [ClientRpc]
     private void AnnounceDeathClientRpc(ulong playerId, PlayerRole role)
     {
-        // Implement UI to announce the killed player and their role.
         Debug.Log($"Player {playerId} ({role}) was killed.");
     }
 
