@@ -186,3 +186,6 @@ Bu sprintte, tüm kritik görevler başarıyla tamamlandı ve projemiz piyasaya 
 - **Sprint içinde tamamlanması tahmin edilen puan**: 200 Puan
 
 Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puanlık backlog bulunmaktadır. 3 sprint'e bölündüğünde üçüncü sprint'in  200 ile başlaması gerektiğine karar verildi.
+
+- **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
+
