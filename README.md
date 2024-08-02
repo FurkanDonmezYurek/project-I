@@ -191,6 +191,11 @@ Ek Özellikler ve İyileştirmeler:
 - UI Dil Desteği: Kullanıcı arayüzüne dil desteği eklendi.
 - AI Desteği: Yapay zeka desteği eklendi.
 - Game Analytics: Oyun analitikleri entegre edildi.
+![DA1](https://github.com/user-attachments/assets/5578188d-c370-4185-a5d5-e33179f014d0)
+![DA2](https://github.com/user-attachments/assets/eab92271-ca46-4827-9443-36f2e0e92de6)
+![DA3](https://github.com/user-attachments/assets/f98f110a-f583-4338-b5bb-6f38fdf2d63d)
+
+
   
 Değerlendirme:
 
