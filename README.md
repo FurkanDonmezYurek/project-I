@@ -1,8 +1,8 @@
 # **Takım İsmi**
 
-RedRaBBit
+RedRabbit
 
-# Ürün İle İlgili Bilgiler
+# Oyuna Genel Bakış
 
 ## Takım Elemanları
 
@@ -12,22 +12,30 @@ RedRaBBit
 - Gözde Kahraman: Team Member/Developer/
 - Gökhan Şener: Team Member/Developer
 
-## Ürün İsmi
+## Oyunun Adı 
 
 Troya
 
+## Asansör Konuşması
+
+Adada geçen ve her oyuncunun belirli rollerden rastgele birini aldığı, rolüne uygun görevleri yaptığı, temelinde köylüler ve hayaletlerin çatışmasını konu alan multiplayer sosyal çıkarım oyunu.  
+
 ## Ürün Açıklaması
 
-(Oyunun demo sürümüdür.)
+TROYA, bir adada geçen ve her oyuncunun belirli rollerden rastgele birini aldığı, rolüne uygun görevleri yaptığı, temelinde köylüler ve hayaletlerin çatışmasını konu alan multiplayer sosyal çıkarım oyunudur. Oyuncular, arkadaşlarıyla veya dünya genelinden rastgele oyuncularla bir araya gelerek, hem strateji hem de içgüdülerini kullanarak hayatta kalmaya çalışır.
 
-Bir bölgede geçen ve her oyuncunun belirli rollerden rastgele birini aldığı. Rolüne uygun görevleri yaptığı, temelinde masumlar ve katillerin çatışmasını konu alan multiplayer sosyal çıkarım oyunu.
+## Türü
+- Basit Eğlence
+- Sosyal Çıkarım
 
-## Ürün Özellikleri
+## Mottosu
 
-- First Person 
-- Low Poly
-- Social Deduction
 
+
+## Oyun Özellikleri
+
+- Basit Eğlen 
+  
 ## Hedef Kitle
 
 - 13 - 30 Yaş Kişiler
