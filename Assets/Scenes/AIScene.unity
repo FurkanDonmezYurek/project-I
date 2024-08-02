@@ -43063,6 +43063,7 @@ GameObject:
   - component: {fileID: 1372881129}
   - component: {fileID: 1372881127}
   - component: {fileID: 1372881128}
+  - component: {fileID: 1372881130}
   m_Layer: 0
   m_Name: LoadManager
   m_TagString: Untagged
@@ -43106,6 +43107,9 @@ MonoBehaviour:
   gameStarted: 0
   loadingPanel: {fileID: 0}
   playerPrefab: {fileID: 2528823654101273685, guid: 53f63d403f131f3449a4cff7f9b94635, type: 3}
+  spawnPoints: []
+  gameUi: {fileID: 0}
+  playerInfoJson: 
 --- !u!4 &1372881129
 Transform:
   m_ObjectHideFlags: 0
@@ -43121,6 +43125,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1372881130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372881126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97be53b87acb8884c97d774eddcb4e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reactorTimer: {fileID: 0}
+  votingUIPrefab: {fileID: 0}
+  playerCount: -1
+  timerText: {fileID: 0}
+  callPanel: {fileID: 0}
 --- !u!1 &1374439745
 GameObject:
   m_ObjectHideFlags: 0

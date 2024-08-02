@@ -35,7 +35,8 @@ public class JoinLobby : MonoBehaviour
                 {
                     "readyCount",
                     new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")
-                }
+                },
+                {"RelayClientId", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")}   
             };
             Lobby lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId, options);
             Debug.Log("Join Lobby Done:" + lobby.Name);
@@ -70,7 +71,8 @@ public class JoinLobby : MonoBehaviour
                 {
                     "readyCount",
                     new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")
-                }
+                },
+                {"RelayClientId", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")}   
             };
             Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(
                 lobbyCodeArea.text,
@@ -104,7 +106,11 @@ public class JoinLobby : MonoBehaviour
                         PlayerDataObject.VisibilityOptions.Public,
                         PlayerPrefs.GetString("PlayerName")
                     )
-                }
+                },{
+                    "readyCount",
+                    new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")
+                },
+                {"RelayClientId", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")}   
             };
 
             Lobby lobby = await LobbyService.Instance.QuickJoinLobbyAsync(options);

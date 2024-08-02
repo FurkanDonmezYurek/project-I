@@ -83,7 +83,8 @@ public class CreateLobby : MonoBehaviour
                     PlayerPrefs.GetString("PlayerName")
                 )
             },
-            { "readyCount", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "1") }
+            { "readyCount", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "1") },
+            {"RelayClientId", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")}   
         };
 
         string villager = Convert.ToString(
