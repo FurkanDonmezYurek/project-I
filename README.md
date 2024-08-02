@@ -75,6 +75,9 @@ Maskeler düşer, gerçekler konuşur.
 
 [Jira Scrum Board](https://hannelodie.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJpIjoiYTA5NjhmNWJjMjFkNGU1YWFlYmYxNmI4MzE5ZGY3ZWUiLCJwIjoiaiJ9)
 
+## KPİ URL
+
+-KPI Dökümanları:[KPI DOCUMENTS](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
 ---
 
 # Sprint 1
