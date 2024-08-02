@@ -32,6 +32,10 @@ public class RoleAssignment : NetworkBehaviour
     private CurrentLobby currentLobby;
 
     public GameObject[] npcArray = new GameObject[5];
+
+    private AnimationManager animManager;
+
+    private Animator Animator;
     
     private void Awake()
     {
@@ -56,13 +60,26 @@ public class RoleAssignment : NetworkBehaviour
         //     //bunu 10sn yaptim
         // }
 
+        
         // Add a listener to the NetworkVariable to handle changes
         role.OnValueChanged += OnRoleChanged;
 
         npcArray = GameObject.FindGameObjectsWithTag("NPC");
 
+        animManager = GetComponent<AnimationManager>();
+
+        Animator = GetComponentInChildren<Animator>();
+
     }
-    
+
+    private void Update()
+    {
+        if (isDead == true)
+        {
+            Animator.SetBool("IsDead", true);
+        }
+    }
+
     //NPC Method
     public void NPCRequest()
     {
@@ -89,6 +106,8 @@ public class RoleAssignment : NetworkBehaviour
     {
         Debug.Log($"Role changed: {gameObject.name} was {oldRole}, now {newRole}");
         EnableRelevantRoleScript(newRole);
+        
+      
     }
 
     private void EnableRelevantRoleScript(PlayerRole newRole)
@@ -180,8 +199,10 @@ public class RoleAssignment : NetworkBehaviour
                         roleAssignment.AssignRole(PlayerRole.Wizard);
                         break;
                 }
+                animManager.UpdateAnimationState();
                 roleCountList[roleClass]--;
                 Debug.Log($"Assigned role {roleAssignment.role.Value} to player {player.name}");
+                
             }
         }
     }

@@ -9,6 +9,8 @@ public class Ghost : NetworkBehaviour
     private PlayerMovement pl_movement;
     private HeadHunter headHunter;
 
+    private Animator Animator;
+
     private float cooldownTime = 5f;  
     private bool canKill = true;
     private float potionMechanicTime = 30f;
@@ -28,6 +30,8 @@ public class Ghost : NetworkBehaviour
             Debug.Log("Hayalet role assigned and script initialized.");
             StartPotionMechanicCoroutine();
         }
+
+        Animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -49,6 +53,7 @@ public class Ghost : NetworkBehaviour
                 KillPlayerServerRpc(targetId);
                 StartCoroutine(KillCooldown());
                 ResetPotionMechanicCoroutine();
+                
             }
             else
             {
@@ -97,6 +102,7 @@ public class Ghost : NetworkBehaviour
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
                 }
                 targetRoleAssignment.isDead = true;
+                Animator.SetTrigger("GhostAttack");
                 return;
             }
         }
@@ -168,6 +174,7 @@ public class Ghost : NetworkBehaviour
         {
             ghostRenderer.material.color = Color.grey; 
             Debug.Log("Hayalet lost its human appearance.");
+            Animator.SetBool("ChangeGhost", true);
         }
         else
         {

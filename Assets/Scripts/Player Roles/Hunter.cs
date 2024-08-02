@@ -7,6 +7,7 @@ public class Hunter : NetworkBehaviour
 {
     private RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
+    private Animator Animator;
 
     private void Start()
     {
@@ -21,6 +22,8 @@ public class Hunter : NetworkBehaviour
         {
             Debug.Log("Avci role assigned and script initialized.");
         }
+
+        Animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -97,6 +100,8 @@ public class Hunter : NetworkBehaviour
                 Debug.Log($"Changing target's color to red: {targetObject.name}");
                 //killed animation
                 targetRenderer.material.color = Color.yellow;
+                Animator.SetTrigger("HunterSkill");
+                
             }
             else
             {

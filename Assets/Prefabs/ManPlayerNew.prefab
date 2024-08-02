@@ -1008,6 +1008,7 @@ GameObject:
   - component: {fileID: 6107918950155889483}
   - component: {fileID: 1454461784541951496}
   - component: {fileID: 4030891177314435780}
+  - component: {fileID: 5715157570167896189}
   m_Layer: 0
   m_Name: ManVillager
   m_TagString: Untagged
@@ -1024,7 +1025,7 @@ Transform:
   m_GameObject: {fileID: 3577317366138227109}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1081,6 +1082,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &5715157570167896189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3577317366138227109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eaddc91eadf77b4395c1c9f12295dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 229373857
+    DestinationState: 1592675027
+    TransitionDuration: 0.25
+    TriggerNameHash: 1835872544
+    TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 229373857
+    DestinationState: 379587660
+    TransitionDuration: 0.25
+    TriggerNameHash: 1213442780
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -21233355
+    DestinationState: 508058772
+    TransitionDuration: 0.25
+    TriggerNameHash: 508058772
+    TransitionIndex: 1
+  m_Animator: {fileID: 1454461784541951496}
 --- !u!1 &3808851893910850387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1224,7 @@ GameObject:
   - component: {fileID: 3247014480750428429}
   - component: {fileID: 6628294402271558785}
   - component: {fileID: 5942375168176134225}
+  - component: {fileID: 667546410776434033}
   - component: {fileID: 399791347947049752}
   - component: {fileID: 3514175640895628665}
   - component: {fileID: 486914191499443827}
@@ -1199,9 +1236,9 @@ GameObject:
   - component: {fileID: 7044401790539624073}
   - component: {fileID: 7167715028671045914}
   - component: {fileID: 6011427551979934784}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ManPlayerNew
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1237,7 +1274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3642990594
+  GlobalObjectIdHash: 3218584357
   InScenePlacedSourceGlobalObjectIdHash: 900197548
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1264,7 +1301,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   playerMovement: {fileID: 5942375168176134225}
-  animator: {fileID: 1454461784541951496}
+  speedCheck: 1
 --- !u!114 &5942375168176134225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1283,6 +1320,18 @@ MonoBehaviour:
   camSocket: {fileID: 6281938891346612242}
   vcam: {fileID: 5801555419338569677}
   minMaxRotationX: {x: 90, y: -90}
+--- !u!114 &667546410776434033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4165452880757609527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5bc16765d2fc64bb76c79bafcb82d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &399791347947049752
 CapsuleCollider:
   m_ObjectHideFlags: 0

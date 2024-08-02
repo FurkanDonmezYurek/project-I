@@ -7,6 +7,7 @@ public class HeadHunter : NetworkBehaviour
 {
     public RoleAssignment roleAssignment;
     private PlayerMovement pl_movement;
+    private Animator Animator;
 
     public ulong vekilId = ulong.MaxValue;
 
@@ -23,6 +24,8 @@ public class HeadHunter : NetworkBehaviour
         {
             Debug.Log("Head Hunter role assigned and script initialized.");
         }
+
+        Animator.GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -183,6 +186,7 @@ public class HeadHunter : NetworkBehaviour
             {
                 targetRenderer.material.color = Color.yellow;
                 Debug.Log($"Head hunter killed {targetObject.name}.");
+                Animator.SetTrigger("HunterSkill");
             }
             else
             {
