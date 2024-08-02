@@ -77,7 +77,7 @@ Maskeler düşer, gerçekler konuşur.
 
 ## KPİ URL
 
--KPI Dökümanları:[KPI DOCUMENTS](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
+-KPI Dökümanları:[KPI Documents](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
 ---
 
 # Sprint 1
