@@ -32,6 +32,7 @@ public class RoleAssignment : NetworkBehaviour
     private AnimationManager animManager;
     private Animator Animator;
 
+    
     private void Awake()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
