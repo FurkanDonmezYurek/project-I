@@ -19,10 +19,15 @@ RedRabbit
 ## Asansör Konuşması
 
 TROYA: Strateji ve Gerilimin Yeni Adı
-- TROYA, oyuncuların rastgele roller üstlendiği ve görevlerini tamamlamaya çalışırken diğer oyuncuların kimliklerini anlamaya çalıştığı bir oyun. Masumlar görevleri tamamlamaya çalışırken, katiller gizlice sabotaj yapıp masumları öldürmeye çalışır.
-- 3D low poly grafikler, mini oyunlar ve stratejik oylama sistemleriyle zenginleştirilmiş bu oyun, sosyal etkileşim ve stratejik düşünmeyi teşvik eder. Katillerin insan formunda kalmak için iksir içmesi gereken mekanik ise oyuna ekstra gerilim katar.
-- TROYA, düşük sistem gereksinimleriyle geniş bir oyuncu kitlesine hitap eder ve sürekli güncellemelerle yeni içerikler sunar.
-TROYA ile strateji ve gerilimi bir araya getiriyoruz. Hazır mısınız? 
+  - TROYA: Strateji ve Gerilimin Yeni Adı
+
+  - TROYA, oyuncuları dinamik bir rol oyununa davet ediyor. Oyuncular, rastgele Hayalet, Köylü veya Aşık rollerini üstlenerek görevlerini tamamlamaya çalışırken diğer oyuncuların kimliklerini anlamaya çalışacaklar. Köylüler görevlerini tamamlamaya çalışırken, Hayaletler gizlice sabotaj yaparak masumları öldürmeye çalışır.
+  - 3D low poly grafikler, mini oyunlar ve stratejik oylama sistemleri ile zenginleştirilmiş bu oyun, sosyal etkileşim ve stratejik düşünmeyi teşvik eder.
+
+TROYA, düşük sistem gereksinimleriyle geniş bir oyuncu kitlesine hitap ederken, sürekli güncellemelerle yeni içerikler sunar.
+
+TROYA ile strateji ve gerilimi bir araya getiriyoruz. Hazır mısınız?
+
 
 ## Ürün Açıklaması
 
