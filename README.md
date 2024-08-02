@@ -143,7 +143,7 @@ Dokümantasyon: Proje dokümantasyonunun detaylandırılması ve düzenli günce
 ---  
 # Sprint 3 
 
-- **Sprint Notları: FİNAL SPRİNT**:
+ **Sprint Notları: FİNAL SPRİNT**
 
   Görev Dağılımı ve Önceliklendirme:
   
@@ -183,3 +183,6 @@ Bu sprintte, tüm kritik görevler başarıyla tamamlandı ve projemiz piyasaya 
 
 -KPI Dökümanları:[KPI DOCUMENTS](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
 
+- **Sprint içinde tamamlanması tahmin edilen puan**: 200 Puan
+
+Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puanlık backlog bulunmaktadır. 3 sprint'e bölündüğünde üçüncü sprint'in  200 ile başlaması gerektiğine karar verildi.
