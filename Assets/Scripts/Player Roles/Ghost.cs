@@ -63,6 +63,8 @@ public class Ghost : NetworkBehaviour
             Debug.Log("Potion used.");
             ResetPotionMechanicCoroutine();
         }
+        
+        
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -195,5 +197,6 @@ public class Ghost : NetworkBehaviour
             Debug.Log("Renderer not found on Hayalet.");
         }
     }
-    
+
+
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class AnimationManager : NetworkBehaviour
 {
     private Animator animator;
-    private PlayerRole currentRole;
     private RoleAssignment _roleAssignment;
 
     private static readonly int RoleID = Animator.StringToHash("RoleID");
@@ -14,10 +13,12 @@ public class AnimationManager : NetworkBehaviour
     {
         { PlayerRole.Lover, 0 },
         { PlayerRole.Ghost, 1 },
-        { PlayerRole.AlphaGhost,1},
+        { PlayerRole.AlphaGhost, 1 },
         { PlayerRole.Hunter, 2 },
-        { PlayerRole.HeadHunter,2}
+        { PlayerRole.HeadHunter, 2 }
     };
+
+    public int CurrentRoleIndex { get; private set; }
 
     private void Start()
     {
@@ -25,15 +26,10 @@ public class AnimationManager : NetworkBehaviour
         if (animator == null)
         {
             Debug.LogError("Animator component not found!");
-           
         }
 
         _roleAssignment = GetComponent<RoleAssignment>();
-
-
     }
-
-  
 
     public void UpdateAnimationState()
     {
@@ -41,15 +37,16 @@ public class AnimationManager : NetworkBehaviour
         {
             if (roleIndices.TryGetValue(_roleAssignment.role.Value, out int index))
             {
+                CurrentRoleIndex = index;
                 animator.SetInteger(RoleID, index);
-                Debug.Log($"Animator parameter updated: RoleID set to {index} for role {currentRole}");
+                Debug.Log($"Animator parameter updated: RoleID set to {index} for role {_roleAssignment.role.Value}");
             }
             else
             {
-                animator.SetInteger(RoleID, -1);  // Varsayılan değer
-                Debug.LogWarning($"Role {currentRole} is not recognized. RoleID set to default.");
+                CurrentRoleIndex = -1;  // Varsayılan değer
+                animator.SetInteger(RoleID, -1);
+                Debug.LogWarning($"Role {_roleAssignment.role.Value} is not recognized. RoleID set to default.");
             }
         }
-    } 
-    
+    }
 }
