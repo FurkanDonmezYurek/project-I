@@ -8,7 +8,7 @@ public class MenuUI : MonoBehaviour
 {
     public void Quit()
     {
-        //Hanne burayý düzenlicek!
-        //Application.Quit();
+        
+        Application.Quit();
     }
 }
