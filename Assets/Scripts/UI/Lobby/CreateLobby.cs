@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using Unity.Services.Analytics;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
 using Unity.Services.Relay.Models;
@@ -28,6 +29,8 @@ public class CreateLobby : MonoBehaviour
     async void Start()
     {
         await UnityServices.InitializeAsync();
+        AnalyticsService.Instance.StartDataCollection();
+
         //for SignIn
         if (!AuthenticationService.Instance.IsSignedIn)
         {
@@ -47,6 +50,15 @@ public class CreateLobby : MonoBehaviour
         //     GameObject relayManager = GameObject.Find("RelayManager");
         //     Destroy(relayManager);
         // }
+
+
+
+        AnalyticsService.Instance.RecordEvent(
+            new CustomEvent("MainMenuSceneViewed")
+            {
+                { "PlayerName", PlayerPrefs.GetString("PlayerName") }
+            }
+        );
     }
 
     public static async void LoginToVivoxAsync()
@@ -84,7 +96,7 @@ public class CreateLobby : MonoBehaviour
                 )
             },
             { "readyCount", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "1") },
-            {"RelayClientId", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")}   
+            { "RelayClientId", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "") }
         };
 
         string villager = Convert.ToString(
@@ -155,6 +167,15 @@ public class CreateLobby : MonoBehaviour
         Debug.Log("Create Lobby Done");
 
         StartCoroutine(PingLobbyCoroutine(lobby.Id, 15f));
+
+        AnalyticsService.Instance.RecordEvent(
+            new CustomEvent("LobbyCreated")
+            {
+                { "lobbyname", lobbyname },
+                { "maxplayers", maxplayers },
+                { "isLobbyPrivate", options.IsPrivate }
+            }
+        );
     }
 
     IEnumerator PingLobbyCoroutine(string lobbyId, float waitTimeSeconds)
