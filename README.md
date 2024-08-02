@@ -197,5 +197,28 @@ Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puan
 - **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
 
 - **Sprint board update**: Sprint board screenshotları: <img width="1210" alt="sprint board uptade" src="https://github.com/user-attachments/assets/79b9e699-2a86-4c0c-aa70-22205fcd5301">
+
+SPRİNT TİMELİNE'I
 ![kk](https://github.com/user-attachments/assets/02c1be26-4914-42b3-bbcb-cdd19a833be5)
 <img width="1382" alt="dddd" src="https://github.com/user-attachments/assets/cce23ce8-65bc-4ab8-b19d-1a40da14e393"> 
+
+- **Ürün Durumu**: Ekran görüntüleri:
+
+![Logo](https://github.com/user-attachments/assets/a0f40851-6f24-487c-9302-5e0722edbaf0)
+  ![3d](https://github.com/user-attachments/assets/9cadefdc-aa81-4877-9445-917422032224)
+  ![lobby1](https://github.com/user-attachments/assets/76f0431d-067d-45ec-bc53-695b85a9094a)
+  ![map](https://github.com/user-attachments/assets/4be835ae-3c54-4e08-9768-f033fed63eb5)
+
+
+- **Sprint Review**: 
+  İkinci haftamızın sonunda, tamamlanan görevlerin gözden geçirildiği bir review toplantısı düzenledik. Bu toplantıda, sprint boyunca gerçekleştirilen çalışmaların genel değerlendirmesi yapıldı ve gelecek sprintler için hedefler belirledik
+  
+Gelecek Sprint Hedefleri:
+Test ve Hata Ayıklama: Tüm tamamlanan özelliklerin sistematik testleri yapılarak hataların düzeltilmesi.
+Yeni Özellikler: Arkadaşlık sistemi, yetenek kullanımı ve sohbet sistemi gibi özelliklerin geliştirilmesi.
+Dokümantasyon: Proje dokümantasyonunun detaylandırılması ve düzenli güncellenmesi.
+
+- **Sprint Retrospective:Bootcamp Projesi Tamamlandı!**
+  - Son sprintimizi tamamlamış olmanın gururunu yaşıyoruz! Retrospektif toplantımızda, ekip olarak iletişim ve takım çalışmasının güçlü olduğunu ve multiplayer ile UI gibi kritik görevleri başarıyla tamamladığımızı gördük.
+Zaman yönetimi ve dokümantasyon konusunda bazı iyileştirmelere ihtiyaç duyduğumuzu fark ettik ve bu alanlarda da önemli adımlar attık. Test ve hata ayıklama süreçlerini daha sık ve sistematik yaparak projemizi tamamladık.
+Genel olarak, ekip karşılaştığı zorluklara hızlı uyum sağladı ve proje ilerleyişinde büyük başarılar elde etti. TROYA'nın geliştirme sürecini başarılı bir şekilde tamamladık ve şimdi oyunumuzu oyuncularla buluşturmanın heyecanını yaşıyoruz!
