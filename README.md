@@ -1,6 +1,9 @@
 # **Takım İsmi**
 
 RedRabbit
+![RedRabbitLogo](https://github.com/user-attachments/assets/0a42105c-94c9-48c5-af63-e06a5c0eaf23)
+
+
 
 # Oyuna Genel Bakış
 
