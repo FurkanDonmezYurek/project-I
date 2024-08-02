@@ -213,7 +213,13 @@ SPRİNT TİMELİNE'I
 
 
 - **Sprint Review**: 
-  - İkinci haftamızın sonunda, tamamlanan görevlerin gözden geçirildiği bir review toplantısı düzenledik. Bu toplantıda, sprint boyunca gerçekleştirilen çalışmaların genel değerlendirmesi yapıldı ve gelecek sprintler için hedefler belirledik
+    - Projemizin final sprintinin sonunda, tamamlanan görevlerin gözden geçirildiği bir review toplantısı düzenledik. Bu toplantıda, sprint boyunca gerçekleştirilen çalışmaların genel değerlendirmesi yapıldı. Tüm özelliklerin test edilmesi ve hataların giderilmesi sürecinde gösterilen çabaları ve elde edilen sonuçları değerlendirdik.
+   Review katılımcıları: 
+  - Gökdeniz Karakuş
+  - Hanne Betül Akdoğan
+  - Furkan Dönmezyürek
+  - Gözde Kahraman
+  - Gökhan Şener
   
 - **Son Sprint Hedefleri**:
   Test ve Hata Ayıklama:
