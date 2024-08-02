@@ -6,15 +6,15 @@ RedRabbit
 
 ## Takım Elemanları
 
-- Hanne Betül Akdoğan: Scrum Master/Game Artist
-- Gökdeniz Karakuş: Product Owner/Developer
-- Furkan Dönmezyürek: Developer Lead
-- Gözde Kahraman: Team Member/Developer/
-- Gökhan Şener: Team Member/Developer
+  - Hanne Betül Akdoğan: Scrum Master/Game Artist
+  - Gökdeniz Karakuş: Product Owner/Developer
+  - Furkan Dönmezyürek: Developer Lead
+  - Gözde Kahraman: Team Member/Developer/
+  - Gökhan Şener: Team Member/Developer
 
 ## Oyunun Adı 
 
-TROYA
+   TROYA
 
 ## Asansör Konuşması
 
@@ -30,8 +30,8 @@ TROYA, bir adada geçen ve her oyuncunun belirli rollerden rastgele birini aldı
 
 ## Türü
 
-- Basit Eğlence
-- Sosyal Çıkarım
+  - Basit Eğlence
+  - Sosyal Çıkarım
 
 ## Mottosu
 
@@ -39,33 +39,33 @@ Maskeler düşer, gerçekler konuşur.
 
 ## Sanat Stilli
 
-- 3D Low Poly
+  - 3D Low Poly
   
 ## Hedef Kitle
 
-- Genellikle 13-30 yaş arası parti oyunlarını seven oyuncular
+  - Genellikle 13-30 yaş arası parti oyunlarını seven oyuncular
 
 ## Hedef Paltformu
 
-- PC
+  - PC
 
 ## Hedef Dağıtım Kanalı
 
-- Steam
+  - Steam
 
 
 ## Hedef Market
 
-- Kuzey Amerika, Avrupa, Asya
+  - Kuzey Amerika, Avrupa, Asya
 
 ## Parasallaştırma Stratejisi
 
-- Skin Market kullanarak
+  - Skin Market kullanarak
 
 ## USP (Unique Selling Points)
 
-- 3D Low Poly bir oyun olması. 
-- İnsanları birbirine düşürecek bir altyapı bulunması.
+  - 3D Low Poly bir oyun olması. 
+  - İnsanları birbirine düşürecek bir altyapı bulunması.
 
 ## Miro Board URL
 
@@ -123,8 +123,9 @@ KPI Dökümanları; Oyun tasarım dökümanı,Pazar analizi ve stratejisi dökü
 Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puanlık backlog bulunmaktadır. 3 sprint'e bölündüğünde 2'nci sprint'in en azından 100 ile başlaması gerektiğine karar verildi.
   
 
-- **Daily Scrum**: Daily Scrum toplantıları Discord üzerinden yapıldı. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
-- [DailyScrumSS](https://github.com/user-attachments/files/16325292/Sprint2Daily.docx)
+- **Daily Scrum**: 
+  - Daily Scrum toplantıları Discord üzerinden yapıldı. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
+  - [DailyScrumSS](https://github.com/user-attachments/files/16325292/Sprint2Daily.docx)
 
 - **Sprint board update**: Sprint board screenshotları: 
 ![sprint2](https://github.com/user-attachments/assets/cbe6045d-f394-4ed3-9490-7c83cd0ad2d9)
@@ -194,7 +195,8 @@ Bu sprintte, tüm kritik görevler başarıyla tamamlandı ve projemiz piyasaya 
 
 Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puanlık backlog bulunmaktadır. 3 sprint'e bölündüğünde üçüncü sprint'in  200 ile başlaması gerektiğine karar verildi.
 
-- **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
+- **Daily Scrum**: 
+  - Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
 
 - **Sprint board update**: Sprint board screenshotları: <img width="1210" alt="sprint board uptade" src="https://github.com/user-attachments/assets/79b9e699-2a86-4c0c-aa70-22205fcd5301">
 
@@ -204,19 +206,20 @@ SPRİNT TİMELİNE'I
 
 - **Ürün Durumu**: Ekran görüntüleri:
 
-![Logo](https://github.com/user-attachments/assets/a0f40851-6f24-487c-9302-5e0722edbaf0)
-  ![3d](https://github.com/user-attachments/assets/9cadefdc-aa81-4877-9445-917422032224)
-  ![lobby1](https://github.com/user-attachments/assets/76f0431d-067d-45ec-bc53-695b85a9094a)
-  ![map](https://github.com/user-attachments/assets/4be835ae-3c54-4e08-9768-f033fed63eb5)
+![Logo]()
+  ![3d]()
+  ![lobby1]()
+  ![map]()
 
 
 - **Sprint Review**: 
-  İkinci haftamızın sonunda, tamamlanan görevlerin gözden geçirildiği bir review toplantısı düzenledik. Bu toplantıda, sprint boyunca gerçekleştirilen çalışmaların genel değerlendirmesi yapıldı ve gelecek sprintler için hedefler belirledik
+  - İkinci haftamızın sonunda, tamamlanan görevlerin gözden geçirildiği bir review toplantısı düzenledik. Bu toplantıda, sprint boyunca gerçekleştirilen çalışmaların genel değerlendirmesi yapıldı ve gelecek sprintler için hedefler belirledik
   
-Gelecek Sprint Hedefleri:
-Test ve Hata Ayıklama: Tüm tamamlanan özelliklerin sistematik testleri yapılarak hataların düzeltilmesi.
-Yeni Özellikler: Arkadaşlık sistemi, yetenek kullanımı ve sohbet sistemi gibi özelliklerin geliştirilmesi.
-Dokümantasyon: Proje dokümantasyonunun detaylandırılması ve düzenli güncellenmesi.
+- **Son Sprint Hedefleri**:
+  Test ve Hata Ayıklama:
+    - Tüm tamamlanan özelliklerin sistematik testlerini yaparak hataların düzeltilmesi,
+    - Communication kanallarının oluşturulması,
+    - Pazarlama stratejilerinin aktif hale getirilmesi.
 
 - **Sprint Retrospective:Bootcamp Projesi Tamamlandı!**
   - Son sprintimizi tamamlamış olmanın gururunu yaşıyoruz! Retrospektif toplantımızda, ekip olarak iletişim ve takım çalışmasının güçlü olduğunu ve multiplayer ile UI gibi kritik görevleri başarıyla tamamladığımızı gördük.
