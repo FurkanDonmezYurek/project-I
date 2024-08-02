@@ -69,7 +69,7 @@ Maskeler düşer, gerçekler konuşur.
 
 ## Jira Board URL
 
-[Jira Board](https://hannelodie.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJpIjoiYTA5NjhmNWJjMjFkNGU1YWFlYmYxNmI4MzE5ZGY3ZWUiLCJwIjoiaiJ9)
+[Jira Scrum Board](https://hannelodie.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJpIjoiYTA5NjhmNWJjMjFkNGU1YWFlYmYxNmI4MzE5ZGY3ZWUiLCJwIjoiaiJ9)
 
 ---
 
@@ -141,4 +141,40 @@ Dokümantasyon: Proje dokümantasyonunun detaylandırılması ve düzenli günce
   - ikinci sprinti geride bırakırken, retrospektif toplantımızda ekip olarak iletişim ve takım çalışmasının güçlü olduğunu, multiplayer ve UI gibi kritik görevlerin başarıyla tamamlandığını gördük. Ancak zaman yönetimi ve dokümantasyon konusunda iyileştirmelere ihtiyaç duyulduğunu fark ettik. Test ve hata ayıklama süreçlerinin daha sık ve sistematik yapılması gerektiğini belirledik. Genel olarak, ekip karşılaştığı zorluklara hızlı uyum sağladı ve proje ilerleyişi konusunda önemli adımlar attı.
   
 ---  
+# Sprint 3 
+
+- **Sprint Notları: FİNAL SPRİNT**:
+
+- Görev Dağılımı ve Önceliklendirme:
+  Hafta başında görev dağılımı yapıldı ve öncelikler belirlendi.
+Görevlerdeki aksamalar göz önünde bulundurularak yeni görev paylaşımları düzenlendi.
+
+- Tamamlanan Görevler:
+*Lobi Özellikleri: Tüm özellikler tamamlandı.
+*AI Entegrasyonu: Başarıyla uygulandı.
+Mini Game Revize: Gerekli düzenlemeler yapıldı.
+Oylama Butonu: İşlevsellik eklendi ve test edildi.
+Yetenek Animasyonları ve Karakter Animasyonları: Tüm animasyonlar entegre edildi.
+Join Kod UI: Arayüz tasarımı ve kodlaması tamamlandı.
+Game Manager: Tüm görevler yerine getirildi.
+Trailer: Tanıtım videosu hazırlandı.
+KPI Dökümanları: Oyun tasarım dökümanı, pazar analizi ve stratejisi dökümanı, pazarlama planı dökümanı, stratejik yönetim dökümanları hazırlandı.
+Game Analytics: Oyun analizleri eklendi.
+Arkadaşlık Sistemi ve Exit Butonu: Entegre edildi ve test edildi.
+Reaktör Temelinin Kodlanması ve Geliştirilmesi: Tüm işler tamamlandı.
+Karakter Seçim Paneli: İşlevsellik eklendi ve test edildi.
+Yetenek Kodlaması: Kodlama tamamlandı.
+Oyun Logosu Revizesi: Oyun logosu tasarlandı.
+VFX (Sis, Aşk Efekti ve Toz Efekti): Eklendi.
+Seslerin Kodlanması: Tüm sesler entegre edildi.
+Oyun İntrosu: Tamamlandı.
+Ek Özellikler ve İyileştirmeler:
+
+UI Dil Desteği: Kullanıcı arayüzüne dil desteği eklendi.
+AI Desteği: Yapay zeka desteği eklendi.
+Game Analytics: Oyun analitikleri entegre edildi.
+Değerlendirme:
+Bu sprintte, tüm kritik görevler başarıyla tamamlandı ve projemiz piyasaya sürülmeye hazır hale geldi. Ekip, zorluklara hızlı uyum sağlayarak ve yüksek performans göstererek büyük bir başarı elde etti. Oyuncularla buluşmak için sabırsızlanıyoruz!
+
+-KPI Dökümanları:[KPI DOCUMENTS](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
 
