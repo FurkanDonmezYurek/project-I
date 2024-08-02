@@ -145,35 +145,40 @@ Dokümantasyon: Proje dokümantasyonunun detaylandırılması ve düzenli günce
 
 - **Sprint Notları: FİNAL SPRİNT**:
 
-- Görev Dağılımı ve Önceliklendirme:
-  Hafta başında görev dağılımı yapıldı ve öncelikler belirlendi.
+  Görev Dağılımı ve Önceliklendirme:
+  
+ - Hafta başında görev dağılımı yapıldı ve öncelikler belirlendi.
 Görevlerdeki aksamalar göz önünde bulundurularak yeni görev paylaşımları düzenlendi.
 
-- Tamamlanan Görevler:
-*Lobi Özellikleri: Tüm özellikler tamamlandı.
-*AI Entegrasyonu: Başarıyla uygulandı.
-Mini Game Revize: Gerekli düzenlemeler yapıldı.
-Oylama Butonu: İşlevsellik eklendi ve test edildi.
-Yetenek Animasyonları ve Karakter Animasyonları: Tüm animasyonlar entegre edildi.
-Join Kod UI: Arayüz tasarımı ve kodlaması tamamlandı.
-Game Manager: Tüm görevler yerine getirildi.
-Trailer: Tanıtım videosu hazırlandı.
-KPI Dökümanları: Oyun tasarım dökümanı, pazar analizi ve stratejisi dökümanı, pazarlama planı dökümanı, stratejik yönetim dökümanları hazırlandı.
-Game Analytics: Oyun analizleri eklendi.
-Arkadaşlık Sistemi ve Exit Butonu: Entegre edildi ve test edildi.
-Reaktör Temelinin Kodlanması ve Geliştirilmesi: Tüm işler tamamlandı.
-Karakter Seçim Paneli: İşlevsellik eklendi ve test edildi.
-Yetenek Kodlaması: Kodlama tamamlandı.
-Oyun Logosu Revizesi: Oyun logosu tasarlandı.
-VFX (Sis, Aşk Efekti ve Toz Efekti): Eklendi.
-Seslerin Kodlanması: Tüm sesler entegre edildi.
-Oyun İntrosu: Tamamlandı.
+  Tamamlanan Görevler:
+
+- Lobi Özellikleri: Tüm özellikler tamamlandı.
+- AI Entegrasyonu: Başarıyla uygulandı.
+- Mini Game Revize: Gerekli düzenlemeler yapıldı.
+- Oylama Butonu: İşlevsellik eklendi ve test edildi.
+- Yetenek Animasyonları ve Karakter Animasyonları: Tüm animasyonlar entegre edildi.
+- Join Kod UI: Arayüz tasarımı ve kodlaması tamamlandı.
+- Game Manager: Tüm görevler yerine getirildi.
+- Trailer: Tanıtım videosu hazırlandı.
+- KPI Dökümanları: Oyun tasarım dökümanı, pazar analizi ve stratejisi dökümanı ve pazarlama planı dökümanları hazırlandı.
+- Game Analytics: Oyun analizleri eklendi.
+- Arkadaşlık Sistemi ve Exit Butonu: Entegre edildi ve test edildi.
+- Reaktör Temelinin Kodlanması ve Geliştirilmesi: Tüm işler tamamlandı.
+- Karakter Seçim Paneli: İşlevsellik eklendi ve test edildi.
+- Yetenek Kodlaması: Kodlama tamamlandı.
+- Oyun Logosu Revizesi: Oyun logosu tasarlandı.
+- VFX (Sis, Aşk Efekti ve Toz Efekti): Eklendi.
+- Seslerin Kodlanması: Tüm sesler entegre edildi.
+- Oyun İntrosu: Tamamlandı.
+
 Ek Özellikler ve İyileştirmeler:
 
-UI Dil Desteği: Kullanıcı arayüzüne dil desteği eklendi.
-AI Desteği: Yapay zeka desteği eklendi.
-Game Analytics: Oyun analitikleri entegre edildi.
+- UI Dil Desteği: Kullanıcı arayüzüne dil desteği eklendi.
+- AI Desteği: Yapay zeka desteği eklendi.
+- Game Analytics: Oyun analitikleri entegre edildi.
+  
 Değerlendirme:
+
 Bu sprintte, tüm kritik görevler başarıyla tamamlandı ve projemiz piyasaya sürülmeye hazır hale geldi. Ekip, zorluklara hızlı uyum sağlayarak ve yüksek performans göstererek büyük bir başarı elde etti. Oyuncularla buluşmak için sabırsızlanıyoruz!
 
 -KPI Dökümanları:[KPI DOCUMENTS](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
