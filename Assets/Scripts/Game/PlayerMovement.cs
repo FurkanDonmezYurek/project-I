@@ -28,6 +28,8 @@ public class PlayerMovement : NetworkBehaviour
     bool taskStarted = false;
     GameObject taskObject;
 
+    private Voting voting;
+
     public override void OnNetworkSpawn()
     {
         CinemachineVirtualCamera cvm =
@@ -50,6 +52,8 @@ public class PlayerMovement : NetworkBehaviour
         {
             animator = GetComponentInChildren<Animator>(); // Animator bileşenini alın
         }
+        // Cursor.lockState = CursorLockMode.Locked;
+        voting = FindObjectOfType<Voting>();
     }
 
     private void Awake()
@@ -67,7 +71,7 @@ public class PlayerMovement : NetworkBehaviour
         else
         {
             taskObject = null;
-            Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.lockState = CursorLockMode.Locked;
             Vector2 movementInput = InputActions.Player.Move.ReadValue<Vector2>();
             Vector2 lookInput = InputActions.Player.Look.ReadValue<Vector2>();
 
@@ -134,6 +138,10 @@ public class PlayerMovement : NetworkBehaviour
                 }
             }
         }
+
+        if (IsLocalPlayer && Input.GetKeyDown(KeyCode.R))
+        {
+            voting.CallForMeeting();
+        }
     }
 }
-

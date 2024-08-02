@@ -30,8 +30,12 @@ public class Hunter : NetworkBehaviour
     {
         //Debug.Log($"Avci Update: IsLocalPlayer: {IsLocalPlayer}, IsOwner: {IsOwner}");
 
-        if (IsLocalPlayer && roleAssignment.role.Value == PlayerRole.Hunter && 
-            !roleAssignment.isDead.Value && Input.GetMouseButtonDown(0))
+        if (
+            IsLocalPlayer
+            && roleAssignment.role.Value == PlayerRole.Hunter
+            && !roleAssignment.isDead.Value
+            && Input.GetMouseButtonDown(0)
+        )
         {
             Debug.Log("K key pressed. Attempting to find target to kill.");
 
@@ -57,7 +61,9 @@ public class Hunter : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void KillPlayerServerRpc(ulong targetId)
     {
-        Debug.Log($"Server received: {gameObject.name} wants to kill the player with ID {targetId}");
+        Debug.Log(
+            $"Server received: {gameObject.name} wants to kill the player with ID {targetId}"
+        );
 
         foreach (var spawnedObject in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
         {
@@ -74,7 +80,7 @@ public class Hunter : NetworkBehaviour
                     }
 
                     Debug.Log($"Target object found on server: {netObj.name}");
-                    targetRoleAssignment.isDead.Value = true; 
+                    targetRoleAssignment.isDead.Value = true;
                     targetRoleAssignment.UpdateIsDeadClientRpc(true);
                     KillPlayerClientRpc(new NetworkObjectReference(netObj));
                 }
@@ -97,8 +103,8 @@ public class Hunter : NetworkBehaviour
             if (targetRenderer != null)
             {
                 Debug.Log($"Changing target's color to yellow: {targetObject.name}");
-                targetRenderer.material.color = Color.yellow; 
-                //targetObject.gameObject.SetActive(false); 
+                targetRenderer.material.color = Color.yellow;
+                //targetObject.gameObject.SetActive(false);
                 Animator.SetTrigger("HunterSkill");
             }
             else

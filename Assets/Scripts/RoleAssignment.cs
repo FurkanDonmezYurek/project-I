@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 
 public enum PlayerRole
@@ -19,7 +20,9 @@ public enum PlayerRole
 
 public class RoleAssignment : NetworkBehaviour
 {
-    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(PlayerRole.Unassigned);
+    public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(
+        PlayerRole.Unassigned
+    );
     public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false);
 
     public bool usedSkill = false;
@@ -28,11 +31,13 @@ public class RoleAssignment : NetworkBehaviour
     public int[] roleCountList = new int[5];
 
     private CurrentLobby currentLobby;
+
+    private List<GameObject> players = new List<GameObject>();
+
     public GameObject[] npcArray = new GameObject[5];
     private AnimationManager animManager;
     private Animator Animator;
 
-    
     private void Awake()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
@@ -98,7 +103,7 @@ public class RoleAssignment : NetworkBehaviour
     {
         if (newIsDead)
         {
-            Animator.SetTrigger("IsDead");                                                                                                                                                                                                                                                                                                                                                         
+            Animator.SetTrigger("IsDead");
         }
     }
 
