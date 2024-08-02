@@ -14,7 +14,7 @@ RedRabbit
 
 ## Oyunun Adı 
 
-Troya
+TROYA
 
 ## Asansör Konuşması
 
@@ -25,24 +25,51 @@ Adada geçen ve her oyuncunun belirli rollerden rastgele birini aldığı, rolü
 TROYA, bir adada geçen ve her oyuncunun belirli rollerden rastgele birini aldığı, rolüne uygun görevleri yaptığı, temelinde köylüler ve hayaletlerin çatışmasını konu alan multiplayer sosyal çıkarım oyunudur. Oyuncular, arkadaşlarıyla veya dünya genelinden rastgele oyuncularla bir araya gelerek, hem strateji hem de içgüdülerini kullanarak hayatta kalmaya çalışır.
 
 ## Türü
+
 - Basit Eğlence
 - Sosyal Çıkarım
 
 ## Mottosu
 
+Maskeler düşer, gerçekler konuşur.
 
+## Sanat Stilli
 
-## Oyun Özellikleri
-
-- Basit Eğlen 
+- 3D Low Poly
   
 ## Hedef Kitle
 
-- 13 - 30 Yaş Kişiler
+- Genellikle 13-30 yaş arası parti oyunlarını seven oyuncular
+
+## Hedef Paltformu
+
+- PC
+
+## Hedef Dağıtım Kanalı
+
+- Steam
+
+
+## Hedef Market
+
+- Kuzey Amerika, Avrupa, Asya
+
+## Parasallaştırma Stratejisi
+
+- Skin Market kullanarak
+
+## USP (Unique Selling Points)
+
+- 3D Low Poly bir oyun olması. 
+- İnsanları birbirine düşürecek bir altyapı bulunması.
 
 ## Miro Board URL
 
 [Miro Backlog Board](https://miro.com/app/board/uXjVK5KK3Ig=/?share_link_id=122507394564)
+
+## Jira Board URL
+
+[Jira Board](https://hannelodie.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJpIjoiYTA5NjhmNWJjMjFkNGU1YWFlYmYxNmI4MzE5ZGY3ZWUiLCJwIjoiaiJ9)
 
 ---
 
