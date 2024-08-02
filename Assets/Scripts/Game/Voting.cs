@@ -14,7 +14,7 @@ public class Voting : NetworkBehaviour
     [SerializeField]
     private GameObject votingUIPrefab;
     public Dictionary<ulong, ulong> votes = new Dictionary<ulong, ulong>(); // voter, voted
-    private bool isVotingInProgress = false;
+    public bool isVotingInProgress = false;
     private float votingDuration = 45.0f;
     private float votingTimer = 0.0f;
     public static Voting Instance;
@@ -82,7 +82,7 @@ public class Voting : NetworkBehaviour
 
         var players = GameObject.FindGameObjectsWithTag("Player");
         playerCount = Array
-            .FindAll(players, (elm) => !elm.gameObject.GetComponent<RoleAssignment>().isDead)
+            .FindAll(players, (elm) => !elm.gameObject.GetComponent<RoleAssignment>().isDead.Value)
             .Length;
 
         var myPlayer = Array.Find(
@@ -90,7 +90,7 @@ public class Voting : NetworkBehaviour
             elm => elm.gameObject.GetComponent<NetworkObject>().IsOwner
         );
 
-        if (!myPlayer.GetComponent<RoleAssignment>().isDead)
+        if (!myPlayer.GetComponent<RoleAssignment>().isDead.Value)
         {
             callPanel = myPlayer.transform.GetChild(0).GetChild(0).Find("CallPanel").gameObject;
             callPanel.SetActive(true);
@@ -220,7 +220,7 @@ public class Voting : NetworkBehaviour
             {
                 Debug.Log("Player object found for: " + playerId);
                 var roleAssignment = player.GetComponent<RoleAssignment>();
-                roleAssignment.isDead = true;
+                roleAssignment.isDead.Value = true;
                 player.GetComponent<CapsuleCollider>().enabled = false;
                 player.transform.GetChild(3).gameObject.SetActive(false);
                 Debug.Log($"Player {playerId} was killed.");

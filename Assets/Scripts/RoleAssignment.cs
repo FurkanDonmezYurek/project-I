@@ -23,74 +23,58 @@ public class RoleAssignment : NetworkBehaviour
     public NetworkVariable<PlayerRole> role = new NetworkVariable<PlayerRole>(
         PlayerRole.Unassigned
     );
+    public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false);
 
     public bool usedSkill = false;
     public bool isVekil = false;
-    public bool isDead = false;
-   
+
     public int[] roleCountList = new int[5];
 
     private CurrentLobby currentLobby;
-    
+
     private List<GameObject> players = new List<GameObject>();
 
     public GameObject[] npcArray = new GameObject[5];
-    
+    private AnimationManager animManager;
+    private Animator Animator;
+
     private void Awake()
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
     }
-    //
-    // public override void OnNetworkSpawn()
-    // {
-    //     base.OnNetworkSpawn();
-    //
-    //     if (IsOwner)
-    //     {
-    //         Debug.Log("isOwner true");
-    //         string playerName = PlayerPrefs.GetString("PlayerName");
-    //         SetNameServerRpc(playerName);
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("not owner");
-    //     }
-    // }
-    //
-    // [ServerRpc]
-    // public void SetNameServerRpc(string playerName, ServerRpcParams rpcParams = default)
-    // {
-    //     Debug.Log("Server received name request: " + playerName);
-    //     transform.name = playerName;
-    //     UpdateNameClientRpc(playerName);
-    // }
-    //
-    // [ClientRpc]
-    // private void UpdateNameClientRpc(string playerName)
-    // {
-    //     transform.name = playerName;
-    //     Debug.Log("Client received name update: " + playerName);
-    // }
-    
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        if (IsOwner)
+        {
+            transform.name = currentLobby.thisPlayer.Data["PlayerName"].Value;
+        }
+    }
+
     private void Start()
     {
-        // if (IsServer && IsOwner)
-        // {
-        //     Invoke("GetLobbyData", 10f);
-        //     //bunu 10sn yaptim
-        // }
-
         // Add a listener to the NetworkVariable to handle changes
         role.OnValueChanged += OnRoleChanged;
+        isDead.OnValueChanged += OnIsDeadChanged;
 
         npcArray = GameObject.FindGameObjectsWithTag("NPC");
-
+        animManager = GetComponent<AnimationManager>();
+        Animator = GetComponentInChildren<Animator>();
     }
-    
-    //NPC Method
+
+    private void Update()
+    {
+        if (isDead.Value)
+        {
+            Animator.SetTrigger("IsDead");
+        }
+    }
+
+    // NPC Method
     public void NPCRequest()
     {
-        for (int i = 0; i < npcArray.Length ; i++)
+        for (int i = 0; i < npcArray.Length; i++)
         {
             npcArray[i].GetComponent<NPCManager>().FieldOfViewCheck(this.gameObject);
         }
@@ -115,10 +99,17 @@ public class RoleAssignment : NetworkBehaviour
         EnableRelevantRoleScript(newRole);
     }
 
+    private void OnIsDeadChanged(bool oldIsDead, bool newIsDead)
+    {
+        if (newIsDead)
+        {
+            Animator.SetTrigger("IsDead");
+        }
+    }
+
     private void EnableRelevantRoleScript(PlayerRole newRole)
     {
         RemoveAllRoleComponents();
-
         Debug.Log($"Enabling role script for {newRole}");
 
         switch (newRole)
@@ -204,9 +195,17 @@ public class RoleAssignment : NetworkBehaviour
                         roleAssignment.AssignRole(PlayerRole.Wizard);
                         break;
                 }
+                animManager.UpdateAnimationState();
                 roleCountList[roleClass]--;
                 Debug.Log($"Assigned role {roleAssignment.role.Value} to player {player.name}");
             }
         }
+    }
+
+    [ClientRpc]
+    public void UpdateIsDeadClientRpc(bool newIsDead)
+    {
+        Debug.Log("sending client the dead announcement / aka RPC");
+        isDead.Value = newIsDead; //ya burası biraz şaibeli bence ama kalsın
     }
 }

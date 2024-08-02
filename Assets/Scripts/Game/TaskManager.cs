@@ -8,8 +8,8 @@ using UnityEngine;
 public class TaskManager : NetworkBehaviour
 {
     public static GameObject[] taskArray = new GameObject[16];
-    public NetworkVariable<int> totalTaskCount = new NetworkVariable<int>(0);
-
+    public NetworkVariable<int> totalTaskCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    
     private void Start()
     {
         for (int i = 0; i < taskArray.Length; i++)
@@ -26,10 +26,13 @@ public class TaskManager : NetworkBehaviour
         if (obj != null && !obj.activeSelf && taskStarted)
         {
             obj.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+
         }
         else if (obj.activeSelf)
         {
             obj.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
@@ -41,13 +44,32 @@ public class TaskManager : NetworkBehaviour
         }
         else
         {
-            SendTaskCountServerRpc();
+            
         }
     }
 
-    [ServerRpc]
-    void SendTaskCountServerRpc()
+    public void CompleteTask()
     {
-        totalTaskCount.Value++;
+        if (IsServer)
+        {
+            totalTaskCount.Value = CalculateCompletedTasks();
+        }
+        else
+        {
+            UpdateTaskCountServerRpc(CalculateCompletedTasks());
+        }
     }
+
+    private int CalculateCompletedTasks()
+    {
+        // Task'leri hesaplayın ve sonucu döndürün
+        return 0; // Örnek değeri değiştirin
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdateTaskCountServerRpc(int newTaskCount)
+    {
+        totalTaskCount.Value = newTaskCount;
+    }
+    
 }

@@ -1,0 +1,196 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: StringTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: StringTable
+  m_TableCollectionNameGuidString: ed858c0b4271e8449b2d442adc7c97ca
+  m_Entries:
+  - m_Id: 195494940672
+    m_Key: "H\u0131zl\u0131E\u015Fle\u015Fme"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4952754229248
+    m_Key: Ses
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5878416150528
+    m_Key: Kontroller
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5922234044416
+    m_Key: Dil
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6137447976960
+    m_Key: "M\xFCzik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6163393941504
+    m_Key: Ambians
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6186835906560
+    m_Key: Oyun Sesleri
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6188345856000
+    m_Key: Ayarlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7922661199872
+    m_Key: Oda Kur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8093956575232
+    m_Key: "\xD6zel Odaya Gir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8189091778560
+    m_Key: "Odaya Kat\u0131l"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8875149889536
+    m_Key: "Karakterini Se\xE7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9457906487296
+    m_Key: "Grup \u0130smi"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9658880757760
+    m_Key: "Hayalet Say\u0131s\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9806528647168
+    m_Key: "B\xFCy\xFCc\xFC Say\u0131s\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9956277882880
+    m_Key: "\xD6zel oda"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10190273908736
+    m_Key: "Oyuncu Say\u0131s\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10314261729280
+    m_Key: "Avc\u0131 Say\u0131s\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10399297048576
+    m_Key: "A\u015F\u0131k Say\u0131s\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10530805256192
+    m_Key: Tamam
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10552334618624
+    m_Key: "\u0130ptal Et"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10874150981632
+    m_Key: Tavsiye Edilen Ayarlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10953167474688
+    m_Key: "6 ki\u015Filik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10986210201600
+    m_Key: "8 ki\u015Filik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11072357011456
+    m_Key: "10 ki\u015Filik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11099682902016
+    m_Key: "12 ki\u015Filik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11486032826368
+    m_Key: Uygula
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11631612923904
+    m_Key: Grup 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14158542671872
+    m_Key: ODA ARANIYOR...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15057784672256
+    m_Key: ODA KODU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15798129659904
+    m_Key: "PROF\u0130L"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15915192684544
+    m_Key: ONAYLA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16013620416512
+    m_Key: "Y\xDCKLE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16090489425920
+    m_Key: "Bu K\u0131s\u0131m Bo\u015F B\u0131rak\u0131lamaz"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17355399237632
+    m_Key: "SE\xC7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17933382717440
+    m_Key: "\xC7OK YAKINDA!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18003817664512
+    m_Key: "Sat\u0131n Al"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18381355356160
+    m_Key: "Y\xDCKLEN\u0130YOR!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19629898993664
+    m_Key: KOPYALA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20002768424960
+    m_Key: "LOB\u0130DEN \xC7IK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20240732262400
+    m_Key: "BA\u015ELAT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23878250795008
+    m_Key: ODA AYARLARI
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5507834214077693976
+  references:
+    version: 2
+    RefIds:
+    - rid: 5507834214077693976
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1722534988935
