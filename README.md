@@ -190,7 +190,8 @@ Değerlendirme:
 
 Bu sprintte, tüm kritik görevler başarıyla tamamlandı ve projemiz piyasaya sürülmeye hazır hale geldi. Ekip, zorluklara hızlı uyum sağlayarak ve yüksek performans göstererek büyük bir başarı elde etti. Oyuncularla buluşmak için sabırsızlanıyoruz!
 
--KPI Dökümanları:[KPI DOCUMENTS](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
+-KPI Dökümanları:[TROYA_KPİ_REDRABBİT.pdf](https://github.com/user-attachments/files/16473695/TROYA_KPI_REDRABBIT.pdf)
+
 
 - **Sprint içinde tamamlanması tahmin edilen puan**: 200 Puan
 
@@ -199,19 +200,16 @@ Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puan
 - **Daily Scrum**: 
   - Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
   - [DailyScrumSS]([DAILY_SCRUM_SS.pdf](https://github.com/user-attachments/files/16473684/DAILY_SCRUM_SS.pdf)
-)
+ 
+    
 - **Sprint board update**: Sprint board screenshotları: <img width="1210" alt="sprint board uptade" src="https://github.com/user-attachments/assets/79b9e699-2a86-4c0c-aa70-22205fcd5301">
-
-SPRİNT TİMELİNE'I
-![kk](https://github.com/user-attachments/assets/02c1be26-4914-42b3-bbcb-cdd19a833be5)
 <img width="1382" alt="dddd" src="https://github.com/user-attachments/assets/cce23ce8-65bc-4ab8-b19d-1a40da14e393"> 
 
 - **Ürün Durumu**: Ekran görüntüleri:
 
-![Logo]()
-  ![3d]()
-  ![lobby1]()
-  ![map]()
+![Yeni Oyun Logosu](https://github.com/user-attachments/assets/62891e8b-9394-4336-98b6-5d8032e977c8)
+![Karakterler](https://github.com/user-attachments/assets/4c84cfda-b75c-4279-98cb-8bf56066ef74)![](https://github.com/user-attachments/assets/a31fbae1-7c54-412b-be51-f8eea3547f7f)
+
 
 
 - **Sprint Review**: 
@@ -231,5 +229,5 @@ SPRİNT TİMELİNE'I
 
 - **Sprint Retrospective:Bootcamp Projesi Tamamlandı!**
   - Son sprintimizi tamamlamış olmanın gururunu yaşıyoruz! Retrospektif toplantımızda, ekip olarak iletişim ve takım çalışmasının güçlü olduğunu ve multiplayer ile UI gibi kritik görevleri başarıyla tamamladığımızı gördük.
-Zaman yönetimi ve dokümantasyon konusunda bazı iyileştirmelere ihtiyaç duyduğumuzu fark ettik ve bu alanlarda da önemli adımlar attık. Test ve hata ayıklama süreçlerini daha sık ve sistematik yaparak projemizi tamamladık.
-Genel olarak, ekip karşılaştığı zorluklara hızlı uyum sağladı ve proje ilerleyişinde büyük başarılar elde etti. TROYA'nın geliştirme sürecini başarılı bir şekilde tamamladık ve şimdi oyunumuzu oyuncularla buluşturmanın heyecanını yaşıyoruz!
+  - Zaman yönetimi ve dokümantasyon konusunda bazı iyileştirmelere ihtiyaç duyduğumuzu fark ettik ve bu alanlarda da önemli adımlar attık. Test ve hata ayıklama süreçlerini daha sık ve sistematik yaparak projemizi tamamladık.
+  - Genel olarak, ekip karşılaştığı zorluklara hızlı uyum sağladı ve proje ilerleyişinde büyük başarılar elde etti. TROYA'nın geliştirme sürecini başarılı bir şekilde tamamladık ve şimdi oyunumuzu oyuncularla buluşturmanın heyecanını yaşıyoruz!
