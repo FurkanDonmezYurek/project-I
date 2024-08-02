@@ -77,7 +77,8 @@ Maskeler düşer, gerçekler konuşur.
 
 ## KPİ URL
 
-[KPI Documents](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
+[TROYA_KPİ_REDRABBİT.pdf](https://github.com/user-attachments/files/16473695/TROYA_KPI_REDRABBIT.pdf)
+
 ---
 
 # Sprint 1
@@ -115,7 +116,7 @@ Maskeler düşer, gerçekler konuşur.
 - Hafta başında görev dağılımı yapıldı ve önceliklendirildi. Tasklardaki aksamaya göre görev paylaşımları düzenlendi. Oyunun logosu tasarlandı ve bunlara ek olarak;
 KPI Dökümanları; Oyun tasarım dökümanı,Pazar analizi ve stratejisi dökümanı, Pazarlama planı dökümanı, Stratejik yönetim dökümanları hazırlanmaya başlandı.
 
--KPI Dökümanları:[KPI DOCUMENTS](https://drive.google.com/drive/folders/1ip8Rl_7lPqX-KgwQfjthpDM7RkyW4r0P?usp=share_link)
+-KPI Dökümanları:[TROYA_KPİ_REDRABBİT.pdf](https://github.com/user-attachments/files/16473695/TROYA_KPI_REDRABBIT.pdf)
 
 
 - **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
