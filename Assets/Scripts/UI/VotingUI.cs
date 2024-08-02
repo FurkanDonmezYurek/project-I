@@ -43,7 +43,7 @@ public class VotingUI : NetworkBehaviour
         {
             GameObject playerObject = GameObject.Find(player.Data["PlayerName"].Value);
             RoleAssignment roleAssignment = playerObject.GetComponent<RoleAssignment>();
-            if (!roleAssignment.isDead)
+            if (!roleAssignment.isDead.Value)
             {
                 playerListAlive.Add(playerObject);
                 GameObject card = Instantiate(playerCardVote, Vector3.zero, Quaternion.identity);
