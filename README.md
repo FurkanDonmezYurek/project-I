@@ -197,3 +197,5 @@ Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 400 puan
 - **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği, Readme'de görsel olarak sizinle paylaşılmıştır.
 
 - **Sprint board update**: Sprint board screenshotları: <img width="1210" alt="sprint board uptade" src="https://github.com/user-attachments/assets/79b9e699-2a86-4c0c-aa70-22205fcd5301">
+![kk](https://github.com/user-attachments/assets/02c1be26-4914-42b3-bbcb-cdd19a833be5)
+<img width="1382" alt="dddd" src="https://github.com/user-attachments/assets/cce23ce8-65bc-4ab8-b19d-1a40da14e393"> 
