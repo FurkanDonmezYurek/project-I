@@ -170,6 +170,17 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.services.analytics": {
+      "version": "5.1.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.services.core": "1.12.5"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.services.authentication": {
       "version": "2.7.4",
       "depth": 1,

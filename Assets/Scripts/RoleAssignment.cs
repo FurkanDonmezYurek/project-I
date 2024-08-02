@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 
 public enum PlayerRole
@@ -26,10 +27,12 @@ public class RoleAssignment : NetworkBehaviour
     public bool usedSkill = false;
     public bool isVekil = false;
     public bool isDead = false;
-
+   
     public int[] roleCountList = new int[5];
 
     private CurrentLobby currentLobby;
+    
+    private List<GameObject> players = new List<GameObject>();
 
     public GameObject[] npcArray = new GameObject[5];
     
@@ -37,17 +40,38 @@ public class RoleAssignment : NetworkBehaviour
     {
         currentLobby = GameObject.Find("LobbyManager").GetComponent<CurrentLobby>();
     }
-
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-        if (IsOwner)
-        {
-            transform.name = currentLobby.thisPlayer.Data["PlayerName"].Value;
-        }
-
-    }
-
+    //
+    // public override void OnNetworkSpawn()
+    // {
+    //     base.OnNetworkSpawn();
+    //
+    //     if (IsOwner)
+    //     {
+    //         Debug.Log("isOwner true");
+    //         string playerName = PlayerPrefs.GetString("PlayerName");
+    //         SetNameServerRpc(playerName);
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("not owner");
+    //     }
+    // }
+    //
+    // [ServerRpc]
+    // public void SetNameServerRpc(string playerName, ServerRpcParams rpcParams = default)
+    // {
+    //     Debug.Log("Server received name request: " + playerName);
+    //     transform.name = playerName;
+    //     UpdateNameClientRpc(playerName);
+    // }
+    //
+    // [ClientRpc]
+    // private void UpdateNameClientRpc(string playerName)
+    // {
+    //     transform.name = playerName;
+    //     Debug.Log("Client received name update: " + playerName);
+    // }
+    
     private void Start()
     {
         // if (IsServer && IsOwner)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.Analytics;
 using UnityEngine;
 
 public class PlayerName : MonoBehaviour
@@ -31,6 +32,10 @@ public class PlayerName : MonoBehaviour
             PlayerPrefs.SetString("PlayerName", playerName.text);
             playerNameMenu.text = PlayerPrefs.GetString("PlayerName");
             playerProfile.SetActive(false);
+
+            AnalyticsService.Instance.RecordEvent(
+                new CustomEvent("PlayerNameChanged") { { "PlayerName", playerNameMenu.text } }
+            );
         }
         else
         {
